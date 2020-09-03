@@ -1,0 +1,1 @@
+The file to string method has worked.

@@ -1,6 +1,6 @@
 -- drop database COUNTUP;
-create database COUNTUP;
-use COUNTUP;
+-- create database COUNTUP;
+-- use COUNTUP;
 
 -- Reference Tables
 
@@ -9,7 +9,7 @@ CREATE TABLE CATEGORY (
 	NAME VARCHAR(16) NOT NULL,
 	DESCRIPTION TEXT,
 	PRIMARY KEY (CATID),
-	UNIQUE KEY (NAME)
+	UNIQUE (NAME)
 );
 
 INSERT INTO CATEGORY (NAME, DESCRIPTION)
