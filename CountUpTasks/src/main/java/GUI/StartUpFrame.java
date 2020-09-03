@@ -27,21 +27,469 @@ public class StartUpFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        CategoryLabel = new javax.swing.JLabel();
+        TimeframeLabel = new javax.swing.JLabel();
+        CompletenessLabel = new javax.swing.JLabel();
+        PriorityLabel = new javax.swing.JLabel();
+        FilterLabel = new javax.swing.JLabel();
+        CompletenessCombo = new javax.swing.JComboBox<>();
+        PriorityCombo = new javax.swing.JComboBox<>();
+        TimeframeCombo = new javax.swing.JComboBox<>();
+        CategoryCombo = new javax.swing.JComboBox<>();
+        CategoryRadio1 = new javax.swing.JRadioButton();
+        TimeframeRadio1 = new javax.swing.JRadioButton();
+        CmpltnessRadio1 = new javax.swing.JRadioButton();
+        PriorityRadio1 = new javax.swing.JRadioButton();
+        SortLabel1 = new javax.swing.JLabel();
+        SortLabel2 = new javax.swing.JLabel();
+        PriorityRadio2 = new javax.swing.JRadioButton();
+        CmpltnessRadio2 = new javax.swing.JRadioButton();
+        TimeframeRadio2 = new javax.swing.JRadioButton();
+        CategoryRadio2 = new javax.swing.JRadioButton();
+        SortLabel3 = new javax.swing.JLabel();
+        CategoryRadio3 = new javax.swing.JRadioButton();
+        TimeframeRadio3 = new javax.swing.JRadioButton();
+        CmpltnessRadio3 = new javax.swing.JRadioButton();
+        PriorityRadio3 = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        CreatedRadio1 = new javax.swing.JRadioButton();
+        CompletedRadio1 = new javax.swing.JRadioButton();
+        DueDateRadio1 = new javax.swing.JRadioButton();
+        CreatedRadio2 = new javax.swing.JRadioButton();
+        CompletedRadio2 = new javax.swing.JRadioButton();
+        DueDateRadio2 = new javax.swing.JRadioButton();
+        CreatedRadio3 = new javax.swing.JRadioButton();
+        CompletedRadio3 = new javax.swing.JRadioButton();
+        DueDateRadio3 = new javax.swing.JRadioButton();
+        jSlider1 = new javax.swing.JSlider();
+        jSlider2 = new javax.swing.JSlider();
+        jSlider3 = new javax.swing.JSlider();
+        jLabel4 = new javax.swing.JLabel();
+        jSlider4 = new javax.swing.JSlider();
+        jSlider5 = new javax.swing.JSlider();
+        jSlider6 = new javax.swing.JSlider();
+        jLabel5 = new javax.swing.JLabel();
+        CreatedStart = new javax.swing.JLabel();
+        CreatedEnd = new javax.swing.JLabel();
+        CompletedStart = new javax.swing.JLabel();
+        CompletedEnd = new javax.swing.JLabel();
+        DueDateStart = new javax.swing.JLabel();
+        DueDateEnd = new javax.swing.JLabel();
+        SubmitButton = new javax.swing.JButton();
+        SkipButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        CategoryLabel.setText("Category:");
+
+        TimeframeLabel.setText("Timeframe:");
+
+        CompletenessLabel.setText("Completeness:");
+
+        PriorityLabel.setText("Priority:");
+
+        FilterLabel.setText("Filter:");
+
+        CompletenessCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        PriorityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        TimeframeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        CategoryCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        buttonGroup1.add(CategoryRadio1);
+        CategoryRadio1.setText("Category");
+        CategoryRadio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CategoryRadio1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(TimeframeRadio1);
+        TimeframeRadio1.setText("Timeframe");
+
+        buttonGroup1.add(CmpltnessRadio1);
+        CmpltnessRadio1.setText("Cmpltness");
+
+        buttonGroup1.add(PriorityRadio1);
+        PriorityRadio1.setText("Priority");
+
+        SortLabel1.setText("Sort By 1:");
+
+        SortLabel2.setText("Sort By 2:");
+
+        buttonGroup2.add(PriorityRadio2);
+        PriorityRadio2.setText("Priority");
+
+        buttonGroup2.add(CmpltnessRadio2);
+        CmpltnessRadio2.setText("Cmpltness");
+
+        buttonGroup2.add(TimeframeRadio2);
+        TimeframeRadio2.setText("Timeframe");
+        TimeframeRadio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TimeframeRadio2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(CategoryRadio2);
+        CategoryRadio2.setText("Category");
+        CategoryRadio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CategoryRadio2ActionPerformed(evt);
+            }
+        });
+
+        SortLabel3.setText("Sort By 3:");
+
+        buttonGroup3.add(CategoryRadio3);
+        CategoryRadio3.setText("Category");
+        CategoryRadio3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CategoryRadio3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(TimeframeRadio3);
+        TimeframeRadio3.setText("Timeframe");
+        TimeframeRadio3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TimeframeRadio3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(CmpltnessRadio3);
+        CmpltnessRadio3.setText("Cmpltness");
+
+        buttonGroup3.add(PriorityRadio3);
+        PriorityRadio3.setText("Priority");
+
+        jLabel1.setText("Created:");
+
+        jLabel2.setText("Completed:");
+
+        jLabel3.setText("Due Date:");
+
+        buttonGroup1.add(CreatedRadio1);
+        CreatedRadio1.setText("Created");
+        CreatedRadio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreatedRadio1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(CompletedRadio1);
+        CompletedRadio1.setText("Completed");
+
+        buttonGroup1.add(DueDateRadio1);
+        DueDateRadio1.setText("Due Date");
+
+        buttonGroup2.add(CreatedRadio2);
+        CreatedRadio2.setText("Created");
+        CreatedRadio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreatedRadio2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(CompletedRadio2);
+        CompletedRadio2.setText("Completed");
+
+        buttonGroup2.add(DueDateRadio2);
+        DueDateRadio2.setText("Due Date");
+
+        buttonGroup3.add(CreatedRadio3);
+        CreatedRadio3.setText("Created");
+        CreatedRadio3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreatedRadio3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(CompletedRadio3);
+        CompletedRadio3.setText("Completed");
+
+        buttonGroup3.add(DueDateRadio3);
+        DueDateRadio3.setText("Due Date");
+
+        jLabel4.setText("Range Start");
+
+        jLabel5.setText("Range End");
+
+        CreatedStart.setText("No Start Created Date.");
+
+        CreatedEnd.setText("No End Created Date.");
+
+        CompletedStart.setText("No Start Completed Date.");
+
+        CompletedEnd.setText("No End Completed Date.");
+
+        DueDateStart.setText("No Start Due Date.");
+
+        DueDateEnd.setText("No End Due Date.");
+
+        SubmitButton.setText("Submit");
+
+        SkipButton.setText("Skip");
+        SkipButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SkipButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SubmitButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SkipButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4)
+                                            .addComponent(CreatedStart))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(jLabel5))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(CreatedEnd))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CompletedStart))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jSlider5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(DueDateEnd)
+                                                    .addComponent(CompletedEnd)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(DueDateStart))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSlider6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CategoryLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(CompletenessLabel)
+                                            .addComponent(TimeframeLabel)
+                                            .addComponent(PriorityLabel))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(PriorityCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(FilterLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(CategoryCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(TimeframeCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(CompletenessCombo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(PriorityRadio1)
+                                            .addComponent(CategoryRadio1)
+                                            .addComponent(TimeframeRadio1)
+                                            .addComponent(CmpltnessRadio1)
+                                            .addComponent(SortLabel1))
+                                        .addGap(20, 20, 20))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(CreatedRadio1)
+                                            .addComponent(CompletedRadio1)
+                                            .addComponent(DueDateRadio1))
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SortLabel2)
+                                    .addComponent(PriorityRadio2)
+                                    .addComponent(CmpltnessRadio2)
+                                    .addComponent(TimeframeRadio2)
+                                    .addComponent(CategoryRadio2)
+                                    .addComponent(CreatedRadio2)
+                                    .addComponent(CompletedRadio2)
+                                    .addComponent(DueDateRadio2))
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(SortLabel3)
+                                            .addComponent(CategoryRadio3)
+                                            .addComponent(TimeframeRadio3)
+                                            .addComponent(CmpltnessRadio3)
+                                            .addComponent(PriorityRadio3))
+                                        .addGap(2, 2, 2))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(CreatedRadio3)
+                                        .addComponent(CompletedRadio3)
+                                        .addComponent(DueDateRadio3)))))
+                        .addGap(0, 2, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FilterLabel)
+                            .addComponent(SortLabel1)
+                            .addComponent(SortLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CategoryLabel)
+                            .addComponent(CategoryCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CategoryRadio1)
+                            .addComponent(CategoryRadio2)
+                            .addComponent(CategoryRadio3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TimeframeLabel)
+                                .addComponent(TimeframeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TimeframeRadio2)
+                                .addComponent(TimeframeRadio3))
+                            .addComponent(TimeframeRadio1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CompletenessLabel)
+                            .addComponent(CompletenessCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CmpltnessRadio1)
+                            .addComponent(CmpltnessRadio2)
+                            .addComponent(CmpltnessRadio3))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PriorityLabel)
+                            .addComponent(PriorityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PriorityRadio1)
+                            .addComponent(PriorityRadio2)
+                            .addComponent(PriorityRadio3)))
+                    .addComponent(SortLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CreatedRadio2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CompletedRadio2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DueDateRadio2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CreatedRadio1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CompletedRadio1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DueDateRadio1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CreatedRadio3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CompletedRadio3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DueDateRadio3)))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CreatedStart)
+                    .addComponent(CreatedEnd))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSlider5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CompletedStart)
+                    .addComponent(CompletedEnd))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSlider6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DueDateStart)
+                    .addComponent(DueDateEnd))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SubmitButton)
+                    .addComponent(SkipButton))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CategoryRadio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryRadio1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CategoryRadio1ActionPerformed
+
+    private void CategoryRadio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryRadio2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CategoryRadio2ActionPerformed
+
+    private void TimeframeRadio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimeframeRadio2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TimeframeRadio2ActionPerformed
+
+    private void CategoryRadio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryRadio3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CategoryRadio3ActionPerformed
+
+    private void TimeframeRadio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimeframeRadio3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TimeframeRadio3ActionPerformed
+
+    private void CreatedRadio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatedRadio1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreatedRadio1ActionPerformed
+
+    private void CreatedRadio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatedRadio2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreatedRadio2ActionPerformed
+
+    private void CreatedRadio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatedRadio3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreatedRadio3ActionPerformed
+
+    private void SkipButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SkipButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SkipButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +528,60 @@ public class StartUpFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CategoryCombo;
+    private javax.swing.JLabel CategoryLabel;
+    private javax.swing.JRadioButton CategoryRadio1;
+    private javax.swing.JRadioButton CategoryRadio2;
+    private javax.swing.JRadioButton CategoryRadio3;
+    private javax.swing.JRadioButton CmpltnessRadio1;
+    private javax.swing.JRadioButton CmpltnessRadio2;
+    private javax.swing.JRadioButton CmpltnessRadio3;
+    private javax.swing.JLabel CompletedEnd;
+    private javax.swing.JRadioButton CompletedRadio1;
+    private javax.swing.JRadioButton CompletedRadio2;
+    private javax.swing.JRadioButton CompletedRadio3;
+    private javax.swing.JLabel CompletedStart;
+    private javax.swing.JComboBox<String> CompletenessCombo;
+    private javax.swing.JLabel CompletenessLabel;
+    private javax.swing.JLabel CreatedEnd;
+    private javax.swing.JRadioButton CreatedRadio1;
+    private javax.swing.JRadioButton CreatedRadio2;
+    private javax.swing.JRadioButton CreatedRadio3;
+    private javax.swing.JLabel CreatedStart;
+    private javax.swing.JLabel DueDateEnd;
+    private javax.swing.JRadioButton DueDateRadio1;
+    private javax.swing.JRadioButton DueDateRadio2;
+    private javax.swing.JRadioButton DueDateRadio3;
+    private javax.swing.JLabel DueDateStart;
+    private javax.swing.JLabel FilterLabel;
+    private javax.swing.JComboBox<String> PriorityCombo;
+    private javax.swing.JLabel PriorityLabel;
+    private javax.swing.JRadioButton PriorityRadio1;
+    private javax.swing.JRadioButton PriorityRadio2;
+    private javax.swing.JRadioButton PriorityRadio3;
+    private javax.swing.JButton SkipButton;
+    private javax.swing.JLabel SortLabel1;
+    private javax.swing.JLabel SortLabel2;
+    private javax.swing.JLabel SortLabel3;
+    private javax.swing.JButton SubmitButton;
+    private javax.swing.JComboBox<String> TimeframeCombo;
+    private javax.swing.JLabel TimeframeLabel;
+    private javax.swing.JRadioButton TimeframeRadio1;
+    private javax.swing.JRadioButton TimeframeRadio2;
+    private javax.swing.JRadioButton TimeframeRadio3;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider jSlider2;
+    private javax.swing.JSlider jSlider3;
+    private javax.swing.JSlider jSlider4;
+    private javax.swing.JSlider jSlider5;
+    private javax.swing.JSlider jSlider6;
     // End of variables declaration//GEN-END:variables
 }
