@@ -34,13 +34,78 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="SubmitButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="SkipButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="TitleInput" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="PriorityLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="PriorityCombo" min="-2" pref="130" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="CategoryLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="CategoryCombo" min="-2" pref="130" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="TimeframeLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="TimeframeCombo" min="-2" pref="130" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="CompletenessLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="CompletenessCombo" min="-2" pref="130" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="SortLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="TimeframeRadio1" min="-2" max="-2" attributes="0"/>
+                          <Component id="CategoryRadio1" min="-2" max="-2" attributes="0"/>
+                          <Component id="CmpltnessRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="PriorityRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="CreatedRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="DueDateRadio1" min="-2" max="-2" attributes="0"/>
+                          <Component id="CompletedRadio1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="CmpltnessRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="CategoryRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="SortLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="TimeframeRadio2" min="-2" max="-2" attributes="0"/>
+                          <Component id="PriorityRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="CreatedRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="CompletedRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="DueDateRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="CategoryRadio3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="CmpltnessRadio3" min="-2" max="-2" attributes="0"/>
+                          <Component id="SortLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DueDateRadio3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CreatedRadio3" min="-2" max="-2" attributes="0"/>
+                          <Component id="PriorityRadio3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CompletedRadio3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TimeframeRadio3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="SubmitButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="SkipButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -49,249 +114,163 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSlider2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CreatedStart" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jSlider4" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                              <Component id="CreatedEnd" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSlider1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CompletedStart" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jSlider5" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="DueDateEnd" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="CompletedEnd" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSlider3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="DueDateStart" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jSlider6" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="startCreated" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="CreatedStart" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CreatedStart1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="startCompleted" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="CreatedStart2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="startDue" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="CategoryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="CompletenessLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TimeframeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="PriorityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="PriorityCombo" max="32767" attributes="0"/>
-                                          <Component id="FilterLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CategoryCombo" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="TimeframeCombo" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="CompletenessCombo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="PriorityRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CategoryRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TimeframeRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CmpltnessRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="SortLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="CreatedRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CompletedRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="DueDateRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="SortLabel2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="PriorityRadio2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CmpltnessRadio2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TimeframeRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CategoryRadio2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CreatedRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CompletedRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="DueDateRadio2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="SortLabel3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CategoryRadio3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TimeframeRadio3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CmpltnessRadio3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="PriorityRadio3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="CreatedRadio3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="CompletedRadio3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="DueDateRadio3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="endCompleted" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="endCreated" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="CreatedEnd1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="endDue" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="CreatedEnd2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CreatedEnd" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <Component id="SortLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CategoryRadio3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="TimeframeRadio3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CmpltnessRadio3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="PriorityRadio3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="CreatedRadio3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CompletedRadio3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="DueDateRadio3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="FilterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="SortLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="SortLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TitleInput" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="CategoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CategoryCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CategoryRadio1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CategoryRadio2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CategoryRadio3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="TimeframeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="TimeframeCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="TimeframeRadio2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="TimeframeRadio3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="TimeframeRadio1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="CompletenessLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CompletenessCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CmpltnessRadio1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CmpltnessRadio2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CmpltnessRadio3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TimeframeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TimeframeCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="CompletenessCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CompletenessLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="PriorityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="PriorityCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="PriorityRadio1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="PriorityRadio2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="PriorityRadio3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="SortLabel3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="86" pref="86" max="-2" attributes="0"/>
+                      <Component id="PriorityRadio2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="CreatedRadio2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="CompletedRadio2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="DueDateRadio2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="CreatedRadio1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="CompletedRadio1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="DueDateRadio1" min="-2" max="-2" attributes="0"/>
+                      <Component id="SortLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CategoryRadio2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="TimeframeRadio2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CmpltnessRadio2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="CreatedRadio3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SortLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CategoryRadio1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="TimeframeRadio1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CmpltnessRadio1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="PriorityRadio1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="CompletedRadio3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="DueDateRadio3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CreatedRadio1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CompletedRadio1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="DueDateRadio1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jSlider4" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSlider2" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="CreatedStart" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="CreatedEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSlider1" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSlider5" alignment="1" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="CompletedStart" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CompletedEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSlider3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSlider6" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="DueDateStart" min="-2" max="-2" attributes="0"/>
-                  <Component id="DueDateEnd" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="startCreated" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CreatedStart" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="startCompleted" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="CreatedStart2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="endCreated" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Component id="CreatedEnd" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="endCompleted" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="CreatedEnd1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="CreatedStart1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="endDue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="startDue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CreatedEnd2" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="SubmitButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="SkipButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -317,68 +296,51 @@
         <Property name="text" type="java.lang.String" value="Priority:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="FilterLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Filter:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JComboBox" name="CompletenessCombo">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;COMPLETENESS&quot;);"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="PriorityCombo">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;PRIORITY&quot;);"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="TimeframeCombo">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;TIMEFRAME&quot;);"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="CategoryCombo">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;CATEGORY&quot;);"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
@@ -604,56 +566,14 @@
         <Property name="text" type="java.lang.String" value="Due Date"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSlider" name="jSlider1">
-    </Component>
-    <Component class="javax.swing.JSlider" name="jSlider2">
-    </Component>
-    <Component class="javax.swing.JSlider" name="jSlider3">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Range Start"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JSlider" name="jSlider4">
-    </Component>
-    <Component class="javax.swing.JSlider" name="jSlider5">
-    </Component>
-    <Component class="javax.swing.JSlider" name="jSlider6">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Range End"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="CreatedStart">
       <Properties>
-        <Property name="text" type="java.lang.String" value="No Start Created Date."/>
+        <Property name="text" type="java.lang.String" value="First Created Date: YYYY/MM/DD"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="CreatedEnd">
       <Properties>
-        <Property name="text" type="java.lang.String" value="No End Created Date."/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="CompletedStart">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No Start Completed Date."/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="CompletedEnd">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No End Completed Date."/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="DueDateStart">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No Start Due Date."/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="DueDateEnd">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="No End Due Date."/>
+        <Property name="text" type="java.lang.String" value="Last Created Date: YYYY/MM/DD"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="SubmitButton">
@@ -668,6 +588,75 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SkipButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="startCreated">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startCreatedActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="endCreated">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="startCompleted">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startCompletedActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="endCompleted">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="CreatedEnd1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Last Completed Date: YYYY/MM/DD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="CreatedStart1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="First Completed Date: YYYY/MM/DD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="startDue">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startDueActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="CreatedStart2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="First Due Date: YYYY/MM/DD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="endDue">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="CreatedEnd2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Last Due Date: YYYY/MM/DD"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TitleInput">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TitleInputActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Title:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
