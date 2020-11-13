@@ -24,35 +24,9 @@ public class InitialStart {
       String SQLView = "SELECT NAME FROM PRIORITY;";
       
       try {
-          
-        Path DBFile = Path.of(filePath);
+        searchOptions tst = new searchOptions(url);
         
-        Connection c;
-        Statement stmt;
-      
-        Class.forName("org.sqlite.JDBC");
-        c = DriverManager.getConnection(url);
-        System.out.println("Opened database.");
-        
-        stmt = c.createStatement();
-        ResultSet rs = stmt.executeQuery(SQLView);
-        
-        ArrayList<String> names = new ArrayList();
-        
-        while (rs.next()) {
-            String name = rs.getString("NAME");
-            names.add(name);
-            System.out.println("added " + name);
-        }
-        
-        System.out.println("Print ArrayList.");
-        for (int i = 0; i < names.size(); i++) {
-            System.out.println(names.get(i));
-        }
-      
-        rs.close();
-        stmt.close();
-        c.close();
+        System.out.println(tst.getReferenceDateTask(true, "DUEDATE"));
         
       /*try {
         
