@@ -39,7 +39,7 @@ VALUES
 	('Not Started', "Get moving, bud."),
 	('In Progress', "Hey! I'm working on it!"),
 	('Stalled', "Something is holding up this endeavor."),
-	('Under Review', "We're suspicious of you're work, Carl.");
+	('Under Review', "We're suspicious of your work, Carl.");
 
 CREATE TABLE PRIORITY (
 	PRIORID INT NOT NULL AUTO_INCREMENT,
@@ -96,7 +96,7 @@ CREATE TABLE TASK (
 	DESCRIPTION TEXT NOT NULL,
 	CREATED TIMESTAMP,
 	STARTED TIMESTAMP,
-	COMPLETED TIMESTAMP,
+	ENDED TIMESTAMP,
 	DUEDATE TIMESTAMP,
 	CATEGORY INT,
 	COMPLETENESS INT,
@@ -118,6 +118,7 @@ CREATE TABLE DETAIL (
 	CREATED TIMESTAMP,
 	STEP_DUEDATE TIMESTAMP,
 	STEP_STARTED TIMESTAMP,
+	STEP_DONE TIMESTAMP,
 	UNIQUE KEY (TASKID, STEP_NUMBER),
     FOREIGN KEY (DETAIL_CATEGORY) references DETAIL_CATEGORY(DCID),
     FOREIGN KEY (TASKID) references TASK(TASKID)
