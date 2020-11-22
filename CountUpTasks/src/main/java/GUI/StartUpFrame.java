@@ -130,6 +130,11 @@ public class StartUpFrame extends javax.swing.JFrame {
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);}
+        CategoryCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CategoryComboActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(CategoryRadio1);
         CategoryRadio1.setText("Category");
@@ -560,6 +565,10 @@ public class StartUpFrame extends javax.swing.JFrame {
     private void TitleInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TitleInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TitleInputActionPerformed
+
+    private void CategoryComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoryComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CategoryComboActionPerformed
 
     /**
      * @param args the command line arguments

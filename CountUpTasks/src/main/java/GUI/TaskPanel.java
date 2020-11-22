@@ -5,16 +5,22 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author marquis
  */
-public class ViewTasks extends javax.swing.JPanel {
+public class TaskPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ViewTasks
+     * Creates new form TaskPanel
      */
-    public ViewTasks() {
+    JFrame jf;
+    int taskID;
+    public TaskPanel(JFrame jfrm, int tskd) {
+        this.jf = jfrm;
+        this.taskID = tskd;
         initComponents();
     }
 

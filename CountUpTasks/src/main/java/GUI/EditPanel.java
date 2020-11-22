@@ -9,12 +9,12 @@ package GUI;
  *
  * @author marquis
  */
-public class TasksSearch extends javax.swing.JPanel {
+public class EditPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form TasksSearch
+     * Creates new form EditPanel
      */
-    public TasksSearch() {
+    public EditPanel() {
         initComponents();
     }
 

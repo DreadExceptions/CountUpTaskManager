@@ -6,15 +6,24 @@
 package GUI;
 
 import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author marquis
  */
 public class StartClass {
+    
     public static void main( String args[] ) throws ClassNotFoundException, SQLException {
-        //StartUpFrame begin = new StartUpFrame();
-        SqliteJDBC.searchOptions tester = new SqliteJDBC.searchOptions("jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db");
-        String[] prnt = tester.getReferenceNames("CATEGORY");
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        StartPanel strt = new StartPanel(fr);
+        fr.add(strt);
+        fr.pack();
+        fr.setVisible(true);
+        //SqliteJDBC.searchOptions tester = new SqliteJDBC.searchOptions("jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db");
+        //String[] prnt = tester.getReferenceNames("CATEGORY");
+        
     }
 }

@@ -338,6 +338,9 @@
           <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CategoryComboActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;CATEGORY&quot;);"/>

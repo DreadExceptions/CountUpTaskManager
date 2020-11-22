@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author marquis
@@ -14,7 +16,9 @@ public class SelectPanel extends javax.swing.JPanel {
     /**
      * Creates new form SelectPanel
      */
-    public SelectPanel() {
+    JFrame jf;
+    public SelectPanel(JFrame jfrm) {
+        this.jf = jfrm;
         initComponents();
     }
 
@@ -64,6 +68,9 @@ public class SelectPanel extends javax.swing.JPanel {
         jRadioButton26 = new javax.swing.JRadioButton();
         jRadioButton27 = new javax.swing.JRadioButton();
         jRadioButton28 = new javax.swing.JRadioButton();
+        returnButton = new javax.swing.JButton();
+        viewAllButton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
 
         jLabel1.setText("Title");
 
@@ -138,6 +145,17 @@ public class SelectPanel extends javax.swing.JPanel {
 
         jRadioButton28.setText("Created");
 
+        returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
+
+        viewAllButton.setText("View All");
+
+        searchButton.setText("Search");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,6 +210,14 @@ public class SelectPanel extends javax.swing.JPanel {
                     .addComponent(jRadioButton27)
                     .addComponent(jRadioButton28))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(searchButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewAllButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(returnButton)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,13 +293,28 @@ public class SelectPanel extends javax.swing.JPanel {
                         .addComponent(jRadioButton13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButton14)))
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(returnButton)
+                    .addComponent(viewAllButton)
+                    .addComponent(searchButton))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton10ActionPerformed
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        StartPanel strt = new StartPanel(fr);
+        fr.add(strt);
+        fr.pack();
+        jf.dispose();
+        fr.setVisible(true);
+    }//GEN-LAST:event_returnButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -314,5 +355,8 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton returnButton;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JButton viewAllButton;
     // End of variables declaration//GEN-END:variables
 }
