@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -17,10 +21,10 @@ public class TaskPanel extends javax.swing.JPanel {
      * Creates new form TaskPanel
      */
     JFrame jf;
-    int taskID;
-    public TaskPanel(JFrame jfrm, int tskd) {
+    ResultSet rs;
+    public TaskPanel(JFrame jfrm, ResultSet rsltst) {
         this.jf = jfrm;
-        this.taskID = tskd;
+        this.rs = rsltst;
         initComponents();
     }
 
@@ -33,19 +37,269 @@ public class TaskPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        try {
+            Title = new javax.swing.JLabel();
+            jScrollPane2 = new javax.swing.JScrollPane();
+            Description = new javax.swing.JTextArea();
+            jLabel1 = new javax.swing.JLabel();
+            jLabel2 = new javax.swing.JLabel();
+            jLabel3 = new javax.swing.JLabel();
+            jLabel4 = new javax.swing.JLabel();
+            created = new javax.swing.JLabel();
+            started = new javax.swing.JLabel();
+            ended = new javax.swing.JLabel();
+            dueDate = new javax.swing.JLabel();
+            jLabel5 = new javax.swing.JLabel();
+            jLabel6 = new javax.swing.JLabel();
+            jLabel7 = new javax.swing.JLabel();
+            jLabel8 = new javax.swing.JLabel();
+            completeness = new javax.swing.JLabel();
+            category = new javax.swing.JLabel();
+            priority = new javax.swing.JLabel();
+            timeframe = new javax.swing.JLabel();
+            returnButton = new javax.swing.JButton();
+            editButton = new javax.swing.JButton();
+            detailsButton = new javax.swing.JButton();
+
+            jButton1.setText("jButton1");
+
+            rs.first();
+            String ttl = rs.getString("TITLE");
+            Title.setText(ttl);
+
+            rs.first();
+            String dscrptn = rs.getString("DESCRIPTION");
+            Description.setColumns(20);
+            Description.setRows(5);
+            Description.setText(dscrptn);
+            jScrollPane2.setViewportView(Description);
+
+            jLabel1.setText("Created:");
+
+            jLabel2.setText("Started:");
+
+            jLabel3.setText("Finished:");
+
+            jLabel4.setText("Due Date:");
+
+            rs.first();
+            String crtd = rs.getString("CREATED");
+            if (crtd.isBlank()) {crtd = "Does not exist.";}
+            created.setText(crtd);
+
+            rs.first();
+            String strtd = rs.getString("STARTED");
+            if (strtd.isBlank()) {strtd = "Does not exist.";}
+            started.setText(strtd);
+
+            rs.first();
+            String ndd = rs.getString("ENDED");
+            if (ndd.isBlank()) {ndd = "Does not exist.";}
+            ended.setText(ndd);
+
+            rs.first();
+            String ddt = rs.getString("DUEDATE");
+            if (ddt.isBlank()) {ddt = "Does not exist.";}
+            dueDate.setText(ddt);
+
+            jLabel5.setText("Completeness:");
+
+            jLabel6.setText("Priority:");
+
+            jLabel7.setText("Timeframe:");
+
+            jLabel8.setText("Category");
+
+            rs.first();
+            String cmplt = rs.getString("COMPLETENESS");
+            if (cmplt.isBlank()) {cmplt = "N/A";}
+            completeness.setText(cmplt);
+
+            rs.first();
+            String ctgr = rs.getString("CATEGORY");
+            if (ctgr.isBlank()) {ctgr = "N/A";}
+            category.setText(ctgr);
+
+            rs.first();
+            String prrt = rs.getString("PRIORITY");
+            if (prrt.isBlank()) {prrt = "N/A";}
+            priority.setText(prrt);
+
+            rs.first();
+            String tmfrm = rs.getString("TIMEFRAME");
+            if (tmfrm.isBlank()) {tmfrm = "N/A";}
+            timeframe.setText(tmfrm);
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
+
+        returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
+
+        editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+
+        detailsButton.setText("Details");
+        detailsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Title)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(dueDate))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ended)
+                                    .addComponent(started)
+                                    .addComponent(created)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(timeframe)
+                                    .addComponent(category)
+                                    .addComponent(completeness)
+                                    .addComponent(priority))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(detailsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(returnButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Title)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(created))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(started))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(ended))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(dueDate))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(category))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(completeness))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(priority))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(timeframe))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(detailsButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(returnButton)
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        EditPanel dt = new EditPanel(fr, this.rs);
+        fr.add(dt);
+        fr.pack();
+        fr.setVisible(true);
+        this.jf.dispose();
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        JFrame fr = new JFrame ("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        StartPanel strt = new StartPanel(fr);
+        fr.add(strt);
+        fr.pack();
+        fr.setVisible(true);
+        this.jf.dispose();
+    }//GEN-LAST:event_returnButtonActionPerformed
+
+    private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_detailsButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Description;
+    private javax.swing.JLabel Title;
+    private javax.swing.JLabel category;
+    private javax.swing.JLabel completeness;
+    private javax.swing.JLabel created;
+    private javax.swing.JButton detailsButton;
+    private javax.swing.JLabel dueDate;
+    private javax.swing.JButton editButton;
+    private javax.swing.JLabel ended;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel priority;
+    private javax.swing.JButton returnButton;
+    private javax.swing.JLabel started;
+    private javax.swing.JLabel timeframe;
     // End of variables declaration//GEN-END:variables
 }

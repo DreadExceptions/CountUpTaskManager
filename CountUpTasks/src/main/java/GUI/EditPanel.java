@@ -5,16 +5,29 @@
  */
 package GUI;
 
+import java.sql.ResultSet;
+import javax.swing.JFrame;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author marquis
  */
 public class EditPanel extends javax.swing.JPanel {
-
+    
     /**
-     * Creates new form EditPanel
+     * Creates new form TasksAdd
      */
-    public EditPanel() {
+    JFrame jf;
+    ResultSet rs;
+    String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
+    
+    public EditPanel(JFrame jfrm, ResultSet rsltst) {
+        this.jf = jfrm;
+        this.rs = rsltst;
         initComponents();
     }
 
@@ -27,19 +40,294 @@ public class EditPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        nptDescription = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        nptCategory = new javax.swing.JComboBox<>();
+        nptPriority = new javax.swing.JComboBox<>();
+        nptTimeframe = new javax.swing.JComboBox<>();
+        cancelButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        createdFTF = new javax.swing.JFormattedTextField();
+        startedFTF = new javax.swing.JFormattedTextField();
+        dueDateFTF = new javax.swing.JFormattedTextField();
+        titleFTF = new javax.swing.JFormattedTextField();
+        jLabel8 = new javax.swing.JLabel();
+        endDateFTF = new javax.swing.JFormattedTextField();
+        completeness = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        detailsButton = new javax.swing.JButton();
+
+        jLabel1.setText("Edit Task");
+
+        nptDescription.setColumns(20);
+        nptDescription.setRows(5);
+        nptDescription.setText("Description, unlimited.");
+        jScrollPane1.setViewportView(nptDescription);
+
+        jLabel2.setText("Created:");
+
+        jLabel3.setText("Started:");
+
+        jLabel4.setText("Due Date:");
+
+        jLabel5.setText("Category:");
+
+        jLabel6.setText("Priority:");
+
+        jLabel7.setText("Timeframe:");
+
+        try {
+            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+            String[] options = choice.getReferenceNames("CATEGORY");
+            nptCategory.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
+        nptCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nptCategoryActionPerformed(evt);
+            }
+        });
+
+        try {
+            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+            String[] options = choice.getReferenceNames("PRIORITY");
+            nptPriority.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
+
+        try {
+            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+            String[] options = choice.getReferenceNames("TIMEFRAME");
+            nptTimeframe.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        editButton.setText("Edit Task");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+
+        createdFTF.setText("YYYY-MM-DD 00:00:00");
+
+        startedFTF.setText("YYYY-MM-DD 00:00:00");
+
+        dueDateFTF.setText("YYYY-MM-DD 00:00:00");
+        dueDateFTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dueDateFTFActionPerformed(evt);
+            }
+        });
+
+        titleFTF.setText("Title, 32 Characters Maximum.");
+        titleFTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleFTFActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("End Date:");
+
+        endDateFTF.setText("YYYY-MM-DD 00:00:00");
+        endDateFTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endDateFTFActionPerformed(evt);
+            }
+        });
+
+        try {
+            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+            String[] options = choice.getReferenceNames("COMPLETENESS");
+            completeness.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
+        completeness.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                completenessActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Completeness:");
+
+        detailsButton.setText("Details");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                    .addComponent(titleFTF)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(editButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(detailsButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cancelButton))
+                            .addComponent(nptCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nptPriority, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nptTimeframe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dueDateFTF)
+                            .addComponent(startedFTF)
+                            .addComponent(createdFTF)
+                            .addComponent(endDateFTF)
+                            .addComponent(completeness, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(titleFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(createdFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(startedFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(dueDateFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(endDateFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(nptCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(completeness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nptPriority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nptTimeframe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton)
+                    .addComponent(editButton)
+                    .addComponent(detailsButton))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        StartPanel strt = new StartPanel(fr);
+        fr.add(strt);
+        fr.pack();
+        jf.dispose();
+        fr.setVisible(true);
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        int pk = 1; //will be primary key of the newly created task
+        
+        //this requires SqliteJDBC udpate to edit
+        
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        TaskPanel tsk = new TaskPanel(fr, rs);
+        fr.add(tsk);
+        fr.pack();
+        jf.dispose();
+        fr.setVisible(true);
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void nptCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nptCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nptCategoryActionPerformed
+
+    private void dueDateFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueDateFTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dueDateFTFActionPerformed
+
+    private void titleFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_titleFTFActionPerformed
+
+    private void endDateFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDateFTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_endDateFTFActionPerformed
+
+    private void completenessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completenessActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_completenessActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JComboBox<String> completeness;
+    private javax.swing.JFormattedTextField createdFTF;
+    private javax.swing.JButton detailsButton;
+    private javax.swing.JFormattedTextField dueDateFTF;
+    private javax.swing.JButton editButton;
+    private javax.swing.JFormattedTextField endDateFTF;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> nptCategory;
+    private javax.swing.JTextArea nptDescription;
+    private javax.swing.JComboBox<String> nptPriority;
+    private javax.swing.JComboBox<String> nptTimeframe;
+    private javax.swing.JFormattedTextField startedFTF;
+    private javax.swing.JFormattedTextField titleFTF;
     // End of variables declaration//GEN-END:variables
 }

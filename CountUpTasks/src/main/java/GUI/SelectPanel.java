@@ -107,7 +107,7 @@ public class SelectPanel extends javax.swing.JPanel {
 
         jRadioButton12.setText("Created");
 
-        jRadioButton13.setText("Completed");
+        jRadioButton13.setText("Finished");
 
         jRadioButton14.setText("Due Date");
 
@@ -123,7 +123,7 @@ public class SelectPanel extends javax.swing.JPanel {
 
         jRadioButton18.setText("Category");
 
-        jRadioButton19.setText("Completed");
+        jRadioButton19.setText("Finished");
 
         jRadioButton20.setText("Timeframe");
 
@@ -133,7 +133,7 @@ public class SelectPanel extends javax.swing.JPanel {
 
         jRadioButton22.setText("Category");
 
-        jRadioButton23.setText("Completed");
+        jRadioButton23.setText("Finished");
 
         jRadioButton24.setText("Timeframe");
 

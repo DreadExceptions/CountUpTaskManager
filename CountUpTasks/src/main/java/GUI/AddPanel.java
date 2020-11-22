@@ -5,7 +5,12 @@
  */
 package GUI;
 
+import java.sql.ResultSet;
 import javax.swing.JFrame;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +22,7 @@ public class AddPanel extends javax.swing.JPanel {
      * Creates new form TasksAdd
      */
     JFrame jf;
+    String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
     
     public AddPanel(JFrame jfrm) {
         this.jf = jfrm;
@@ -33,7 +39,6 @@ public class AddPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        nptTitle = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         nptDescription = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -42,21 +47,22 @@ public class AddPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        nptCreated = new javax.swing.JTextField();
-        nptStarted = new javax.swing.JTextField();
-        nptDueDate = new javax.swing.JTextField();
         nptCategory = new javax.swing.JComboBox<>();
         nptPriority = new javax.swing.JComboBox<>();
         nptTimeframe = new javax.swing.JComboBox<>();
         cancelButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
+        createdFTF = new javax.swing.JFormattedTextField();
+        startedFTF = new javax.swing.JFormattedTextField();
+        dueDateFTF = new javax.swing.JFormattedTextField();
+        titleFTF = new javax.swing.JFormattedTextField();
+        detailsButton = new javax.swing.JButton();
 
         jLabel1.setText("Add Task");
 
-        nptTitle.setText("Title");
-
         nptDescription.setColumns(20);
         nptDescription.setRows(5);
+        nptDescription.setText("Description, unlimited.");
         jScrollPane1.setViewportView(nptDescription);
 
         jLabel2.setText("Created:");
@@ -71,27 +77,34 @@ public class AddPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Timeframe:");
 
-        nptCreated.setText("YYYY-MM-DD 00:00:00");
-
-        nptStarted.setText("YYYY-MM-DD 00:00:00");
-        nptStarted.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nptStartedActionPerformed(evt);
-            }
-        });
-
-        nptDueDate.setText("YYYY-MM-DD 00:00:00");
-
-        nptCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        try {
+            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+            String[] options = choice.getReferenceNames("CATEGORY");
+            nptCategory.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
         nptCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nptCategoryActionPerformed(evt);
             }
         });
 
-        nptPriority.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        try {
+            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+            String[] options = choice.getReferenceNames("PRIORITY");
+            nptPriority.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
 
-        nptTimeframe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        try {
+            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+            String[] options = choice.getReferenceNames("TIMEFRAME");
+            nptTimeframe.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +120,26 @@ public class AddPanel extends javax.swing.JPanel {
             }
         });
 
+        createdFTF.setText("YYYY-MM-DD 00:00:00");
+
+        startedFTF.setText("YYYY-MM-DD 00:00:00");
+
+        dueDateFTF.setText("YYYY-MM-DD 00:00:00");
+        dueDateFTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dueDateFTFActionPerformed(evt);
+            }
+        });
+
+        titleFTF.setText("Title, 32 Characters Maximum.");
+        titleFTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleFTFActionPerformed(evt);
+            }
+        });
+
+        detailsButton.setText("Details");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,10 +148,6 @@ public class AddPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(nptTitle)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -129,16 +158,22 @@ public class AddPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nptCreated)
-                            .addComponent(nptStarted)
-                            .addComponent(nptDueDate)
                             .addComponent(nptCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nptPriority, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nptTimeframe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(nptTimeframe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dueDateFTF)
+                            .addComponent(startedFTF)
+                            .addComponent(createdFTF)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cancelButton)))
+                        .addComponent(detailsButton)
+                        .addGap(51, 51, 51)
+                        .addComponent(cancelButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(titleFTF))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,21 +182,21 @@ public class AddPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nptTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(titleFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(nptCreated, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(createdFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(nptStarted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startedFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(nptDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dueDateFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -177,7 +212,8 @@ public class AddPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
-                    .addComponent(addButton))
+                    .addComponent(addButton)
+                    .addComponent(detailsButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -194,31 +230,39 @@ public class AddPanel extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         int pk = 1; //will be primary key of the newly created task
+        ResultSet rs;
         
         //this requires SqliteJDBC udpate to add
         //will need to get automatically generated pk from DB
         
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        TaskPanel tsk = new TaskPanel(fr, pk);
+        TaskPanel tsk = new TaskPanel(fr, rs);
         fr.add(tsk);
         fr.pack();
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
-    private void nptStartedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nptStartedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nptStartedActionPerformed
-
     private void nptCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nptCategoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nptCategoryActionPerformed
+
+    private void dueDateFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueDateFTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dueDateFTFActionPerformed
+
+    private void titleFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_titleFTFActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JFormattedTextField createdFTF;
+    private javax.swing.JButton detailsButton;
+    private javax.swing.JFormattedTextField dueDateFTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -228,12 +272,10 @@ public class AddPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> nptCategory;
-    private javax.swing.JTextField nptCreated;
     private javax.swing.JTextArea nptDescription;
-    private javax.swing.JTextField nptDueDate;
     private javax.swing.JComboBox<String> nptPriority;
-    private javax.swing.JTextField nptStarted;
     private javax.swing.JComboBox<String> nptTimeframe;
-    private javax.swing.JTextField nptTitle;
+    private javax.swing.JFormattedTextField startedFTF;
+    private javax.swing.JFormattedTextField titleFTF;
     // End of variables declaration//GEN-END:variables
 }

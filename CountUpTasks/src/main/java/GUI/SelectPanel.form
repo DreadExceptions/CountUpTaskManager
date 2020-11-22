@@ -311,7 +311,7 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton13">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Completed"/>
+        <Property name="text" type="java.lang.String" value="Finished"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton14">
@@ -351,7 +351,7 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton19">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Completed"/>
+        <Property name="text" type="java.lang.String" value="Finished"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton20">
@@ -376,7 +376,7 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton23">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Completed"/>
+        <Property name="text" type="java.lang.String" value="Finished"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton24">
