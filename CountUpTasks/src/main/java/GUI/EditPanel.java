@@ -43,7 +43,6 @@ public class EditPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         nptDescription = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -54,7 +53,6 @@ public class EditPanel extends javax.swing.JPanel {
         nptTimeframe = new javax.swing.JComboBox<>();
         cancelButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
-        createdFTF = new javax.swing.JFormattedTextField();
         startedFTF = new javax.swing.JFormattedTextField();
         dueDateFTF = new javax.swing.JFormattedTextField();
         titleFTF = new javax.swing.JFormattedTextField();
@@ -70,8 +68,6 @@ public class EditPanel extends javax.swing.JPanel {
         nptDescription.setRows(5);
         nptDescription.setText("Description, unlimited.");
         jScrollPane1.setViewportView(nptDescription);
-
-        jLabel2.setText("Created:");
 
         jLabel3.setText("Started:");
 
@@ -126,8 +122,6 @@ public class EditPanel extends javax.swing.JPanel {
             }
         });
 
-        createdFTF.setText("YYYY-MM-DD 00:00:00");
-
         startedFTF.setText("YYYY-MM-DD 00:00:00");
 
         dueDateFTF.setText("YYYY-MM-DD 00:00:00");
@@ -169,6 +163,11 @@ public class EditPanel extends javax.swing.JPanel {
         jLabel9.setText("Completeness:");
 
         detailsButton.setText("Details");
+        detailsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailsButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -189,7 +188,6 @@ public class EditPanel extends javax.swing.JPanel {
                             .addComponent(jLabel5)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
                             .addComponent(editButton))
@@ -205,7 +203,6 @@ public class EditPanel extends javax.swing.JPanel {
                             .addComponent(nptTimeframe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dueDateFTF)
                             .addComponent(startedFTF)
-                            .addComponent(createdFTF)
                             .addComponent(endDateFTF)
                             .addComponent(completeness, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -219,10 +216,6 @@ public class EditPanel extends javax.swing.JPanel {
                 .addComponent(titleFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(createdFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -253,9 +246,9 @@ public class EditPanel extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
                     .addComponent(editButton)
-                    .addComponent(detailsButton))
+                    .addComponent(detailsButton)
+                    .addComponent(cancelButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -304,17 +297,24 @@ public class EditPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_completenessActionPerformed
 
+    private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editDetailsPanel dtdtl = new editDetailsPanel(fr, rs);
+        fr.add(dtdtl);
+        fr.pack();
+        fr.setVisible(true);
+    }//GEN-LAST:event_detailsButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> completeness;
-    private javax.swing.JFormattedTextField createdFTF;
     private javax.swing.JButton detailsButton;
     private javax.swing.JFormattedTextField dueDateFTF;
     private javax.swing.JButton editButton;
     private javax.swing.JFormattedTextField endDateFTF;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

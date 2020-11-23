@@ -27,7 +27,6 @@
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -36,7 +35,6 @@
                           <Component id="nptTimeframe" alignment="0" max="32767" attributes="0"/>
                           <Component id="dueDateFTF" alignment="0" max="32767" attributes="0"/>
                           <Component id="startedFTF" max="32767" attributes="0"/>
-                          <Component id="createdFTF" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -65,11 +63,6 @@
               <Component id="titleFTF" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="createdFTF" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -128,11 +121,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Created:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Started:"/>
@@ -213,11 +201,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="createdFTF">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="YYYY-MM-DD 00:00:00"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JFormattedTextField" name="startedFTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD 00:00:00"/>
@@ -243,6 +226,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Details"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="detailsButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

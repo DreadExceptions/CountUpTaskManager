@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.sql.ResultSet;
 import javax.swing.JFrame;
 
 /**
@@ -13,12 +14,14 @@ import javax.swing.JFrame;
  */
 public class DetailsPanel extends javax.swing.JPanel {
 
-    JFrame jf;    
+    JFrame jf;
+    ResultSet rs;
     /**
      * Creates new form DetailsPanel
      */
-    public DetailsPanel(JFrame jfrm) {
+    public DetailsPanel(JFrame jfrm, ResultSet rsltst) {
         this.jf = jfrm;
+        this.rs = rsltst;
         initComponents();
     }
 

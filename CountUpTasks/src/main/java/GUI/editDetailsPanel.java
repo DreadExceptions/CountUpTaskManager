@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.sql.ResultSet;
 import javax.swing.JFrame;
 
 /**
@@ -17,6 +18,12 @@ public class editDetailsPanel extends javax.swing.JPanel {
      * Creates new form DetailsPanel
      */
     JFrame jf;
+    ResultSet rs;
+    public editDetailsPanel(JFrame jfrm, ResultSet rsltst) {
+        this.rs = rsltst;
+        this.jf = jfrm;
+        initComponents();
+    }
     public editDetailsPanel(JFrame jfrm) {
         this.jf = jfrm;
         initComponents();

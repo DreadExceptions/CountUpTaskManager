@@ -273,7 +273,12 @@ public class TaskPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        // TODO add your handling code here:
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        DetailsPanel dtl = new DetailsPanel(fr, rs);
+        fr.add(dtl);
+        fr.pack();
+        fr.setVisible(true);
     }//GEN-LAST:event_detailsButtonActionPerformed
 
 
