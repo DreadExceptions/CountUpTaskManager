@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author marquis
@@ -14,7 +16,9 @@ public class editDetailsPanel extends javax.swing.JPanel {
     /**
      * Creates new form DetailsPanel
      */
-    public editDetailsPanel() {
+    JFrame jf;
+    public editDetailsPanel(JFrame jfrm) {
+        this.jf = jfrm;
         initComponents();
     }
 
@@ -37,9 +41,10 @@ public class editDetailsPanel extends javax.swing.JPanel {
         titleLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         description = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        deleteOneButton = new javax.swing.JButton();
+        deleteAllButton = new javax.swing.JButton();
+        submitButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,16 +101,23 @@ public class editDetailsPanel extends javax.swing.JPanel {
         description.setRows(5);
         jScrollPane2.setViewportView(description);
 
-        jButton1.setText("Delete Selected");
+        deleteOneButton.setText("Delete Selected");
 
-        jButton2.setText("Delete All");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        deleteAllButton.setText("Delete All");
+        deleteAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                deleteAllButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Submit");
+        submitButton.setText("Submit");
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -128,11 +140,13 @@ public class editDetailsPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane2))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(deleteOneButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(deleteAllButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(submitButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -150,30 +164,36 @@ public class editDetailsPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(deleteOneButton)
+                    .addComponent(deleteAllButton)
+                    .addComponent(submitButton)
+                    .addComponent(cancelButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void deleteAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAllButtonActionPerformed
+        //TO DO action code here
+    }//GEN-LAST:event_deleteAllButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        this.jf.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton deleteAllButton;
+    private javax.swing.JButton deleteOneButton;
     private javax.swing.JTextArea description;
     private javax.swing.JTable detailsTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton submitButton;
     private javax.swing.JLabel taskIDLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables

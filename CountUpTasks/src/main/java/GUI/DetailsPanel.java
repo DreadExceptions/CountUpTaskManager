@@ -5,16 +5,20 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author marquis
  */
 public class DetailsPanel extends javax.swing.JPanel {
 
+    JFrame jf;    
     /**
      * Creates new form DetailsPanel
      */
-    public DetailsPanel() {
+    public DetailsPanel(JFrame jfrm) {
+        this.jf = jfrm;
         initComponents();
     }
 
@@ -80,6 +84,11 @@ public class DetailsPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(description);
 
         jButton1.setText("Close");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -122,6 +131,10 @@ public class DetailsPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.jf.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
