@@ -9,12 +9,12 @@ package GUI;
  *
  * @author marquis
  */
-public class DetailsPanel extends javax.swing.JPanel {
+public class editDetailsPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DetailsPanel
      */
-    public DetailsPanel() {
+    public editDetailsPanel() {
         initComponents();
     }
 
