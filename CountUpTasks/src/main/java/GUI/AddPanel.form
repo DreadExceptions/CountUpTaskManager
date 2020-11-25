@@ -152,9 +152,6 @@
           <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nptCategoryActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;CATEGORY&quot;);"/>
@@ -210,17 +207,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD 00:00:00"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dueDateFTFActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="titleFTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="Title, 32 Characters Maximum."/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleFTFActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="detailsButton">
       <Properties>

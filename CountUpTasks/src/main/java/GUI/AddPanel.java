@@ -23,6 +23,7 @@ public class AddPanel extends javax.swing.JPanel {
      */
     JFrame jf;
     String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
+    String tsfrmt = "YYYY-MM-DD HH:MM:SS";
     
     public AddPanel(JFrame jfrm) {
         this.jf = jfrm;
@@ -80,11 +81,6 @@ public class AddPanel extends javax.swing.JPanel {
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);}
-        nptCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nptCategoryActionPerformed(evt);
-            }
-        });
 
         try {
             SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
@@ -119,18 +115,8 @@ public class AddPanel extends javax.swing.JPanel {
         startedFTF.setText("YYYY-MM-DD 00:00:00");
 
         dueDateFTF.setText("YYYY-MM-DD 00:00:00");
-        dueDateFTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dueDateFTFActionPerformed(evt);
-            }
-        });
 
         titleFTF.setText("Title, 32 Characters Maximum.");
-        titleFTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                titleFTFActionPerformed(evt);
-            }
-        });
 
         detailsButton.setText("Details");
         detailsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -222,16 +208,32 @@ public class AddPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        //Will need to automatically populate:
-        //      completeness
-        //      created date
-        //      ended date
+        ResultSet rs = null;
         
-        /*int pk = 1; //will be primary key of the newly created task
-        ResultSet rs;
+        try {
+        
+        //int pk = null; //Auto populated by the DB
+        String TITLE = titleFTF.getText();
+        int PRRTY = nptPriority.getSelectedIndex();
+        int CTGRY = nptCategory.getSelectedIndex();
+        String DESCRIPTION = nptDescription.getText();
+        if (DESCRIPTION.isBlank()) {DESCRIPTION = null;}
+        int TMFRM = nptTimeframe.getSelectedIndex();
+        String STRTD = startedFTF.getText();
+        if (STRTD.equalsIgnoreCase(tsfrmt)) {STRTD = null;}
+        String DUEDT = dueDateFTF.getText();
+        if (DUEDT.equalsIgnoreCase(tsfrmt)) {DUEDT = null;}
+        String NDDT = null;
+        int CMPLTNSS = 2;
+        //String CRTDDT = CURRENT_TIMESTAMP;
+        //Created Date might end up automatically populating via the DB
         
         //this requires SqliteJDBC udpate to add
         //will need to get automatically generated pk from DB
+        
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
         
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -239,20 +241,8 @@ public class AddPanel extends javax.swing.JPanel {
         fr.add(tsk);
         fr.pack();
         jf.dispose();
-        fr.setVisible(true);*/
+        fr.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
-
-    private void nptCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nptCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nptCategoryActionPerformed
-
-    private void dueDateFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueDateFTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dueDateFTFActionPerformed
-
-    private void titleFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_titleFTFActionPerformed
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");

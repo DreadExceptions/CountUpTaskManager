@@ -24,6 +24,7 @@ public class EditPanel extends javax.swing.JPanel {
     JFrame jf;
     ResultSet rs;
     String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
+    String tsfrmt = "YYYY-MM-DD HH:MM:SS";
     
     public EditPanel(JFrame jfrm, ResultSet rsltst) {
         this.jf = jfrm;
@@ -40,6 +41,7 @@ public class EditPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         nptDescription = new javax.swing.JTextArea();
@@ -55,110 +57,106 @@ public class EditPanel extends javax.swing.JPanel {
         editButton = new javax.swing.JButton();
         startedFTF = new javax.swing.JFormattedTextField();
         dueDateFTF = new javax.swing.JFormattedTextField();
-        titleFTF = new javax.swing.JFormattedTextField();
-        jLabel8 = new javax.swing.JLabel();
-        endDateFTF = new javax.swing.JFormattedTextField();
-        completeness = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        detailsButton = new javax.swing.JButton();
-
-        jLabel1.setText("Edit Task");
-
-        nptDescription.setColumns(20);
-        nptDescription.setRows(5);
-        nptDescription.setText("Description, unlimited.");
-        jScrollPane1.setViewportView(nptDescription);
-
-        jLabel3.setText("Started:");
-
-        jLabel4.setText("Due Date:");
-
-        jLabel5.setText("Category:");
-
-        jLabel6.setText("Priority:");
-
-        jLabel7.setText("Timeframe:");
-
         try {
-            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
-            String[] options = choice.getReferenceNames("CATEGORY");
-            nptCategory.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+            titleFTF = new javax.swing.JFormattedTextField();
+            jLabel8 = new javax.swing.JLabel();
+            endDateFTF = new javax.swing.JFormattedTextField();
+            completeness = new javax.swing.JComboBox<>();
+            jLabel9 = new javax.swing.JLabel();
+            detailsButton = new javax.swing.JButton();
+
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+            jLabel1.setText("Edit Task");
+
+            nptDescription.setColumns(20);
+            nptDescription.setRows(5);
+            rs.first();
+            nptDescription.setText(rs.getString("DESCRIPTION"));
+            jScrollPane1.setViewportView(nptDescription);
+
+            jLabel3.setText("Started:");
+
+            jLabel4.setText("Due Date:");
+
+            jLabel5.setText("Category:");
+
+            jLabel6.setText("Priority:");
+
+            jLabel7.setText("Timeframe:");
+
+            try {
+                SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+                String[] options = choice.getReferenceNames("CATEGORY");
+                nptCategory.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                System.exit(0);}
+            nptCategory.setSelectedIndex(rs.getInt("CATEGORY"));
+
+            try {
+                SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+                String[] options = choice.getReferenceNames("PRIORITY");
+                nptPriority.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+                nptPriority.setSelectedIndex(rs.getInt("PRIORITY"));
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                System.exit(0);}
+
+            try {
+                SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
+                String[] options = choice.getReferenceNames("TIMEFRAME");
+                nptTimeframe.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+                nptTimeframe.setSelectedIndex(rs.getInt("TIMEFRAME"));
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                System.exit(0);}
+
+            cancelButton.setText("Cancel");
+            cancelButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    cancelButtonActionPerformed(evt);
+                }
+            });
+
+            editButton.setText("Edit Task");
+            editButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    editButtonActionPerformed(evt);
+                }
+            });
+
+            rs.first();
+            String strtd = rs.getString("STARTED");
+            if (strtd.isBlank()) {strtd = tsfrmt;}
+            startedFTF.setText(strtd);
+
+            rs.first();
+            String ddt = rs.getString("DUEDATE");
+            if (ddt.isBlank()) {ddt = this.tsfrmt;}
+            dueDateFTF.setText(ddt);
+
+            rs.first();
+            titleFTF.setText(rs.getString("TITLE"));
+
+            jLabel8.setText("End Date:");
+
+            rs.first();
+            String ended = rs.getString("ENDED");
+            if (ended.isBlank()){ended = this.tsfrmt;}
+            endDateFTF.setText(ended);
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);}
-        nptCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nptCategoryActionPerformed(evt);
-            }
-        });
-
-        try {
-            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
-            String[] options = choice.getReferenceNames("PRIORITY");
-            nptPriority.setModel(new javax.swing.DefaultComboBoxModel<>(options));
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);}
-
-        try {
-            SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
-            String[] options = choice.getReferenceNames("TIMEFRAME");
-            nptTimeframe.setModel(new javax.swing.DefaultComboBoxModel<>(options));
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);}
-
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
-        editButton.setText("Edit Task");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
-
-        startedFTF.setText("YYYY-MM-DD 00:00:00");
-
-        dueDateFTF.setText("YYYY-MM-DD 00:00:00");
-        dueDateFTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dueDateFTFActionPerformed(evt);
-            }
-        });
-
-        titleFTF.setText("Title, 32 Characters Maximum.");
-        titleFTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                titleFTFActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("End Date:");
-
-        endDateFTF.setText("YYYY-MM-DD 00:00:00");
-        endDateFTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endDateFTFActionPerformed(evt);
-            }
-        });
 
         try {
             SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);
             String[] options = choice.getReferenceNames("COMPLETENESS");
             completeness.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+            completeness.setSelectedIndex(rs.getInt("COMPLETENESS"));
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);}
-        completeness.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                completenessActionPerformed(evt);
-            }
-        });
 
         jLabel9.setText("Completeness:");
 
@@ -264,9 +262,33 @@ public class EditPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        int pk = 1; //will be primary key of the newly created task
+        //have to create warnings that stop user from submitting null fields for certain things.
+        try {
         
-        //this requires SqliteJDBC udpate to edit
+        rs.first();
+        int pk = rs.getInt("TASKID");
+        String TITLE = titleFTF.getText();
+        int CMPLTNSS = completeness.getSelectedIndex();
+        int PRRTY = nptPriority.getSelectedIndex();
+        int CTGRY = nptCategory.getSelectedIndex();
+        String DESCRIPTION = nptDescription.getText();
+        if (DESCRIPTION.isBlank()) {DESCRIPTION = null;}
+        int TMFRM = nptTimeframe.getSelectedIndex();
+        String STRTD = startedFTF.getText();
+        if (STRTD.equalsIgnoreCase(tsfrmt)) {STRTD = null;}
+        String DUEDT = dueDateFTF.getText();
+        if (DUEDT.equalsIgnoreCase(tsfrmt)) {DUEDT = null;}
+        String NDDT = endDateFTF.getText();
+        if (NDDT.equalsIgnoreCase(tsfrmt)) {NDDT = null;}
+        
+        /* HERE WILL GO UPDATE STATEMENT FOR DB
+            This update statement should give a result set, which can be given
+            to the TaskPanel
+        */
+        
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
         
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -276,26 +298,6 @@ public class EditPanel extends javax.swing.JPanel {
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_editButtonActionPerformed
-
-    private void nptCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nptCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nptCategoryActionPerformed
-
-    private void dueDateFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueDateFTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dueDateFTFActionPerformed
-
-    private void titleFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_titleFTFActionPerformed
-
-    private void endDateFTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDateFTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_endDateFTFActionPerformed
-
-    private void completenessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completenessActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_completenessActionPerformed
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
@@ -314,6 +316,7 @@ public class EditPanel extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField dueDateFTF;
     private javax.swing.JButton editButton;
     private javax.swing.JFormattedTextField endDateFTF;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
