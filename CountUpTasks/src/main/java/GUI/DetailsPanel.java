@@ -70,6 +70,13 @@ public class DetailsPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        detailsTable.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                detailsTableCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(detailsTable);
         detailsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -138,6 +145,10 @@ public class DetailsPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.jf.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void detailsTableCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_detailsTableCaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_detailsTableCaretPositionChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

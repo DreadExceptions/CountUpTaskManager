@@ -238,6 +238,7 @@
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rs.first();&#xa;String strtd = rs.getString(&quot;STARTED&quot;);&#xa;if (strtd.isBlank()) {strtd = tsfrmt;}"/>
       </AuxValues>
     </Component>
@@ -248,6 +249,7 @@
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rs.first();&#xa;String ddt = rs.getString(&quot;DUEDATE&quot;);&#xa;if (ddt.isBlank()) {ddt = this.tsfrmt;}"/>
       </AuxValues>
     </Component>
@@ -274,6 +276,7 @@
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rs.first();&#xa;String ended = rs.getString(&quot;ENDED&quot;);&#xa;if (ended.isBlank()){ended = this.tsfrmt;}"/>
         <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;            System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;            System.exit(0);}"/>
       </AuxValues>

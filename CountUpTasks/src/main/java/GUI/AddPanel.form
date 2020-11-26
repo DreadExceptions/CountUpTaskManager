@@ -202,11 +202,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD 00:00:00"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="dueDateFTF">
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD 00:00:00"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="titleFTF">
       <Properties>

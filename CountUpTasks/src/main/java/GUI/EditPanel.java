@@ -8,6 +8,8 @@ package GUI;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,7 @@ public class EditPanel extends javax.swing.JPanel {
     ResultSet rs;
     String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
     String tsfrmt = "YYYY-MM-DD HH:MM:SS";
+    DateFormat tmstmpFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
     public EditPanel(JFrame jfrm, ResultSet rsltst) {
         this.jf = jfrm;
@@ -55,12 +58,12 @@ public class EditPanel extends javax.swing.JPanel {
         nptTimeframe = new javax.swing.JComboBox<>();
         cancelButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
-        startedFTF = new javax.swing.JFormattedTextField();
-        dueDateFTF = new javax.swing.JFormattedTextField();
+        startedFTF = new javax.swing.JFormattedTextField(tmstmpFormat);
+        dueDateFTF = new javax.swing.JFormattedTextField(tmstmpFormat);
         try {
             titleFTF = new javax.swing.JFormattedTextField();
             jLabel8 = new javax.swing.JLabel();
-            endDateFTF = new javax.swing.JFormattedTextField();
+            endDateFTF = new javax.swing.JFormattedTextField(tmstmpFormat);
             completeness = new javax.swing.JComboBox<>();
             jLabel9 = new javax.swing.JLabel();
             detailsButton = new javax.swing.JButton();
@@ -272,7 +275,6 @@ public class EditPanel extends javax.swing.JPanel {
         int PRRTY = nptPriority.getSelectedIndex();
         int CTGRY = nptCategory.getSelectedIndex();
         String DESCRIPTION = nptDescription.getText();
-        if (DESCRIPTION.isBlank()) {DESCRIPTION = null;}
         int TMFRM = nptTimeframe.getSelectedIndex();
         String STRTD = startedFTF.getText();
         if (STRTD.equalsIgnoreCase(tsfrmt)) {STRTD = null;}
