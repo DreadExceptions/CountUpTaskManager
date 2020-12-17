@@ -22,6 +22,16 @@ public class SelectPanel extends javax.swing.JPanel {
     JFrame jf;
     String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
     DateFormat tmstmpFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String fieldCheck = "YYYY-MM-DD HH:MM:SS";
+    String sortA = "";
+    String sortB = "";
+    String sortC = "";
+    String filterCategory = "";
+    String filterTimeframe = "";
+    String filterCompleteness = "";
+    String filterPriority = "";
+    String view = "SELECT * FROM TASKS";
+    
     public SelectPanel(JFrame jfrm) {
         this.jf = jfrm;
         initComponents();
@@ -49,45 +59,48 @@ public class SelectPanel extends javax.swing.JPanel {
         timeframeBox = new javax.swing.JComboBox<>();
         completenessBox = new javax.swing.JComboBox<>();
         priorityBox = new javax.swing.JComboBox<>();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
-        jRadioButton10 = new javax.swing.JRadioButton();
-        jRadioButton11 = new javax.swing.JRadioButton();
-        jRadioButton12 = new javax.swing.JRadioButton();
-        jRadioButton13 = new javax.swing.JRadioButton();
-        jRadioButton14 = new javax.swing.JRadioButton();
+        categoryA = new javax.swing.JRadioButton();
+        timeframeA = new javax.swing.JRadioButton();
+        completenessA = new javax.swing.JRadioButton();
+        priorityA = new javax.swing.JRadioButton();
+        createdA = new javax.swing.JRadioButton();
+        finishedA = new javax.swing.JRadioButton();
+        dueDateA = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
-        jRadioButton15 = new javax.swing.JRadioButton();
-        jRadioButton16 = new javax.swing.JRadioButton();
-        jRadioButton17 = new javax.swing.JRadioButton();
+        priorityB = new javax.swing.JRadioButton();
+        completenessB = new javax.swing.JRadioButton();
+        createdB = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
-        jRadioButton18 = new javax.swing.JRadioButton();
-        jRadioButton19 = new javax.swing.JRadioButton();
-        jRadioButton20 = new javax.swing.JRadioButton();
-        jRadioButton21 = new javax.swing.JRadioButton();
+        categoryB = new javax.swing.JRadioButton();
+        finishedB = new javax.swing.JRadioButton();
+        timeframeB = new javax.swing.JRadioButton();
+        dueDateB = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
-        jRadioButton22 = new javax.swing.JRadioButton();
-        jRadioButton23 = new javax.swing.JRadioButton();
-        jRadioButton24 = new javax.swing.JRadioButton();
-        jRadioButton25 = new javax.swing.JRadioButton();
-        jRadioButton26 = new javax.swing.JRadioButton();
-        jRadioButton27 = new javax.swing.JRadioButton();
-        jRadioButton28 = new javax.swing.JRadioButton();
+        categoryC = new javax.swing.JRadioButton();
+        finishedC = new javax.swing.JRadioButton();
+        timeframeC = new javax.swing.JRadioButton();
+        dueDateC = new javax.swing.JRadioButton();
+        priorityC = new javax.swing.JRadioButton();
+        completenessC = new javax.swing.JRadioButton();
+        createdC = new javax.swing.JRadioButton();
         returnButton = new javax.swing.JButton();
         viewAllButton = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField(tmstmpFormat);
-        jFormattedTextField2 = new javax.swing.JFormattedTextField(tmstmpFormat);
+        createdDateB = new javax.swing.JFormattedTextField(tmstmpFormat);
+        createdDateA = new javax.swing.JFormattedTextField(tmstmpFormat);
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField(tmstmpFormat);
-        jFormattedTextField4 = new javax.swing.JFormattedTextField(tmstmpFormat);
+        completeDateB = new javax.swing.JFormattedTextField(tmstmpFormat);
+        completeDateA = new javax.swing.JFormattedTextField(tmstmpFormat);
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField(tmstmpFormat);
+        dueDateFieldA = new javax.swing.JFormattedTextField(tmstmpFormat);
         jLabel14 = new javax.swing.JLabel();
-        jFormattedTextField6 = new javax.swing.JFormattedTextField(tmstmpFormat);
+        dueDateFieldB = new javax.swing.JFormattedTextField(tmstmpFormat);
+        titleA = new javax.swing.JRadioButton();
+        titleB = new javax.swing.JRadioButton();
+        titleC = new javax.swing.JRadioButton();
 
         jLabel1.setText("Title");
 
@@ -133,74 +146,179 @@ public class SelectPanel extends javax.swing.JPanel {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);}
 
-        buttonGroup1.add(jRadioButton8);
-        jRadioButton8.setText("Category");
+        buttonGroup1.add(categoryA);
+        categoryA.setText("Category");
+        categoryA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryAActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton9);
-        jRadioButton9.setText("Timeframe");
+        buttonGroup1.add(timeframeA);
+        timeframeA.setText("Timeframe");
+        timeframeA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeframeAActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton10);
-        jRadioButton10.setText("Compltnss");
+        buttonGroup1.add(completenessA);
+        completenessA.setText("Compltnss");
+        completenessA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                completenessAActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton11);
-        jRadioButton11.setText("Priority");
+        buttonGroup1.add(priorityA);
+        priorityA.setText("Priority");
+        priorityA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priorityAActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton12);
-        jRadioButton12.setText("Created");
+        buttonGroup1.add(createdA);
+        createdA.setText("Created");
+        createdA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createdAActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton13);
-        jRadioButton13.setText("Finished");
+        buttonGroup1.add(finishedA);
+        finishedA.setText("Finished");
+        finishedA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finishedAActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton14);
-        jRadioButton14.setText("Due Date");
+        buttonGroup1.add(dueDateA);
+        dueDateA.setText("Due Date");
+        dueDateA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dueDateAActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Sort By 1");
 
-        buttonGroup2.add(jRadioButton15);
-        jRadioButton15.setText("Priority");
+        buttonGroup2.add(priorityB);
+        priorityB.setText("Priority");
+        priorityB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priorityBActionPerformed(evt);
+            }
+        });
 
-        buttonGroup2.add(jRadioButton16);
-        jRadioButton16.setText("Compltnss");
+        buttonGroup2.add(completenessB);
+        completenessB.setText("Compltnss");
+        completenessB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                completenessBActionPerformed(evt);
+            }
+        });
 
-        buttonGroup2.add(jRadioButton17);
-        jRadioButton17.setText("Created");
+        buttonGroup2.add(createdB);
+        createdB.setText("Created");
+        createdB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createdBActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Sort By 2");
 
-        buttonGroup2.add(jRadioButton18);
-        jRadioButton18.setText("Category");
+        buttonGroup2.add(categoryB);
+        categoryB.setText("Category");
+        categoryB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryBActionPerformed(evt);
+            }
+        });
 
-        buttonGroup2.add(jRadioButton19);
-        jRadioButton19.setText("Finished");
+        buttonGroup2.add(finishedB);
+        finishedB.setText("Finished");
+        finishedB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finishedBActionPerformed(evt);
+            }
+        });
 
-        buttonGroup2.add(jRadioButton20);
-        jRadioButton20.setText("Timeframe");
+        buttonGroup2.add(timeframeB);
+        timeframeB.setText("Timeframe");
+        timeframeB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeframeBActionPerformed(evt);
+            }
+        });
 
-        buttonGroup2.add(jRadioButton21);
-        jRadioButton21.setText("Due Date");
+        buttonGroup2.add(dueDateB);
+        dueDateB.setText("Due Date");
+        dueDateB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dueDateBActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Sort By 3");
 
-        buttonGroup3.add(jRadioButton22);
-        jRadioButton22.setText("Category");
+        buttonGroup3.add(categoryC);
+        categoryC.setText("Category");
+        categoryC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryCActionPerformed(evt);
+            }
+        });
 
-        buttonGroup3.add(jRadioButton23);
-        jRadioButton23.setText("Finished");
+        buttonGroup3.add(finishedC);
+        finishedC.setText("Finished");
+        finishedC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finishedCActionPerformed(evt);
+            }
+        });
 
-        buttonGroup3.add(jRadioButton24);
-        jRadioButton24.setText("Timeframe");
+        buttonGroup3.add(timeframeC);
+        timeframeC.setText("Timeframe");
+        timeframeC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeframeCActionPerformed(evt);
+            }
+        });
 
-        buttonGroup3.add(jRadioButton25);
-        jRadioButton25.setText("Due Date");
+        buttonGroup3.add(dueDateC);
+        dueDateC.setText("Due Date");
+        dueDateC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dueDateCActionPerformed(evt);
+            }
+        });
 
-        buttonGroup3.add(jRadioButton26);
-        jRadioButton26.setText("Priority");
+        buttonGroup3.add(priorityC);
+        priorityC.setText("Priority");
+        priorityC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priorityCActionPerformed(evt);
+            }
+        });
 
-        buttonGroup3.add(jRadioButton27);
-        jRadioButton27.setText("Compltnss");
+        buttonGroup3.add(completenessC);
+        completenessC.setText("Compltnss");
+        completenessC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                completenessCActionPerformed(evt);
+            }
+        });
 
-        buttonGroup3.add(jRadioButton28);
-        jRadioButton28.setText("Created");
+        buttonGroup3.add(createdC);
+        createdC.setText("Created");
+        createdC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createdCActionPerformed(evt);
+            }
+        });
 
         returnButton.setText("Return");
         returnButton.addActionListener(new java.awt.event.ActionListener() {
@@ -217,40 +335,59 @@ public class SelectPanel extends javax.swing.JPanel {
         });
 
         searchButton.setText("Search");
-
-        jFormattedTextField1.setText("YYYY-MM-DD HH:MM:SS");
-
-        jFormattedTextField2.setText("YYYY-MM-DD HH:MM:SS");
-        jFormattedTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jFormattedTextField2FocusLost(evt);
-            }
-        });
-        jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField2ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
+
+        createdDateB.setText("YYYY-MM-DD HH:MM:SS");
+
+        createdDateA.setText("YYYY-MM-DD HH:MM:SS");
 
         jLabel6.setText("Created Date:");
 
         jLabel10.setText("to");
 
-        jFormattedTextField3.setText("YYYY-MM-DD HH:MM:SS");
+        completeDateB.setText("YYYY-MM-DD HH:MM:SS");
 
-        jFormattedTextField4.setText("YYYY-MM-DD HH:MM:SS");
+        completeDateA.setText("YYYY-MM-DD HH:MM:SS");
 
-        jLabel11.setText("Completed Date:");
+        jLabel11.setText("Finished Date:");
 
         jLabel12.setText("to");
 
         jLabel13.setText("Due Date:");
 
-        jFormattedTextField5.setText("YYYY-MM-DD HH:MM:SS");
+        dueDateFieldA.setText("YYYY-MM-DD HH:MM:SS");
 
         jLabel14.setText("to");
 
-        jFormattedTextField6.setText("YYYY-MM-DD HH:MM:SS");
+        dueDateFieldB.setText("YYYY-MM-DD HH:MM:SS");
+
+        buttonGroup1.add(titleA);
+        titleA.setText("Title");
+        titleA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleAActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(titleB);
+        titleB.setText("Title");
+        titleB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleBActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(titleC);
+        titleC.setText("Title");
+        titleC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleCActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -279,34 +416,37 @@ public class SelectPanel extends javax.swing.JPanel {
                                     .addComponent(categoryBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton8)
-                            .addComponent(jRadioButton9)
-                            .addComponent(jRadioButton10)
-                            .addComponent(jRadioButton11)
-                            .addComponent(jRadioButton12)
-                            .addComponent(jRadioButton13)
-                            .addComponent(jRadioButton14)
-                            .addComponent(jLabel7))
+                            .addComponent(categoryA)
+                            .addComponent(timeframeA)
+                            .addComponent(completenessA)
+                            .addComponent(priorityA)
+                            .addComponent(createdA)
+                            .addComponent(finishedA)
+                            .addComponent(dueDateA)
+                            .addComponent(jLabel7)
+                            .addComponent(titleA))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton15)
-                            .addComponent(jRadioButton16)
-                            .addComponent(jRadioButton17)
+                            .addComponent(priorityB)
+                            .addComponent(completenessB)
+                            .addComponent(createdB)
                             .addComponent(jLabel8)
-                            .addComponent(jRadioButton18)
-                            .addComponent(jRadioButton19)
-                            .addComponent(jRadioButton20)
-                            .addComponent(jRadioButton21))
+                            .addComponent(categoryB)
+                            .addComponent(finishedB)
+                            .addComponent(timeframeB)
+                            .addComponent(dueDateB)
+                            .addComponent(titleB))
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleC)
                             .addComponent(jLabel9)
-                            .addComponent(jRadioButton22)
-                            .addComponent(jRadioButton23)
-                            .addComponent(jRadioButton24)
-                            .addComponent(jRadioButton26)
-                            .addComponent(jRadioButton27)
-                            .addComponent(jRadioButton28)
-                            .addComponent(jRadioButton25)))
+                            .addComponent(categoryC)
+                            .addComponent(finishedC)
+                            .addComponent(timeframeC)
+                            .addComponent(priorityC)
+                            .addComponent(completenessC)
+                            .addComponent(createdC)
+                            .addComponent(dueDateC)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -314,23 +454,23 @@ public class SelectPanel extends javax.swing.JPanel {
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextField5)
-                            .addComponent(jFormattedTextField2)
-                            .addComponent(jFormattedTextField4))
+                            .addComponent(dueDateFieldA)
+                            .addComponent(createdDateA)
+                            .addComponent(completeDateA))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField3))
+                                .addComponent(completeDateB))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField6))
+                                .addComponent(dueDateFieldB))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(createdDateB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(returnButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,35 +487,35 @@ public class SelectPanel extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel9)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRadioButton22)
+                            .addComponent(categoryC)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRadioButton24)
+                            .addComponent(timeframeC)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRadioButton27)
+                            .addComponent(completenessC)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRadioButton26)
+                            .addComponent(priorityC)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jRadioButton28)
+                            .addComponent(createdC)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jRadioButton23)
+                            .addComponent(finishedC)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jRadioButton25))
+                            .addComponent(dueDateC))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRadioButton18)
+                            .addComponent(categoryB)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRadioButton20)
+                            .addComponent(timeframeB)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRadioButton16)
+                            .addComponent(completenessB)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jRadioButton15)
+                            .addComponent(priorityB)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jRadioButton17)
+                            .addComponent(createdB)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jRadioButton19)
+                            .addComponent(finishedB)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jRadioButton21)))
+                            .addComponent(dueDateB)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -399,41 +539,46 @@ public class SelectPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton8)
+                        .addComponent(categoryA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton9)
+                        .addComponent(timeframeA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton10)
+                        .addComponent(completenessA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton11)
+                        .addComponent(priorityA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton12)
+                        .addComponent(createdA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton13)
+                        .addComponent(finishedA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton14)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dueDateA)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleA)
+                    .addComponent(titleB)
+                    .addComponent(titleC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(createdDateA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel10)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createdDateB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(returnButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewAllButton)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(completeDateB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(completeDateA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchButton)
                     .addComponent(jLabel13)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dueDateFieldA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(jFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dueDateFieldB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -448,17 +593,205 @@ public class SelectPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void viewAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllButtonActionPerformed
-        String viewAll = "SELECT * FROM TASKS";
-        //still use sorts for viewAll
+        if (!sortA.isBlank()||!sortB.isBlank()||!sortC.isBlank()) {
+            view += " SORT BY ";
+        }
+        if (!sortA.isBlank()) {
+            view += sortA;
+            if (!sortB.isBlank()||!sortC.isBlank()) {view += ", ";}
+        } else if (!sortB.isBlank()) {
+            view += sortB;
+            if (!sortC.isBlank()) {view += ", ";}
+        } else if (!sortC.isBlank()) {view += sortC;}
+        view += ";";
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ViewPanel vw = new ViewPanel(fr, view);
+        fr.add(vw);
+        fr.pack();
+        jf.dispose();
+        fr.setVisible(true);
     }//GEN-LAST:event_viewAllButtonActionPerformed
 
-    private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField2ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        //Must create Select Query
+        //Add where clause, using filters
+        if ((categoryBox.getSelectedIndex()+timeframeBox.getSelectedIndex()+
+                completenessBox.getSelectedIndex()+priorityBox.getSelectedIndex() > 0) ||
+                (!createdDateA.getText().isBlank())||(!createdDateB.getText().isBlank())||
+                (!completeDateA.getText().isBlank())||(!completeDateB.getText().isBlank())||
+                (!dueDateFieldA.getText().isBlank())||(!dueDateFieldB.getText().isBlank()))
+        {//START FILTERS
+            view += " WHERE ";
+            
+            if (categoryBox.getSelectedIndex() > 0) {
+                view += "CATEGORY = " + categoryBox.getSelectedIndex();
+            }
+            //timeframe
+            if (timeframeBox.getSelectedIndex() > 0) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "TIMEFRAME = " + timeframeBox.getSelectedIndex();
+            }
+            //completeness
+            if (completenessBox.getSelectedIndex() > 0) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "COMPLETENESS = " + completenessBox.getSelectedIndex();
+            }
+            //priority
+            if (priorityBox.getSelectedIndex() > 0) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "PRIORITY = " + priorityBox.getSelectedIndex();
+            }
+            //created date 1
+            if (!createdDateA.getText().isBlank() || !createdDateA.getText().equals(fieldCheck)) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "CREATED > " + createdDateA.getText();
+            }
+            //created date 2
+            if (!createdDateB.getText().isBlank() || !createdDateB.getText().equals(fieldCheck)) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "CREATED < " + createdDateB.getText();
+            }
+            //completed date 1
+            if (!completeDateA.getText().isBlank() || !completeDateA.getText().equals(fieldCheck)) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "ENDED > " + completeDateA.getText();
+            }
+            //completed date 2
+            if (!completeDateB.getText().isBlank() || !completeDateB.getText().equals(fieldCheck)) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "ENDED < " + completeDateB.getText();
+            }
+            //due date 1
+            if (!dueDateFieldA.getText().isBlank() || !dueDateFieldA.getText().equals(fieldCheck)) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "DUEDATE > " + dueDateFieldA.getText();
+            }
+            //due date 2
+            if (!dueDateFieldA.getText().isBlank() || !dueDateFieldA.getText().equals(fieldCheck)) {
+                if (!view.endsWith(" ")) {view+= ", ";}
+                view += "DUEDATE < " + dueDateFieldA.getText();
+            }
+        }//END FILTERS
+        
+        //category
+        //Add sort clause, using sorts
+        if (!sortA.isBlank()||!sortB.isBlank()||!sortC.isBlank()) {
+            view += " SORT BY ";
+        }
+        if (!sortA.isBlank()) {
+            view += sortA;
+            if (!sortB.isBlank()||!sortC.isBlank()) {view += ", ";}
+        } else if (!sortB.isBlank()) {
+            view += sortB;
+            if (!sortC.isBlank()) {view += ", ";}
+        } else if (!sortC.isBlank()) {view += sortC;}
+        //Call View Panel
+        view += ";";
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ViewPanel vw = new ViewPanel(fr, view);
+        fr.add(vw);
+        fr.pack();
+        jf.dispose();
+        fr.setVisible(true);
+    }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void jFormattedTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField2FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField2FocusLost
+    private void categoryAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryAActionPerformed
+        sortA = "CATEGORY";
+    }//GEN-LAST:event_categoryAActionPerformed
+
+    private void categoryBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryBActionPerformed
+        sortB = "CATEGORY";
+    }//GEN-LAST:event_categoryBActionPerformed
+
+    private void categoryCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryCActionPerformed
+        sortC = "CATEGORY";
+    }//GEN-LAST:event_categoryCActionPerformed
+
+    private void timeframeAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeframeAActionPerformed
+        sortA = "TIMEFRAME";
+    }//GEN-LAST:event_timeframeAActionPerformed
+
+    private void timeframeBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeframeBActionPerformed
+        sortB = "TIMEFRAME";
+    }//GEN-LAST:event_timeframeBActionPerformed
+
+    private void timeframeCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeframeCActionPerformed
+        sortC = "TIMEFRAME";
+    }//GEN-LAST:event_timeframeCActionPerformed
+
+    private void completenessAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completenessAActionPerformed
+        sortA = "COMPLETENESS";
+    }//GEN-LAST:event_completenessAActionPerformed
+
+    private void completenessBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completenessBActionPerformed
+        sortB = "COMPLETENESS";
+    }//GEN-LAST:event_completenessBActionPerformed
+
+    private void completenessCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completenessCActionPerformed
+        sortC = "COMPLETENESS";
+    }//GEN-LAST:event_completenessCActionPerformed
+
+    private void priorityAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priorityAActionPerformed
+        sortA = "PRIORITY";
+    }//GEN-LAST:event_priorityAActionPerformed
+
+    private void priorityBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priorityBActionPerformed
+        sortB = "PRIORITY";
+    }//GEN-LAST:event_priorityBActionPerformed
+
+    private void priorityCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priorityCActionPerformed
+        sortC = "PRIORITY";
+    }//GEN-LAST:event_priorityCActionPerformed
+
+    private void createdAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createdAActionPerformed
+        sortA = "CREATED";
+    }//GEN-LAST:event_createdAActionPerformed
+
+    private void createdBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createdBActionPerformed
+        sortB = "CREATED";
+    }//GEN-LAST:event_createdBActionPerformed
+
+    private void createdCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createdCActionPerformed
+        sortC = "CREATED";
+    }//GEN-LAST:event_createdCActionPerformed
+
+    private void finishedAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishedAActionPerformed
+        sortA = "ENDED";
+    }//GEN-LAST:event_finishedAActionPerformed
+
+    private void finishedBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishedBActionPerformed
+        sortB = "ENDED";
+    }//GEN-LAST:event_finishedBActionPerformed
+
+    private void finishedCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishedCActionPerformed
+        sortC = "ENDED";
+    }//GEN-LAST:event_finishedCActionPerformed
+
+    private void dueDateAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueDateAActionPerformed
+        sortA = "DUEDATE";
+    }//GEN-LAST:event_dueDateAActionPerformed
+
+    private void dueDateBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueDateBActionPerformed
+        sortB = "DUEDATE";
+    }//GEN-LAST:event_dueDateBActionPerformed
+
+    private void dueDateCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dueDateCActionPerformed
+        sortC = "DUEDATE";
+    }//GEN-LAST:event_dueDateCActionPerformed
+
+    private void titleAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleAActionPerformed
+        sortA = "TITLE";
+    }//GEN-LAST:event_titleAActionPerformed
+
+    private void titleBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleBActionPerformed
+        sortB = "TITLE";
+    }//GEN-LAST:event_titleBActionPerformed
+
+    private void titleCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleCActionPerformed
+        sortC = "TITLE";
+    }//GEN-LAST:event_titleCActionPerformed
 
     private void verifyTimestampFTF(JFormattedTextField jftf){
         //When focus is lost
@@ -470,14 +803,29 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JRadioButton categoryA;
+    private javax.swing.JRadioButton categoryB;
     private javax.swing.JComboBox<String> categoryBox;
+    private javax.swing.JRadioButton categoryC;
+    private javax.swing.JFormattedTextField completeDateA;
+    private javax.swing.JFormattedTextField completeDateB;
+    private javax.swing.JRadioButton completenessA;
+    private javax.swing.JRadioButton completenessB;
     private javax.swing.JComboBox<String> completenessBox;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
-    private javax.swing.JFormattedTextField jFormattedTextField6;
+    private javax.swing.JRadioButton completenessC;
+    private javax.swing.JRadioButton createdA;
+    private javax.swing.JRadioButton createdB;
+    private javax.swing.JRadioButton createdC;
+    private javax.swing.JFormattedTextField createdDateA;
+    private javax.swing.JFormattedTextField createdDateB;
+    private javax.swing.JRadioButton dueDateA;
+    private javax.swing.JRadioButton dueDateB;
+    private javax.swing.JRadioButton dueDateC;
+    private javax.swing.JFormattedTextField dueDateFieldA;
+    private javax.swing.JFormattedTextField dueDateFieldB;
+    private javax.swing.JRadioButton finishedA;
+    private javax.swing.JRadioButton finishedB;
+    private javax.swing.JRadioButton finishedC;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -492,32 +840,20 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton16;
-    private javax.swing.JRadioButton jRadioButton17;
-    private javax.swing.JRadioButton jRadioButton18;
-    private javax.swing.JRadioButton jRadioButton19;
-    private javax.swing.JRadioButton jRadioButton20;
-    private javax.swing.JRadioButton jRadioButton21;
-    private javax.swing.JRadioButton jRadioButton22;
-    private javax.swing.JRadioButton jRadioButton23;
-    private javax.swing.JRadioButton jRadioButton24;
-    private javax.swing.JRadioButton jRadioButton25;
-    private javax.swing.JRadioButton jRadioButton26;
-    private javax.swing.JRadioButton jRadioButton27;
-    private javax.swing.JRadioButton jRadioButton28;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton priorityA;
+    private javax.swing.JRadioButton priorityB;
     private javax.swing.JComboBox<String> priorityBox;
+    private javax.swing.JRadioButton priorityC;
     private javax.swing.JButton returnButton;
     private javax.swing.JButton searchButton;
+    private javax.swing.JRadioButton timeframeA;
+    private javax.swing.JRadioButton timeframeB;
     private javax.swing.JComboBox<String> timeframeBox;
+    private javax.swing.JRadioButton timeframeC;
+    private javax.swing.JRadioButton titleA;
+    private javax.swing.JRadioButton titleB;
+    private javax.swing.JRadioButton titleC;
     private javax.swing.JButton viewAllButton;
     // End of variables declaration//GEN-END:variables
 }

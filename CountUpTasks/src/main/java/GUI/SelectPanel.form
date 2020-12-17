@@ -52,36 +52,39 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jRadioButton8" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton9" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton10" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton11" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton12" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton13" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton14" min="-2" max="-2" attributes="0"/>
+                          <Component id="categoryA" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeframeA" min="-2" max="-2" attributes="0"/>
+                          <Component id="completenessA" min="-2" max="-2" attributes="0"/>
+                          <Component id="priorityA" min="-2" max="-2" attributes="0"/>
+                          <Component id="createdA" min="-2" max="-2" attributes="0"/>
+                          <Component id="finishedA" min="-2" max="-2" attributes="0"/>
+                          <Component id="dueDateA" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="titleA" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jRadioButton15" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton16" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton17" min="-2" max="-2" attributes="0"/>
+                          <Component id="priorityB" min="-2" max="-2" attributes="0"/>
+                          <Component id="completenessB" min="-2" max="-2" attributes="0"/>
+                          <Component id="createdB" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton18" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton19" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton20" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton21" min="-2" max="-2" attributes="0"/>
+                          <Component id="categoryB" min="-2" max="-2" attributes="0"/>
+                          <Component id="finishedB" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeframeB" min="-2" max="-2" attributes="0"/>
+                          <Component id="dueDateB" min="-2" max="-2" attributes="0"/>
+                          <Component id="titleB" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="titleC" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton22" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton23" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton24" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton26" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton27" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton28" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton25" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="categoryC" min="-2" max="-2" attributes="0"/>
+                          <Component id="finishedC" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeframeC" min="-2" max="-2" attributes="0"/>
+                          <Component id="priorityC" min="-2" max="-2" attributes="0"/>
+                          <Component id="completenessC" min="-2" max="-2" attributes="0"/>
+                          <Component id="createdC" min="-2" max="-2" attributes="0"/>
+                          <Component id="dueDateC" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -92,26 +95,26 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jFormattedTextField5" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField4" alignment="0" max="32767" attributes="0"/>
+                          <Component id="dueDateFieldA" max="32767" attributes="0"/>
+                          <Component id="createdDateA" alignment="0" max="32767" attributes="0"/>
+                          <Component id="completeDateA" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jFormattedTextField3" max="32767" attributes="0"/>
+                              <Component id="completeDateB" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jFormattedTextField6" max="32767" attributes="0"/>
+                              <Component id="dueDateFieldB" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jFormattedTextField1" min="-2" max="-2" attributes="0"/>
+                              <Component id="createdDateB" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -135,36 +138,36 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jRadioButton22" min="-2" max="-2" attributes="0"/>
+                          <Component id="categoryC" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jRadioButton24" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeframeC" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jRadioButton27" min="-2" max="-2" attributes="0"/>
+                          <Component id="completenessC" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jRadioButton26" min="-2" max="-2" attributes="0"/>
+                          <Component id="priorityC" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jRadioButton28" min="-2" max="-2" attributes="0"/>
+                          <Component id="createdC" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jRadioButton23" min="-2" max="-2" attributes="0"/>
+                          <Component id="finishedC" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jRadioButton25" min="-2" max="-2" attributes="0"/>
+                          <Component id="dueDateC" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jRadioButton18" min="-2" max="-2" attributes="0"/>
+                          <Component id="categoryB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jRadioButton20" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeframeB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jRadioButton16" min="-2" max="-2" attributes="0"/>
+                          <Component id="completenessB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jRadioButton15" min="-2" max="-2" attributes="0"/>
+                          <Component id="priorityB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jRadioButton17" min="-2" max="-2" attributes="0"/>
+                          <Component id="createdB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jRadioButton19" min="-2" max="-2" attributes="0"/>
+                          <Component id="finishedB" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jRadioButton21" min="-2" max="-2" attributes="0"/>
+                          <Component id="dueDateB" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -196,46 +199,52 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jRadioButton8" min="-2" max="-2" attributes="0"/>
+                      <Component id="categoryA" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jRadioButton9" min="-2" max="-2" attributes="0"/>
+                      <Component id="timeframeA" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jRadioButton10" min="-2" max="-2" attributes="0"/>
+                      <Component id="completenessA" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jRadioButton11" min="-2" max="-2" attributes="0"/>
+                      <Component id="priorityA" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jRadioButton12" min="-2" max="-2" attributes="0"/>
+                      <Component id="createdA" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jRadioButton13" min="-2" max="-2" attributes="0"/>
+                      <Component id="finishedA" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jRadioButton14" min="-2" max="-2" attributes="0"/>
+                      <Component id="dueDateA" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jFormattedTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="titleA" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="titleB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="titleC" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="createdDateA" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="createdDateB" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="returnButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="viewAllButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="completeDateB" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="completeDateA" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="searchButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dueDateFieldA" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dueDateFieldB" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -319,188 +328,251 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton8">
+    <Component class="javax.swing.JRadioButton" name="categoryA">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Category"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="categoryAActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton9">
+    <Component class="javax.swing.JRadioButton" name="timeframeA">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Timeframe"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="timeframeAActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton10">
+    <Component class="javax.swing.JRadioButton" name="completenessA">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Compltnss"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="completenessAActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton11">
+    <Component class="javax.swing.JRadioButton" name="priorityA">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Priority"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priorityAActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton12">
+    <Component class="javax.swing.JRadioButton" name="createdA">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Created"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createdAActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton13">
+    <Component class="javax.swing.JRadioButton" name="finishedA">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Finished"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="finishedAActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton14">
+    <Component class="javax.swing.JRadioButton" name="dueDateA">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Due Date"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dueDateAActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sort By 1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton15">
+    <Component class="javax.swing.JRadioButton" name="priorityB">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Priority"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priorityBActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton16">
+    <Component class="javax.swing.JRadioButton" name="completenessB">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Compltnss"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="completenessBActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton17">
+    <Component class="javax.swing.JRadioButton" name="createdB">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Created"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createdBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sort By 2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton18">
+    <Component class="javax.swing.JRadioButton" name="categoryB">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Category"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="categoryBActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton19">
+    <Component class="javax.swing.JRadioButton" name="finishedB">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Finished"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="finishedBActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton20">
+    <Component class="javax.swing.JRadioButton" name="timeframeB">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Timeframe"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="timeframeBActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton21">
+    <Component class="javax.swing.JRadioButton" name="dueDateB">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Due Date"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dueDateBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sort By 3"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton22">
+    <Component class="javax.swing.JRadioButton" name="categoryC">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Category"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="categoryCActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton23">
+    <Component class="javax.swing.JRadioButton" name="finishedC">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Finished"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="finishedCActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton24">
+    <Component class="javax.swing.JRadioButton" name="timeframeC">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Timeframe"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="timeframeCActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton25">
+    <Component class="javax.swing.JRadioButton" name="dueDateC">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Due Date"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dueDateCActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton26">
+    <Component class="javax.swing.JRadioButton" name="priorityC">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Priority"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priorityCActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton27">
+    <Component class="javax.swing.JRadioButton" name="completenessC">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Compltnss"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="completenessCActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton28">
+    <Component class="javax.swing.JRadioButton" name="createdC">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Created"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createdCActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="returnButton">
       <Properties>
@@ -522,8 +594,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchButtonActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+    <Component class="javax.swing.JFormattedTextField" name="createdDateB">
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD HH:MM:SS"/>
       </Properties>
@@ -531,14 +606,10 @@
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
+    <Component class="javax.swing.JFormattedTextField" name="createdDateA">
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD HH:MM:SS"/>
       </Properties>
-      <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFormattedTextField2FocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextField2ActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
       </AuxValues>
@@ -553,7 +624,7 @@
         <Property name="text" type="java.lang.String" value="to"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField3">
+    <Component class="javax.swing.JFormattedTextField" name="completeDateB">
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD HH:MM:SS"/>
       </Properties>
@@ -561,7 +632,7 @@
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField4">
+    <Component class="javax.swing.JFormattedTextField" name="completeDateA">
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD HH:MM:SS"/>
       </Properties>
@@ -571,7 +642,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Completed Date:"/>
+        <Property name="text" type="java.lang.String" value="Finished Date:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
@@ -584,7 +655,7 @@
         <Property name="text" type="java.lang.String" value="Due Date:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField5">
+    <Component class="javax.swing.JFormattedTextField" name="dueDateFieldA">
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD HH:MM:SS"/>
       </Properties>
@@ -597,13 +668,46 @@
         <Property name="text" type="java.lang.String" value="to"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField6">
+    <Component class="javax.swing.JFormattedTextField" name="dueDateFieldB">
       <Properties>
         <Property name="text" type="java.lang.String" value="YYYY-MM-DD HH:MM:SS"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(tmstmpFormat)"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="titleA">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Title"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleAActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="titleB">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup2"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Title"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="titleC">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup3"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Title"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleCActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

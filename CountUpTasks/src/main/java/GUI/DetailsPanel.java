@@ -44,13 +44,22 @@ public class DetailsPanel extends javax.swing.JPanel {
         description = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
+        /*String[][] detailsMatrix = {{null, null, null, null, null, null}};
+        try {
+            int size = rs.getRow();
+            detailsMatrix = new String[size][6];
+            rs.last();
+            rs.first();
+            for (int i = 0; i < size; i++) {
+                detailsMatrix[i] = {null, rs.getString("STEP_NUMBER"), rs.getString("CREATED"),
+                    rs.getString("STEP_STARTED"), rs.getString("STEP_DONE"), rs.getString("STEP_DUEDATE")};
+                rs.next();
+            }
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);}
         detailsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
+            detailsMatrix,
             new String [] {
                 "Category", "Step #", "Created", "Started", "Ended", "Due Date"
             }
@@ -79,6 +88,7 @@ public class DetailsPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(detailsTable);
         detailsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        */
 
         jLabel1.setText("TaskID:");
 

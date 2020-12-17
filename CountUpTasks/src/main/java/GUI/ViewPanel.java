@@ -21,6 +21,7 @@ public class ViewPanel extends javax.swing.JPanel {
     
     public ViewPanel(JFrame jfrm) {
         this.jf = jfrm;
+        this.slctquery = "SELECT * FROM TASKS;";
         initComponents();
     }
 
