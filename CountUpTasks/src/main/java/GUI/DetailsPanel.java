@@ -6,6 +6,9 @@
 package GUI;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -19,12 +22,13 @@ public class DetailsPanel extends javax.swing.JPanel {
     /**
      * Creates new form DetailsPanel
      */
-    public DetailsPanel(JFrame jfrm, ResultSet rsltst) {
+    public DetailsPanel(JFrame jfrm, String qr) {
         this.jf = jfrm;
-        this.rs = rsltst;
+        //code to create resultset
+        //this.rs = ;
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,15 +48,20 @@ public class DetailsPanel extends javax.swing.JPanel {
         description = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
-        /*String[][] detailsMatrix = {{null, null, null, null, null, null}};
+        String[][] detailsMatrix = {};
         try {
+            rs.last();
             int size = rs.getRow();
             detailsMatrix = new String[size][6];
             rs.last();
             rs.first();
             for (int i = 0; i < size; i++) {
-                detailsMatrix[i] = {null, rs.getString("STEP_NUMBER"), rs.getString("CREATED"),
-                    rs.getString("STEP_STARTED"), rs.getString("STEP_DONE"), rs.getString("STEP_DUEDATE")};
+                detailsMatrix[i][0] = null;
+                detailsMatrix[i][1] = rs.getString("STEP_NUMBER");
+                detailsMatrix[i][2] = rs.getString("CREATED");
+                detailsMatrix[i][3] = rs.getString("STEP_STARTED");
+                detailsMatrix[i][4] = rs.getString("STEP_DONE");
+                detailsMatrix[i][5] = rs.getString("STEP_DUEDATE");
                 rs.next();
             }
         } catch ( Exception e ) {
@@ -79,16 +88,13 @@ public class DetailsPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        detailsTable.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                detailsTableCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+        detailsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                detailsTableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(detailsTable);
         detailsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        */
 
         jLabel1.setText("TaskID:");
 
@@ -156,9 +162,16 @@ public class DetailsPanel extends javax.swing.JPanel {
         this.jf.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void detailsTableCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_detailsTableCaretPositionChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_detailsTableCaretPositionChanged
+    private void detailsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detailsTableMouseClicked
+        try {
+            int row = detailsTable.getSelectedRow();
+            rs.absolute(row);
+            
+            description.setText(rs.getString("DESCRIPTION"));
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_detailsTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,7 +22,7 @@ public class TaskPanel extends javax.swing.JPanel {
      */
     JFrame jf;
     ResultSet rs;
-    public TaskPanel(JFrame jfrm, ResultSet rsltst) {
+    public TaskPanel(JFrame jfrm, ResultSet rsltst) { //hopefully, rsltst will keep it's pointer's position
         this.jf = jfrm;
         this.rs = rsltst;
         initComponents();
@@ -255,11 +255,10 @@ public class TaskPanel extends javax.swing.JPanel {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        EditPanel dt = new EditPanel(fr, this.rs);
+        EditPanel dt = new EditPanel(fr, this.jf, this.rs);
         fr.add(dt);
         fr.pack();
         fr.setVisible(true);
-        this.jf.dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
@@ -273,12 +272,17 @@ public class TaskPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        JFrame fr = new JFrame("CountUp Task Manager");
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        DetailsPanel dtl = new DetailsPanel(fr, rs);
-        fr.add(dtl);
-        fr.pack();
-        fr.setVisible(true);
+        try {
+            JFrame fr = new JFrame("CountUp Task Manager");
+            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            String qr = "SELECT * FROM DETAILS WHERE TASKID = " + rs.getString("TASKID") + ";";
+            DetailsPanel dtl = new DetailsPanel(fr, qr);
+            fr.add(dtl);
+            fr.pack();
+            fr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(TaskPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_detailsButtonActionPerformed
 
 

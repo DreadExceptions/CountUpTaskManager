@@ -5,10 +5,17 @@
  */
 package SqliteJDBC;
 
+import java.sql.ResultSet;
+
 /**
  *
  * @author marquis
  */
 public class ViewMultiple {
+    
+    /*public static ResultSet selectQuery(String query) {
+        return new ResultSet();
+    }*/
+    //update ViewPanel, which uses this method but it is commented out
     
 }

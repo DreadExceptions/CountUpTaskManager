@@ -24,14 +24,16 @@ public class EditPanel extends javax.swing.JPanel {
      * Creates new form TasksAdd
      */
     JFrame jf;
+    JFrame parentFr;
     ResultSet rs;
     String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
     String tsfrmt = "YYYY-MM-DD HH:MM:SS";
     DateFormat tmstmpFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
-    public EditPanel(JFrame jfrm, ResultSet rsltst) {
+    public EditPanel(JFrame jfrm, JFrame prnt, ResultSet rsltst) {
         this.jf = jfrm;
         this.rs = rsltst;
+        this.parentFr = prnt;
         initComponents();
     }
 
@@ -45,6 +47,7 @@ public class EditPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         nptDescription = new javax.swing.JTextArea();
@@ -67,8 +70,11 @@ public class EditPanel extends javax.swing.JPanel {
             completeness = new javax.swing.JComboBox<>();
             jLabel9 = new javax.swing.JLabel();
             detailsButton = new javax.swing.JButton();
+            deleteButton = new javax.swing.JButton();
 
             jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+            jButton1.setText("jButton1");
 
             jLabel1.setText("Edit Task");
 
@@ -170,6 +176,8 @@ public class EditPanel extends javax.swing.JPanel {
             }
         });
 
+        deleteButton.setText("Delete");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +185,7 @@ public class EditPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(titleFTF)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -191,14 +199,17 @@ public class EditPanel extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(editButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(editButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(detailsButton)))
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(detailsButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cancelButton))
+                                .addComponent(deleteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(nptCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nptPriority, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nptTimeframe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -249,19 +260,20 @@ public class EditPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editButton)
                     .addComponent(detailsButton)
-                    .addComponent(cancelButton))
+                    .addComponent(cancelButton)
+                    .addComponent(deleteButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        JFrame fr = new JFrame("CountUp Task Manager");
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        StartPanel strt = new StartPanel(fr);
-        fr.add(strt);
-        fr.pack();
+        //JFrame fr = new JFrame("CountUp Task Manager");
+        //fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //StartPanel strt = new StartPanel(fr);
+        //fr.add(strt);
+        //fr.pack();
         jf.dispose();
-        fr.setVisible(true);
+        //fr.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
@@ -298,6 +310,7 @@ public class EditPanel extends javax.swing.JPanel {
         fr.add(tsk);
         fr.pack();
         jf.dispose();
+        parentFr.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_editButtonActionPerformed
 
@@ -314,10 +327,12 @@ public class EditPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox<String> completeness;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton detailsButton;
     private javax.swing.JFormattedTextField dueDateFTF;
     private javax.swing.JButton editButton;
     private javax.swing.JFormattedTextField endDateFTF;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
