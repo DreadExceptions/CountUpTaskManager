@@ -6,7 +6,11 @@
 package GUI;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,9 +23,16 @@ public class editDetailsPanel extends javax.swing.JPanel {
      */
     JFrame jf;
     ResultSet rs;
-    public editDetailsPanel(JFrame jfrm, ResultSet rsltst) {
+    Object [][] dfltSet = {};
+    String [] col = {"Category", "Step #", "Created", "Started", "Ended", "Due Date"};
+    DefaultTableModel model = new DefaultTableModel(dfltSet, col);
+    String [] categories; //valid categories for Category field
+    
+    public editDetailsPanel(JFrame jfrm, ResultSet rsltst) throws SQLException {
         this.rs = rsltst;
         this.jf = jfrm;
+        this.addDetails(rsltst);
+        this.populateCategories();
         initComponents();
     }
     public editDetailsPanel(JFrame jfrm) {
@@ -52,6 +63,7 @@ public class editDetailsPanel extends javax.swing.JPanel {
         deleteAllButton = new javax.swing.JButton();
         submitButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        categoryComboBox = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,10 +80,7 @@ public class editDetailsPanel extends javax.swing.JPanel {
 
         detailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Category", "Step #", "Created", "Started", "Ended", "Due Date"
@@ -81,7 +90,7 @@ public class editDetailsPanel extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, false, true, true, true
+                false, true, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -93,6 +102,11 @@ public class editDetailsPanel extends javax.swing.JPanel {
             }
         });
         detailsTable.setColumnSelectionAllowed(true);
+        detailsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                detailsTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(detailsTable);
         detailsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -109,6 +123,11 @@ public class editDetailsPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(description);
 
         deleteOneButton.setText("Delete Selected");
+        deleteOneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteOneButtonActionPerformed(evt);
+            }
+        });
 
         deleteAllButton.setText("Delete All");
         deleteAllButton.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +145,8 @@ public class editDetailsPanel extends javax.swing.JPanel {
             }
         });
 
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,27 +155,32 @@ public class editDetailsPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(taskIDLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(titleLabel))
-                            .addComponent(jScrollPane2))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(deleteOneButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteAllButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(submitButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(taskIDLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(titleLabel))
+                                    .addComponent(jScrollPane2))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(deleteOneButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deleteAllButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(submitButton)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,8 +194,10 @@ public class editDetailsPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteOneButton)
                     .addComponent(deleteAllButton)
@@ -180,16 +208,55 @@ public class editDetailsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAllButtonActionPerformed
-        //TO DO action code here
+        //DELETE FROM DETAILS WHERE TASKID = #;
     }//GEN-LAST:event_deleteAllButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.jf.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void deleteOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOneButtonActionPerformed
+        //DELETE FROM DETAILS WEHRE TASKID = # AND 
+    }//GEN-LAST:event_deleteOneButtonActionPerformed
 
+    private void detailsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detailsTableMouseClicked
+        try {
+            int row = jTable1.getSelectedRow() + 1;
+            rs.absolute(row);
+            
+            description.setText(rs.getString("DESCRIPTION"));
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_detailsTableMouseClicked
+
+    private void addDetails(ResultSet rs) throws SQLException {
+        Object [] rcrd = new Object [6];
+        if (rs.first()) {
+            do {
+                rcrd[0] = rs.getString("CATEGORY");
+                rcrd[1] = rs.getString("STEP_NUMBER");
+                rcrd[2] = rs.getString("CREATED");
+                rcrd[3] = rs.getString("STEP_STARTED");
+                rcrd[4] = rs.getString("STEP_DONE");
+                rcrd[5] = rs.getString("STEP_DUEDATE");
+                model.addRow(rcrd);
+            }
+            while (rs.next());
+        }
+        for (int i = 0; i < 6; i++) {
+            rcrd[i] = null;
+        }
+        model.addRow(rcrd);
+    }
+
+    private void populateCategories() throws SQLException {
+        //sends stuff to JDBC to make sure categories are correct
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JComboBox<String> categoryComboBox;
     private javax.swing.JButton deleteAllButton;
     private javax.swing.JButton deleteOneButton;
     private javax.swing.JTextArea description;

@@ -5,8 +5,11 @@
  */
 package GUI;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 
@@ -593,24 +596,28 @@ public class SelectPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void viewAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllButtonActionPerformed
-        if (!sortA.isBlank()||!sortB.isBlank()||!sortC.isBlank()) {
-            view += " SORT BY ";
+        try {
+            if (!sortA.isBlank()||!sortB.isBlank()||!sortC.isBlank()) {
+                view += " SORT BY ";
+            }
+            if (!sortA.isBlank()) {
+                view += sortA;
+                if (!sortB.isBlank()||!sortC.isBlank()) {view += ", ";}
+            } else if (!sortB.isBlank()) {
+                view += sortB;
+                if (!sortC.isBlank()) {view += ", ";}
+            } else if (!sortC.isBlank()) {view += sortC;}
+            view += ";";
+            JFrame fr = new JFrame("CountUp Task Manager");
+            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            ViewPanel vw = new ViewPanel(fr, view);
+            fr.add(vw);
+            fr.pack();
+            jf.dispose();
+            fr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(SelectPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (!sortA.isBlank()) {
-            view += sortA;
-            if (!sortB.isBlank()||!sortC.isBlank()) {view += ", ";}
-        } else if (!sortB.isBlank()) {
-            view += sortB;
-            if (!sortC.isBlank()) {view += ", ";}
-        } else if (!sortC.isBlank()) {view += sortC;}
-        view += ";";
-        JFrame fr = new JFrame("CountUp Task Manager");
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ViewPanel vw = new ViewPanel(fr, view);
-        fr.add(vw);
-        fr.pack();
-        jf.dispose();
-        fr.setVisible(true);
     }//GEN-LAST:event_viewAllButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -688,13 +695,19 @@ public class SelectPanel extends javax.swing.JPanel {
         } else if (!sortC.isBlank()) {view += sortC;}
         //Call View Panel
         view += ";";
-        JFrame fr = new JFrame("CountUp Task Manager");
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ViewPanel vw = new ViewPanel(fr, view);
-        fr.add(vw);
-        fr.pack();
-        jf.dispose();
-        fr.setVisible(true);
+        try {
+            JFrame fr = new JFrame("CountUp Task Manager");
+            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            ViewPanel vw;
+            vw = new ViewPanel(fr, view);
+            fr.add(vw);
+            fr.pack();
+            jf.dispose();
+            fr.setVisible(true);
+        }catch (SQLException ex) {
+            Logger.getLogger(SelectPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void categoryAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryAActionPerformed

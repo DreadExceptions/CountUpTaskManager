@@ -164,7 +164,7 @@ public class DetailsPanel extends javax.swing.JPanel {
 
     private void detailsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detailsTableMouseClicked
         try {
-            int row = detailsTable.getSelectedRow();
+            int row = detailsTable.getSelectedRow() + 1;
             rs.absolute(row);
             
             description.setText(rs.getString("DESCRIPTION"));

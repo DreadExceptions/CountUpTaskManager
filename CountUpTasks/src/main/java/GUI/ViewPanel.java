@@ -204,7 +204,7 @@ public class ViewPanel extends javax.swing.JPanel {
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
         try {
-            int row = jTable1.getSelectedRow();
+            int row = jTable1.getSelectedRow() + 1;
             selection.absolute(row);
             String tskID = selection.getString("TASKID");
             String details = "SELECT * FROM DETAIL WHERE TASKID = " + row + " ";
@@ -221,18 +221,24 @@ public class ViewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_detailsButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        JFrame fr = new JFrame("CountUp Task Manager");
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        EditPanel dt = new EditPanel(fr, this.jf, selection);
-        fr.add(dt);
-        fr.pack();
-        jf.dispose();// should not dispose unless edit is made
-        fr.setVisible(true);
+        try {
+            JFrame fr = new JFrame("CountUp Task Manager");
+            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            int row = jTable1.getSelectedRow() + 1;
+            selection.absolute(row);
+            EditPanel dt = new EditPanel(fr, selection);
+            fr.add(dt);
+            fr.pack();
+            jf.dispose();// should not dispose unless edit is made
+            fr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
-            int row = jTable1.getSelectedRow();
+            int row = jTable1.getSelectedRow() + 1;
             selection.absolute(row);
             
             descArea.setText(selection.getString("DESCRIPTION"));
@@ -245,7 +251,7 @@ public class ViewPanel extends javax.swing.JPanel {
         try {
             JFrame fr = new JFrame("CountUp Task Manager");
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            int row = jTable1.getSelectedRow();
+            int row = jTable1.getSelectedRow() + 1;
             selection.absolute(row);
             TaskPanel dt = new TaskPanel(fr, selection);
             fr.add(dt);

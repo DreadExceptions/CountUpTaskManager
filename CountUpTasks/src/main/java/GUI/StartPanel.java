@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -119,13 +122,17 @@ public class StartPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SelectButtonActionPerformed
 
     private void ViewAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAllButtonActionPerformed
-        JFrame fr = new JFrame("CountUp Task Manager");
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ViewPanel vw = new ViewPanel(fr);
-        fr.add(vw);
-        fr.pack();
-        fr.setVisible(true);
-        this.jf.dispose();
+        try {
+            JFrame fr = new JFrame("CountUp Task Manager");
+            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            ViewPanel vw = new ViewPanel(fr);
+            fr.add(vw);
+            fr.pack();
+            fr.setVisible(true);
+            this.jf.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(StartPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ViewAllButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

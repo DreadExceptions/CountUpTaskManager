@@ -30,10 +30,10 @@ public class EditPanel extends javax.swing.JPanel {
     String tsfrmt = "YYYY-MM-DD HH:MM:SS";
     DateFormat tmstmpFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
-    public EditPanel(JFrame jfrm, JFrame prnt, ResultSet rsltst) {
+    public EditPanel(JFrame jfrm, ResultSet rsltst) {
         this.jf = jfrm;
         this.rs = rsltst;
-        this.parentFr = prnt;
+        //this.parentFr = prnt;
         initComponents();
     }
 
@@ -267,13 +267,13 @@ public class EditPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        //JFrame fr = new JFrame("CountUp Task Manager");
-        //fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //StartPanel strt = new StartPanel(fr);
-        //fr.add(strt);
-        //fr.pack();
-        jf.dispose();
-        //fr.setVisible(true);
+        JFrame fr = new JFrame ("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        StartPanel strt = new StartPanel(fr);
+        fr.add(strt);
+        fr.pack();
+        fr.setVisible(true);
+        this.jf.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
@@ -310,17 +310,21 @@ public class EditPanel extends javax.swing.JPanel {
         fr.add(tsk);
         fr.pack();
         jf.dispose();
-        parentFr.dispose();
+        //parentFr.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        JFrame fr = new JFrame("CountUp Task Manager");
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        editDetailsPanel dtdtl = new editDetailsPanel(fr, rs);
-        fr.add(dtdtl);
-        fr.pack();
-        fr.setVisible(true);
+        try {
+            JFrame fr = new JFrame("CountUp Task Manager");
+            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            editDetailsPanel dtdtl = new editDetailsPanel(fr, rs);
+            fr.add(dtdtl);
+            fr.pack();
+            fr.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_detailsButtonActionPerformed
 
 

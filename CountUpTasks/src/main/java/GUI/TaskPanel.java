@@ -255,7 +255,7 @@ public class TaskPanel extends javax.swing.JPanel {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        EditPanel dt = new EditPanel(fr, this.jf, this.rs);
+        EditPanel dt = new EditPanel(fr, this.rs);
         fr.add(dt);
         fr.pack();
         fr.setVisible(true);
