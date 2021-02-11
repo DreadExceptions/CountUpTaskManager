@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package Graphics;
 
 import SqliteJDBC.ViewMultiple;
 import java.sql.ResultSet;
@@ -61,7 +61,6 @@ public class ViewPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         descArea = new javax.swing.JTextArea();
-        detailsButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         search = new javax.swing.JButton();
         viewTask = new javax.swing.JButton();
@@ -107,13 +106,6 @@ public class ViewPanel extends javax.swing.JPanel {
         descArea.setRows(5);
         jScrollPane2.setViewportView(descArea);
 
-        detailsButton.setText("View Details");
-        detailsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                detailsButtonActionPerformed(evt);
-            }
-        });
-
         editButton.setText("Edit Task");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,11 +142,14 @@ public class ViewPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(viewTask, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(detailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(viewTask, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -171,9 +166,8 @@ public class ViewPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(viewTask)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(detailsButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editButton)))
+                        .addComponent(editButton)
+                        .addGap(31, 31, 31)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(returnButton)
@@ -202,31 +196,13 @@ public class ViewPanel extends javax.swing.JPanel {
         fr.setVisible(true);
     }//GEN-LAST:event_searchActionPerformed
 
-    private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        try {
-            int row = jTable1.getSelectedRow() + 1;
-            selection.absolute(row);
-            String tskID = selection.getString("TASKID");
-            String details = "SELECT * FROM DETAIL WHERE TASKID = " + row + " ";
-            
-            JFrame fr = new JFrame("CountUp Task Manager");
-            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            DetailsPanel dtls = new DetailsPanel(fr, details);
-            fr.add(dtls);
-            fr.pack();
-            fr.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_detailsButtonActionPerformed
-
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         try {
             JFrame fr = new JFrame("CountUp Task Manager");
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             int row = jTable1.getSelectedRow() + 1;
             selection.absolute(row);
-            EditPanel dt = new EditPanel(fr, selection);
+            AddEditPanel dt = new AddEditPanel(fr, selection);
             fr.add(dt);
             fr.pack();
             jf.dispose();// should not dispose unless edit is made
@@ -281,7 +257,6 @@ public class ViewPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea descArea;
-    private javax.swing.JButton detailsButton;
     private javax.swing.JButton editButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package Graphics;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -104,8 +104,8 @@ public class StartPanel extends javax.swing.JPanel {
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        AddPanel dd = new AddPanel(fr);
-        fr.add(dd);
+        //AddPanel dd = new AddPanel(fr);
+        //fr.add(dd);
         fr.pack();
         fr.setVisible(true);
         this.jf.dispose();

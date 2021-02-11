@@ -1,5 +1,9 @@
+drop database COUNTUPLITE;
+create database COUNTUPLITE;
+use COUNTUPLITE;
+
 CREATE TABLE PRIORITY (
-	REFID INTEGER PRIMARY KEY,
+	REFID INTEGER auto_increment KEY,
 	TITLE VARCHAR(16) NOT NULL,
 	DESCRIPTION TEXT NOT NULL,
 	UNIQUE KEY (TITLE)
@@ -12,7 +16,7 @@ INSERT INTO PRIORITY (TITLE, DESCRIPTION)
 	('Minor', "Not immenently important.");
 
 CREATE TABLE TIMEFRAME (
-	REFID INTEGER PRIMARY KEY,
+	REFID INTEGER auto_increment KEY,
 	TITLE VARCHAR(16) NOT NULL,
 	DESCRIPTION TEXT NOT NULL,
 	UNIQUE KEY (TITLE)
@@ -25,7 +29,7 @@ INSERT INTO TIMEFRAME (TITLE, DESCRIPTION)
 	('Long Term', "A year or more may pass before this is completed.");
 
 CREATE TABLE GENRE (
-	REFID INTEGER PRIMARY KEY,
+	REFID INTEGER auto_increment KEY,
 	TITLE VARCHAR(16) NOT NULL,
 	DESCRIPTION TEXT NOT NULL,
 	UNIQUE KEY (TITLE)
@@ -33,7 +37,7 @@ CREATE TABLE GENRE (
 
 INSERT INTO GENRE (TITLE, DESCRIPTION)
 	VALUES
-	('Template', "Project outline to reference.")
+	('Template', "Project outline to reference."),
 	('Chores', "Daily tasks necessary for the upkeep of a homestead."),
 	('Coding', "Anything for our computer overlords."),
 	('Design', "Creating something, but only on paper."),
@@ -45,7 +49,7 @@ INSERT INTO GENRE (TITLE, DESCRIPTION)
 	('Writing', "Alphanumerics conveyed on white space.");
 
 CREATE TABLE TASKTYPE (
-	REFID INTEGER PRIMARY KEY,
+	REFID INTEGER auto_increment KEY,
 	TITLE VARCHAR(16) NOT NULL,
 	DESCRIPTION TEXT NOT NULL,
 	UNIQUE KEY (TITLE)
@@ -60,7 +64,7 @@ INSERT INTO TASKTYPE (TITLE, DESCRIPTION)
 	('Unexpected', "Anything that was not expected before the task was begun.");
 
 CREATE TABLE PROGRESS (
-	REFID INTEGER PRIMARY KEY,
+	REFID INTEGER auto_increment KEY,
 	TITLE VARCHAR(16) NOT NULL,
 	DESCRIPTION TEXT NOT NULL,
 	UNIQUE KEY (TITLE)
@@ -74,8 +78,6 @@ INSERT INTO PROGRESS (TITLE, DESCRIPTION)
 	('Under Review', "We're suspicious of your work."),
 	('Recurring', "This pesky task is very needy.");
 
--- default, unassigned values. Wanted to set as 0, but auto_increment
--- starts at 1.
 -- default, unassigned values. Wanted to set as 0, but auto_increment
 -- starts at 1.
 INSERT INTO PROGRESS (REFID, TITLE, DESCRIPTION)
@@ -104,7 +106,7 @@ UPDATE GENRE SET REFID = 0
 	WHERE TITLE = 'Unassigned';
 
 CREATE TABLE TASK (
-	TASKID INTEGER PRIMARY KEY,
+	TASKID INTEGER auto_increment PRIMARY KEY,
 	TITLE VARCHAR(32),
 	PARENTID INT,
 	TIMEFRAME INT NOT NULL
@@ -119,7 +121,7 @@ CREATE TABLE TASK (
 		DEFAULT 0,
 	DESCRIPTION TEXT,
 	CREATEDDATE DATETIME NOT NULL
-		DEFAULT DATETIME(NOW),
+		DEFAULT NOW(),
 	STARTEDDATE DATE,
 	COMPLETED DATE,
 	DUEDATE DATE,
@@ -146,47 +148,37 @@ CREATE TABLE TASKHISTORY (
 CREATE TRIGGER updateTaskPriorityTrigger
 	BEFORE DELETE ON PRIORITY
 	FOR EACH ROW
-	BEGIN
 		UPDATE TASK T
 		SET T.PRIORITY = 0
 		WHERE T.PRIORITY = old.REFID;
-	END;
 
 CREATE TRIGGER updateTaskTimeframeTrigger
 	BEFORE DELETE ON TIMEFRAME
 	FOR EACH ROW
-	BEGIN
 		UPDATE TASK T
 		SET T.TIMEFRAME = 0
 		WHERE T.TIMEFRAME = old.REFID;
-	END;
 	
 CREATE TRIGGER updateTaskGenreTrigger
 	BEFORE DELETE ON GENRE
 	FOR EACH ROW
-	BEGIN
 		UPDATE TASK T
 		SET T.GENRE = 0
 		WHERE T.GENRE = old.REFID;
-	END;
 	
 CREATE TRIGGER updateTaskTaskTypeTrigger
 	BEFORE DELETE ON TASKTYPE
 	FOR EACH ROW
-	BEGIN
 		UPDATE TASK T
 		SET T.TASKTYPE = 0
 		WHERE T.TASKTYPE = old.REFID;
-	END;
 	
 CREATE TRIGGER updateTaskProgressTrigger
 	BEFORE DELETE ON PROGRESS
 	FOR EACH ROW
-	BEGIN
 		UPDATE TASK T
 		SET T.PROGRESS = 0
 		WHERE T.PROGRESS = old.REFID;
-	END;
 
 /* This Trigger is recursive, and as a result, many complications are arising.
 Instead of implementing it with SQL, I will implement it with Java, and later
@@ -206,7 +198,7 @@ CREATE TRIGGER historicalTasksTrigger
 		INSERT INTO TASKHISTORY
         VALUES
         (old.TASKID, NOW(), CHANGED_FIELD, CAST(old.VALUE AS TEXT);*/
-
+        
 INSERT INTO TASK (TITLE, PARENTID, TIMEFRAME, GENRE, PRIORITY, PROGRESS, TASKTYPE, DESCRIPTION)
 VALUES
 ('Project Template', null, 0, 1, 0, 0, 0, "This is the root of a complex template for a project."),

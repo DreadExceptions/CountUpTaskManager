@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package Graphics;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,7 +60,6 @@ public class TaskPanel extends javax.swing.JPanel {
             timeframe = new javax.swing.JLabel();
             returnButton = new javax.swing.JButton();
             editButton = new javax.swing.JButton();
-            detailsButton = new javax.swing.JButton();
 
             jButton1.setText("jButton1");
 
@@ -148,13 +147,6 @@ public class TaskPanel extends javax.swing.JPanel {
             }
         });
 
-        detailsButton.setText("Details");
-        detailsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                detailsButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,7 +187,6 @@ public class TaskPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(detailsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(returnButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -243,8 +234,6 @@ public class TaskPanel extends javax.swing.JPanel {
                         .addGap(24, 24, 24))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(detailsButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(returnButton)
@@ -255,7 +244,7 @@ public class TaskPanel extends javax.swing.JPanel {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        EditPanel dt = new EditPanel(fr, this.rs);
+        AddEditPanel dt = new AddEditPanel(fr, this.rs);
         fr.add(dt);
         fr.pack();
         fr.setVisible(true);
@@ -271,20 +260,6 @@ public class TaskPanel extends javax.swing.JPanel {
         this.jf.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 
-    private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        try {
-            JFrame fr = new JFrame("CountUp Task Manager");
-            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            String qr = "SELECT * FROM DETAILS WHERE TASKID = " + rs.getString("TASKID") + ";";
-            DetailsPanel dtl = new DetailsPanel(fr, qr);
-            fr.add(dtl);
-            fr.pack();
-            fr.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(TaskPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_detailsButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Description;
@@ -292,7 +267,6 @@ public class TaskPanel extends javax.swing.JPanel {
     private javax.swing.JLabel category;
     private javax.swing.JLabel completeness;
     private javax.swing.JLabel created;
-    private javax.swing.JButton detailsButton;
     private javax.swing.JLabel dueDate;
     private javax.swing.JButton editButton;
     private javax.swing.JLabel ended;

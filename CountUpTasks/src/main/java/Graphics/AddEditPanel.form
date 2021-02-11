@@ -56,13 +56,9 @@
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="editButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="detailsButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="editButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
@@ -131,7 +127,6 @@
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="editButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="detailsButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -235,7 +230,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="editButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Edit Task"/>
+        <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editButtonActionPerformed"/>
@@ -307,14 +302,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Completeness:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="detailsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Details"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="detailsButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>

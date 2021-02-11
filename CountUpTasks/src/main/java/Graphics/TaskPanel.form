@@ -67,7 +67,6 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="editButton" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="detailsButton" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="returnButton" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -129,8 +128,6 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="detailsButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="editButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="returnButton" min="-2" max="-2" attributes="0"/>
@@ -309,14 +306,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="detailsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Details"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="detailsButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
