@@ -250,11 +250,44 @@ public class Task {
         return success;
     }
     
+    /*
+    int tsk, int prnt, String ttl, String dscrpt,
+            String prgrss, String prrt, String tsktp, String gnr,
+            String tmfrm, String crtd, String strtd, String cmpltd,
+            String ddt
+    */
+    
+    public ArrayList<Task> selectChildren(){
+        GeneralJDBC jdbc = new GeneralJDBC();
+        ArrayList<Task> taskSet = new ArrayList();
+        
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTREF() + tblNm + ";");
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                taskSet.add(new Task(
+                        rs.getInt("TASKID"), this.TaskID, rs.getString("TITLE"),
+                        rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), rs.getString("PRIORITY"),
+                        rs.getString("TASKTYPE"), rs.getString("GENRE"),
+                        rs.getString("TIMEFRAME"), rs.getString("CREATED"), rs.getString("STARTEDDATE"),
+                        rs.getString("COMPLETED"), rs.getString("DUEDATE")
+                ));
+            }//end While Loop
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return taskSet;
+    }
+    
     public ArrayList<Task> recursiveChildrenFind(){
         
     }
     
-    public boolean updateTask(ArrayList<FieldUpdate> updts) {
+    public boolean updateTask(ArrayList<FieldAccess> updts) {
         //UPDATETASK + WHERETASK
         GeneralJDBC jdbc = new GeneralJDBC();
         boolean success = true;

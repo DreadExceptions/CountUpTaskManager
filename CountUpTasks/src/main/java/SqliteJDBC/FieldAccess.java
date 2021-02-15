@@ -9,12 +9,12 @@ package SqliteJDBC;
  *
  * @author marquis
  */
-public class FieldUpdate {
+public class FieldAccess {
     
     private String FieldName;
     private String FieldValue;
 
-    public FieldUpdate(String FieldName, String FieldValue) {
+    public FieldAccess(String FieldName, String FieldValue) {
         this.FieldName = FieldName;
         this.FieldValue = FieldValue;
     }

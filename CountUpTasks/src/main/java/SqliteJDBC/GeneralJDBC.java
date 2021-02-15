@@ -22,76 +22,32 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         this.DBNAME = "CountUpLite.db";
     }
 
-    public String getSELECTREF() {
-        return SELECTREF;
-    }
-
-    public String getSELECTTASK() {
+    protected String getSELECTTASK() {
         return SELECTTASK;
     }
-
-    public String getSELECTCHILDREN() {
+    
+    protected String getSELECTCHILDREN() {
         return SELECTCHILDREN;
     }
-
-    public String getUPDATETASK() {
+    
+    protected String getSELECTREF() {
+        return SELECTREF;
+    }
+    
+    protected String getUPDATETASK() {
         return UPDATETASK;
     }
 
-    public String getDELETETASK() {
+    protected String getDELETETASK() {
         return DELETETASK;
     }
 
-    public String getDELETECHILDREN() {
+    protected String getDELETECHILDREN() {
         return DELETECHILDREN;
     }
 
-    public String getINSERTTASK() {
+    protected String getINSERTTASK() {
         return INSERTTASK;
-    }
-
-    public String getROOTTASKS() {
-        return ROOTTASKS;
-    }
-
-    public String getTIMEFRAME() {
-        return TIMEFRAME;
-    }
-
-    public String getGENRE() {
-        return GENRE;
-    }
-
-    public String getPRIORITY() {
-        return PRIORITY;
-    }
-
-    public String getPROGRESS() {
-        return PROGRESS;
-    }
-
-    public String getTASKTYPE() {
-        return TASKTYPE;
-    }
-
-    public String getCMPLTNULL() {
-        return CMPLTNULL;
-    }
-
-    public String getCMPLTNOTNULL() {
-        return CMPLTNOTNULL;
-    }
-
-    public String getSTRTDDTNULL() {
-        return STRTDDTNULL;
-    }
-
-    public String getSTRTDDTNOTNULL() {
-        return STRTDDTNOTNULL;
-    }
-    
-    public String getWHERETASK() {
-        return WHERETASK;
     }
     
     //JDBC Access variables
