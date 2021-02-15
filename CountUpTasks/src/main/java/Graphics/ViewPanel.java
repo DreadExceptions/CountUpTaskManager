@@ -5,7 +5,6 @@
  */
 package Graphics;
 
-import SqliteJDBC.ViewMultiple;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -33,7 +32,7 @@ public class ViewPanel extends javax.swing.JPanel {
     public ViewPanel(JFrame jfrm) throws SQLException {
         this.jf = jfrm;
         this.slctquery = "SELECT * FROM TASKS;";
-        //this.selection = ViewMultiple.selectQuery(slctquery);
+        //this.selection = SelectTask.selectQuery(slctquery);
         this.addResultSetRows(selection);
         initComponents();
     }
@@ -41,7 +40,7 @@ public class ViewPanel extends javax.swing.JPanel {
     public ViewPanel(JFrame jfrm, String qr) throws SQLException{
         this.jf = jfrm;
         this.slctquery = qr;
-        //this.selection = ViewMultiple.selectQuery(slctquery);
+        //this.selection = SelectTask.selectQuery(slctquery);
         this.addResultSetRows(selection);
         initComponents();
     }

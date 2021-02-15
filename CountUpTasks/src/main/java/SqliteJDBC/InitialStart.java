@@ -17,36 +17,22 @@ import java.util.ArrayList;
 public class InitialStart {
     
     public static void main( String args[] ) {
-      String filePath = "/home/marquis/Code/CountUpTaskManager/Database/databaseCreationSQLite.sql";
-      String SQLString;
-      String dbName = "CountUp.db";
+      String filePath = "/home/marquis/Code/CountUpTaskManager/Database/dbCreation.sql";
+      String dbName = "CountUpLite.db";
       String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/" + dbName;
-      String SQLView = "SELECT NAME FROM PRIORITY;";
+      
+      Connection conn = null;
+      
+      try {
+          conn = DriverManager.getConnection(url);
+      } catch (SQLException e) {
+          System.out.println(e.getMessage());
+      }
       
       try {
         searchOptions tst = new searchOptions(url);
-        
         System.out.println(tst.getReferenceDateTask(true, "DUEDATE"));
-        
-      /*try {
-        
-        Path DBFile = Path.of(filePath);
-        SQLString = Files.readString(DBFile);
-        System.out.println("Read SQL.");
-        
-        Connection c;
-        Statement stmt;
-      
-        Class.forName("org.sqlite.JDBC");
-        c = DriverManager.getConnection(url);
-        System.out.println("Opened database.");
-         
-        stmt = c.createStatement();
-        stmt.executeUpdate(SQLString);
-        stmt.close();
-        c.commit();
-        c.close(); */
-      } catch ( Exception e ) {
+      } catch ( ClassNotFoundException | SQLException e ) {
         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
         System.exit(0);
       }

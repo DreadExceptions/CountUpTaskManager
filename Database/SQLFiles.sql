@@ -3,7 +3,7 @@
 "SELECT * FROM TASK WHERE TASKID = " + taskID + ";"
 
 -- Select Root Tasks
-"SELECT * FROM TASK WHERE PARENTID = NULL;"
+"SELECT * FROM TASK WHERE PARENTID is NULL;"
 
 -- Select Child Tasks
 "SELECT * FROM TASK WHERE PARENTID = " + taskID + ";"
