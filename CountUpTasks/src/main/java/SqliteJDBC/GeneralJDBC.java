@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,6 +32,10 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         return SELECTCHILDREN;
     }
     
+    protected String getSELECTCHILDRENSHORT() {
+        return SELECTCHILDRENSHORT;
+    }
+    
     protected String getSELECTREF() {
         return SELECTREF;
     }
@@ -50,10 +56,13 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         return INSERTTASK;
     }
     
+    protected String getWHERETASK() {
+        return WHERETASK;
+    }
+    
     //JDBC Access variables
     private final String FILEPATH = "/home/marquis/Code/CountUpTaskManager/Database/dbCreation.sql";
-    //String DBNAME = "CountUpLite.db";
-    private final String URL = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/" + DBNAME;
+    private final String URL = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/";
     
     //SQL Strings, General
     //Get reference variables
@@ -61,7 +70,7 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     //Get Specific task
     private String SELECTTASK = "SELECT * FROM task WHERE taskID = ? ;";
     //Get Children Tasks
-    private String SELECTCHILDREN = "SELECT T.TITLE, " + 
+    private String SELECTCHILDREN = "SELECT T.TASKID, T.TITLE, " + 
 	"T.DESCRIPTION, " + 
         "TIMEFRAME.TITLE AS TIMEFRAME, " + 
         "GENRE.TITLE AS GENRE, " + 
@@ -76,6 +85,7 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         "INNER JOIN PROGRESS ON T.PROGRESS = PROGRESS.REFID " +
         "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
         "WHERE PARENTID = ? ;";
+    private String SELECTCHILDRENSHORT = "SELECT TASKID FROM TASK WHERE PARENTID = ? ";
     //SQL Strings, Exclusive to AddEditPanel
     //Update Task
     private String UPDATETASK = "UPDATE task SET ";
@@ -87,7 +97,7 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     //Insert Tasks
     private String INSERTTASK = "INSERT INTO TASK (TITLE, DESCRIPTION, PRIORITY, TIMEFRAME, " + 
             "PROGRESS, GENRE, TASKTYPE, STARTEDDATE, COMPLETED, DUEDATE) VALUES (" + 
-            ":TTLE, :DSCR, :PRRT, :TMFR, :PRGR, :GNRE, :TSKT, :STRT, :CMPL, :DDTE);";
+            "?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     //SQL Strings, Exclusive to SelectPanel
     //Select all root tasks
     private String ROOTTASKS = "SELECT T.TITLE, " + 
@@ -120,12 +130,30 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         Connection conn = null;
         
         try {
-            conn = DriverManager.getConnection(URL);
+            conn = DriverManager.getConnection(URL+DBNAME);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         
         return conn;
+    }
+    
+    public void initializeDatabase() {
+        System.out.println(URL+DBNAME);
+        try (Connection conn = DriverManager.getConnection(URL+DBNAME)) {
+            if (conn != null) {
+                Statement stmt = conn.createStatement();
+                System.out.println("A new Count Up Database has been created.");
+                String sql = Files.readString(Path.of(FILEPATH));
+                System.out.println(sql.substring(0, 20));
+                //stmt.addBatch(sql);
+                //stmt.executeBatch();
+                stmt.executeUpdate(sql);
+                System.out.println("A new Count Up Database has been initialized.");
+            }
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(GeneralJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

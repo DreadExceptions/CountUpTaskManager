@@ -52,6 +52,25 @@ public class Task {
         this.DueDate = ddt;
 	}
 
+    public Task(int ParentID, String Title, String Description, int ProgressID, 
+            int PrioityID, int TaskTypeID, int GenreID, int TimeframeID, 
+            String CreatedDate, String StartedDate, String Completed, String DueDate) {
+        this.ParentID = ParentID;
+        this.Title = Title;
+        this.Description = Description;
+        this.ProgressID = ProgressID;
+        this.PrioityID = PrioityID;
+        this.TaskTypeID = TaskTypeID;
+        this.GenreID = GenreID;
+        this.TimeframeID = TimeframeID;
+        this.CreatedDate = CreatedDate;
+        this.StartedDate = StartedDate;
+        this.Completed = Completed;
+        this.DueDate = DueDate;
+    }
+
+    
+    
     public Task (int TaskID, int ParentID, String Title, String Description, 
             String Progress, int ProgressID, String Priority, int PrioityID, 
             String TaskType, int TaskTypeID, String Genre, int GenreID, 
@@ -77,9 +96,13 @@ public class Task {
         this.DueDate = DueDate;
     }
 
-    public Task (int TaskID, int ParentID) {
+    protected Task (int TaskID, int ParentID) {
         this.TaskID = TaskID;
         this.ParentID = ParentID;
+    }
+    
+    protected Task (int TaskID) {
+        this.TaskID = TaskID;
     }
     
     public int getTaskID() {
@@ -250,20 +273,13 @@ public class Task {
         return success;
     }
     
-    /*
-    int tsk, int prnt, String ttl, String dscrpt,
-            String prgrss, String prrt, String tsktp, String gnr,
-            String tmfrm, String crtd, String strtd, String cmpltd,
-            String ddt
-    */
-    
     public ArrayList<Task> selectChildren(){
         GeneralJDBC jdbc = new GeneralJDBC();
         ArrayList<Task> taskSet = new ArrayList();
-        
         try {
             Connection conn = jdbc.connect();
-            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTREF() + tblNm + ";");
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTCHILDREN());
+            pstmt.setInt(1, TaskID);
             ResultSet rs = pstmt.executeQuery();
             
             while (rs.next()) {
@@ -271,7 +287,7 @@ public class Task {
                         rs.getInt("TASKID"), this.TaskID, rs.getString("TITLE"),
                         rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), rs.getString("PRIORITY"),
                         rs.getString("TASKTYPE"), rs.getString("GENRE"),
-                        rs.getString("TIMEFRAME"), rs.getString("CREATED"), rs.getString("STARTEDDATE"),
+                        rs.getString("TIMEFRAME"), rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
                         rs.getString("COMPLETED"), rs.getString("DUEDATE")
                 ));
             }//end While Loop
@@ -283,8 +299,53 @@ public class Task {
         return taskSet;
     }
     
-    public ArrayList<Task> recursiveChildrenFind(){
+    public ArrayList<Task> selectChildrenShort(){
+        GeneralJDBC jdbc = new GeneralJDBC();
+        ArrayList<Task> taskSet = new ArrayList();
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTCHILDRENSHORT());
+            pstmt.setInt(1, TaskID);
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                taskSet.add(new Task(
+                        rs.getInt("TASKID"), this.TaskID
+                ));
+            }//end While Loop
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         
+        return taskSet;
+    }
+    
+    //might be able to make this function iterative:
+    //If it is allowed to simply foreach and continue as it adds more
+    //that might suffice instead of recursively calling
+    public ArrayList<Task> findChildren(){
+        ArrayList<Task> Children = this.selectChildren();
+        ArrayList<Task> GrandChildren = new ArrayList();
+        if (!Children.isEmpty()) {
+            Children.forEach(e -> {
+                GrandChildren.add(e);
+                GrandChildren.addAll(e.findChildren());
+            });
+        }
+        return GrandChildren;
+    }
+    
+    public ArrayList<Task> findChildrenWithChildren(){
+        ArrayList<Task> Parents = new ArrayList();
+        ArrayList<Task> Children = this.selectChildrenShort();
+        if (!Children.isEmpty()) {
+            Parents.add(this);
+            Children.forEach( e -> {
+                Parents.addAll(e.findChildrenWithChildren());
+            });
+        }
+        return Parents;
     }
     
     public boolean updateTask(ArrayList<FieldAccess> updts) {
@@ -295,7 +356,19 @@ public class Task {
         
         if (updts.isEmpty()) {return false;}
         
-        set = updts.stream().map(updt -> updt.getFieldName() + " = " + updt.getFieldValue()).reduce(set, String::concat);
+        for (FieldAccess updt : updts) {
+            if (updt.getFieldName().equals("STARTEDDATE") || 
+                    updt.getFieldName().equals("COMPLETED") || 
+                    updt.getFieldName().equals("DUEDATE") ||
+                    updt.getFieldName().equals("TITLE") ||
+                    updt.getFieldName().equals("DESCRIPTION")) {
+                set += updt.getFieldName() + " = \"" + updt.getFieldValue() + "\", ";
+            } else {
+                set += updt.getFieldName() + " = " + updt.getFieldValue() + " , ";
+            }
+        }
+        
+        set = set.substring(0, set.lastIndexOf(",")-2);
         
         try {
             Connection conn = jdbc.connect();
@@ -311,7 +384,28 @@ public class Task {
     }
     
     public boolean insertIntoTask() {
+        GeneralJDBC jdbc = new GeneralJDBC();
+        boolean success = true;        
         
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getINSERTTASK());
+            pstmt.setString(1, this.Title);
+            pstmt.setString(2, this.Description);
+            pstmt.setInt(3, this.PrioityID);
+            pstmt.setInt(4, this.TimeframeID);
+            pstmt.setInt(5, this.ProgressID);
+            pstmt.setInt(6, this.GenreID);
+            pstmt.setInt(7, this.TaskTypeID);
+            pstmt.setString(8, this.StartedDate);
+            pstmt.setString(9, this.Completed);
+            pstmt.setString(10, this.DueDate);
+            int sccss = pstmt.executeUpdate();
+            if (sccss == 0) {success = false;}
+        } catch (SQLException e) {
+            return false;
+        }
+        return success;
     }
     
 }

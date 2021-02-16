@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 package SqliteJDBC;
-import java.sql.*;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
 import java.util.ArrayList;
 
 /**
@@ -16,13 +13,32 @@ import java.util.ArrayList;
  */
 public class InitialStart {
     
-    public static void main( String args[] ) {
-      String filePath = "/home/marquis/Code/CountUpTaskManager/Database/dbCreation.sql";
-      String dbName = "CountUpLite.db";
-      String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/" + dbName;
+    public static void main( String args[] ) {      
+      /*new GeneralJDBC().initializeDatabase();
       
-      Connection conn = null;
+      ArrayList<Reference> ref = Reference.referencesSQL("PRIORITY");
+      for (Reference e : ref) {System.out.println(e.toString());}
+      ref = Reference.referencesSQL("PROGRESS");
+      for (Reference e : ref) {System.out.println(e.toString());}
+      ref = Reference.referencesSQL("TIMEFRAME");
+      for (Reference e : ref) {System.out.println(e.toString());}
+      ref = Reference.referencesSQL("TASKTYPE");
+      for (Reference e : ref) {System.out.println(e.toString());}
+      ref = Reference.referencesSQL("GENRE");
+      for (Reference e : ref) {System.out.println(e.toString());}*/
       
+      Task prnt = new Task(1);
+      
+      prnt.findChildren().forEach(e -> {
+          System.out.println(e.toStringMarkdown());
+        });
+      
+      prnt.findChildrenWithChildren().forEach(e -> {
+          System.out.println(e.toString());
+      });
+      //System.out.println("It should return true: " + prnt.findChildrenWithChildren().isEmpty());
+      
+      /*
       try {
           conn = DriverManager.getConnection(url);
       } catch (SQLException e) {
@@ -36,6 +52,6 @@ public class InitialStart {
         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
         System.exit(0);
       }
-      System.out.println("Initialized database.");
+      System.out.println("Initialized database.");*/
    }
 }

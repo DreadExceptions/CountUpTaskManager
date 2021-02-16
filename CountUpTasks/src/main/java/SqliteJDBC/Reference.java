@@ -56,7 +56,7 @@ public class Reference {
         this.Description = Description;
     }
     
-    public ArrayList<Reference> referencesSQL (String tblNm) {
+    public static ArrayList<Reference> referencesSQL (String tblNm) {
         GeneralJDBC jdbc = new GeneralJDBC();
         ArrayList<Reference> refSet = new ArrayList();
         
@@ -64,7 +64,7 @@ public class Reference {
             Connection conn = jdbc.connect();
             PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTREF() + tblNm + ";");
             ResultSet rs = pstmt.executeQuery();
-            
+
             while (rs.next()) {
                 refSet.add(new Reference(rs.getInt("REFID"), rs.getString("TITLE")));
             }//end While Loop
@@ -77,7 +77,7 @@ public class Reference {
         
     }
     
-    public ArrayList<Reference> referencesWDescSQL (String tblNm) {
+    public static ArrayList<Reference> referencesWDescSQL (String tblNm) {
         GeneralJDBC jdbc = new GeneralJDBC();
         ArrayList<Reference> refSet = new ArrayList();
         
@@ -96,5 +96,12 @@ public class Reference {
         
         return refSet;
     }
+
+    @Override
+    public String toString() {
+        return "Reference{" + "RefID=" + RefID + ", Title=" + Title + ", Description=" + Description + '}';
+    }
+    
+    
     
 }
