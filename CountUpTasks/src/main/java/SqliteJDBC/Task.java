@@ -5,6 +5,8 @@
  */
 package SqliteJDBC;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -223,18 +225,37 @@ public class Task {
                 ", Completed=" + Completed + ", DueDate=" + DueDate + '}';
     }
 
-    public String toStringMarkdown() {
-        return  "# " + Title +
-                "\n Priority: " + Priority + 
-                "\n Progress: " + Progress + 
-                "\n Timeframe: " + Timeframe +
-                "\n Genre: " + Genre + 
-                "\n TaskType: " + TaskType +
-                "\n CreatedDate: " + CreatedDate +
-                "\n StartedDate: " + StartedDate + 
-                "\n Completed: " + Completed + 
-                "\n DueDate: " + DueDate + 
-                "\n #### Description \n" + Description;
+    public String toStringMarkdown(String heading) {
+        String md = heading + Title;
+            if (Priority != null) {md += "\n **Priority**: " + Priority;}
+            if (Progress != null) {md += "\n **Progress**: " + Progress;}
+            if (Timeframe != null) {md += "\n **Time-frame**: " + Timeframe;}
+            if (Genre != null) {md += "\n **Genre**: " + Genre;}
+            if (TaskType != null) {md += "\n **Task Type**: " + TaskType;}
+            if (CreatedDate != null) {md += "\n **Created Date**: " + CreatedDate;}
+            if (StartedDate != null) {md += "\n **Started Date**: " + StartedDate;}
+            if (Completed != null) {md += "\n **Completed**: " + Completed;}
+            if (DueDate != null) {md += "\n **Due Date**: " + DueDate;}
+            md += "\n **Description**: \n  " + Description;
+        return md;
+    }
+    
+    public void markDownCountUp(String heading, FileWriter fw) throws IOException{
+        ArrayList<Task> Children = this.selectChildren();
+        String task = this.toStringMarkdown(heading) + "\n";
+        fw.write(task);
+        
+        if (!Children.isEmpty()) {
+            if ( (heading + "      ").substring(0, 5).equals("######") ) {
+                for (Task e : Children) {
+                    e.markDownCountUp(heading + ">", fw);
+                }
+            } else {
+                for (Task e : Children) {
+                    e.markDownCountUp("#" + heading + ">", fw);
+                }
+            } //end else
+        }
     }
     
     public boolean deleteTask() {
@@ -271,6 +292,22 @@ public class Task {
             return false;
         }
         return success;
+    }
+    
+    public static Task selectTask(int task) throws SQLException {
+        GeneralJDBC jdbc = new GeneralJDBC();
+        Connection conn = jdbc.connect();
+        PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTTASK());
+        pstmt.setInt(1, task);
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        Task rtrn = new Task(
+                        rs.getInt("TASKID"), task, rs.getString("TITLE"),
+                        rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), rs.getString("PRIORITY"),
+                        rs.getString("TASKTYPE"), rs.getString("GENRE"),
+                        rs.getString("TIMEFRAME"), rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
+                        rs.getString("COMPLETED"), rs.getString("DUEDATE"));
+        return rtrn;
     }
     
     public ArrayList<Task> selectChildren(){

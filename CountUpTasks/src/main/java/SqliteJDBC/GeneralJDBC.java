@@ -66,11 +66,11 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     
     //SQL Strings, General
     //Get reference variables
-    private String SELECTREF = "SELECT REFID, TITLE FROM ";// + table name + ";"
+    private final String SELECTREF = "SELECT REFID, TITLE FROM ";// + table name + ";"
     //Get Specific task
-    private String SELECTTASK = "SELECT * FROM task WHERE taskID = ? ;";
+    private final String SELECTTASK = "SELECT * FROM task WHERE taskID = ? ;";
     //Get Children Tasks
-    private String SELECTCHILDREN = "SELECT T.TASKID, T.TITLE, " + 
+    private final String SELECTCHILDREN = "SELECT T.TASKID, T.TITLE, " + 
 	"T.DESCRIPTION, " + 
         "TIMEFRAME.TITLE AS TIMEFRAME, " + 
         "GENRE.TITLE AS GENRE, " + 
@@ -85,22 +85,22 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         "INNER JOIN PROGRESS ON T.PROGRESS = PROGRESS.REFID " +
         "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
         "WHERE PARENTID = ? ;";
-    private String SELECTCHILDRENSHORT = "SELECT TASKID FROM TASK WHERE PARENTID = ? ";
+    private final String SELECTCHILDRENSHORT = "SELECT TASKID FROM TASK WHERE PARENTID = ? ";
     //SQL Strings, Exclusive to AddEditPanel
     //Update Task
-    private String UPDATETASK = "UPDATE task SET ";
-    private String WHERETASK = " WHERE taskID = ? ;";
+    private final String UPDATETASK = "UPDATE task SET ";
+    private final String WHERETASK = " WHERE taskID = ? ;";
     //Delete Task
-    private String DELETETASK = "DELETE FROM task WHERE taskID = ? ;";
+    private final String DELETETASK = "DELETE FROM task WHERE taskID = ? ;";
     //Delete Children Tasks
-    private String DELETECHILDREN = "DELETE FROM task WHERE parentID = ? ;";
+    private final String DELETECHILDREN = "DELETE FROM task WHERE parentID = ? ;";
     //Insert Tasks
-    private String INSERTTASK = "INSERT INTO TASK (TITLE, DESCRIPTION, PRIORITY, TIMEFRAME, " + 
+    private final String INSERTTASK = "INSERT INTO TASK (TITLE, DESCRIPTION, PRIORITY, TIMEFRAME, " + 
             "PROGRESS, GENRE, TASKTYPE, STARTEDDATE, COMPLETED, DUEDATE) VALUES (" + 
             "?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     //SQL Strings, Exclusive to SelectPanel
     //Select all root tasks
-    private String ROOTTASKS = "SELECT T.TITLE, " + 
+    private final String ROOTTASKS = "SELECT T.TITLE, " + 
 	"T.DESCRIPTION, " + 
         "TIMEFRAME.TITLE AS TIMEFRAME, " + 
         "GENRE.TITLE AS GENRE, " + 
@@ -116,15 +116,15 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
         "WHERE PARENTID IS NULL"; //+ ";"
     //Additions for the Where clause of ROOTTASKS
-    private String TIMEFRAME = "AND TIMEFRAME.TITLE = ?";
-    private String GENRE = "AND GENRE.TITLE = ?";
-    private String PRIORITY = "AND PRIORITY.TITLE = ?";
-    private String PROGRESS = "AND PROGRESS.TITLE = ?";
-    private String TASKTYPE = "AND TASKTYPE.TITLE = ?";
-    private String CMPLTNULL = "AND T.COMPLETED IS NULL";
-    private String CMPLTNOTNULL = "AND T.COMPLETED IS NOT NULL";
-    private String STRTDDTNULL = "AND T.STARTEDDATE IS NULL";
-    private String STRTDDTNOTNULL = "AND T.STARTEDDATE IS NOT NULL";
+    private final String TIMEFRAME = "AND TIMEFRAME.TITLE = ?";
+    private final String GENRE = "AND GENRE.TITLE = ?";
+    private final String PRIORITY = "AND PRIORITY.TITLE = ?";
+    private final String PROGRESS = "AND PROGRESS.TITLE = ?";
+    private final String TASKTYPE = "AND TASKTYPE.TITLE = ?";
+    private final String CMPLTNULL = "AND T.COMPLETED IS NULL";
+    private final String CMPLTNOTNULL = "AND T.COMPLETED IS NOT NULL";
+    private final String STRTDDTNULL = "AND T.STARTEDDATE IS NULL";
+    private final String STRTDDTNOTNULL = "AND T.STARTEDDATE IS NOT NULL";
     
     public Connection connect() {
         Connection conn = null;

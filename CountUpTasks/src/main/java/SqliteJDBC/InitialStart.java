@@ -5,6 +5,10 @@
  */
 package SqliteJDBC;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -13,45 +17,19 @@ import java.util.ArrayList;
  */
 public class InitialStart {
     
-    public static void main( String args[] ) {      
-      /*new GeneralJDBC().initializeDatabase();
+    public static void main( String args[] ) throws IOException, SQLException {      
+      /*new GeneralJDBC().initializeDatabase();*/
       
-      ArrayList<Reference> ref = Reference.referencesSQL("PRIORITY");
-      for (Reference e : ref) {System.out.println(e.toString());}
-      ref = Reference.referencesSQL("PROGRESS");
-      for (Reference e : ref) {System.out.println(e.toString());}
-      ref = Reference.referencesSQL("TIMEFRAME");
-      for (Reference e : ref) {System.out.println(e.toString());}
-      ref = Reference.referencesSQL("TASKTYPE");
-      for (Reference e : ref) {System.out.println(e.toString());}
-      ref = Reference.referencesSQL("GENRE");
-      for (Reference e : ref) {System.out.println(e.toString());}*/
+      String file = "/home/marquis/Desktop/template.md";
+      File mdDoc = new File(file);
+      mdDoc.createNewFile();
       
-      Task prnt = new Task(1);
+      FileWriter fw = new FileWriter(file);
       
-      prnt.findChildren().forEach(e -> {
-          System.out.println(e.toStringMarkdown());
-        });
+      Task tmplt = Task.selectTask(1);      
+      tmplt.markDownCountUp("# ", fw);
       
-      prnt.findChildrenWithChildren().forEach(e -> {
-          System.out.println(e.toString());
-      });
-      //System.out.println("It should return true: " + prnt.findChildrenWithChildren().isEmpty());
+      fw.close();
       
-      /*
-      try {
-          conn = DriverManager.getConnection(url);
-      } catch (SQLException e) {
-          System.out.println(e.getMessage());
-      }
-      
-      try {
-        searchOptions tst = new searchOptions(url);
-        System.out.println(tst.getReferenceDateTask(true, "DUEDATE"));
-      } catch ( ClassNotFoundException | SQLException e ) {
-        System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-        System.exit(0);
-      }
-      System.out.println("Initialized database.");*/
    }
 }
