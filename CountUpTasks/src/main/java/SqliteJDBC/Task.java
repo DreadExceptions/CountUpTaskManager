@@ -54,6 +54,24 @@ public class Task {
         this.DueDate = ddt;
 	}
 
+    public Task (int tsk, String ttl, String dscrpt,
+            String prgrss, String prrt, String tsktp, String gnr,
+            String tmfrm, String crtd, String strtd, String cmpltd,
+            String ddt) {
+        this.TaskID = tsk;
+        this.Title = ttl;
+        this.Description = dscrpt;
+        this.Progress = prgrss;
+        this.Priority = prrt;
+        this.TaskType = tsktp;
+        this.Genre = gnr;
+        this.Timeframe = tmfrm;
+        this.CreatedDate = crtd;
+        this.StartedDate = strtd;
+        this.Completed = cmpltd;
+        this.DueDate = ddt;
+	}
+    
     public Task(int ParentID, String Title, String Description, int ProgressID, 
             int PrioityID, int TaskTypeID, int GenreID, int TimeframeID, 
             String CreatedDate, String StartedDate, String Completed, String DueDate) {
@@ -70,8 +88,6 @@ public class Task {
         this.Completed = Completed;
         this.DueDate = DueDate;
     }
-
-    
     
     public Task (int TaskID, int ParentID, String Title, String Description, 
             String Progress, int ProgressID, String Priority, int PrioityID, 
@@ -443,6 +459,72 @@ public class Task {
             return false;
         }
         return success;
+    }
+    
+    public static ArrayList<Task> selectRootTasks(int timeframe, int genre, int priority,
+            int tasktype, int progress, int completed, int started) {
+        
+        GeneralJDBC jdbc = new GeneralJDBC();
+        
+        String sql = jdbc.getROOTTASKS();
+        ArrayList<Integer> params = new ArrayList();
+        ArrayList<Task> taskSet = new ArrayList();
+        
+        if (timeframe >= 0) {
+            sql += jdbc.getTIMEFRAME();
+            params.add(timeframe);
+        }
+        if (genre >= 0) {
+            sql += jdbc.getGENRE();
+            params.add(genre);
+        }
+        if (priority >= 0) {
+            sql += jdbc.getPRIORITY();
+            params.add(priority);
+        }
+        if (tasktype >= 0) {
+            sql += jdbc.getTASKTYPE();
+            params.add(tasktype);
+        }
+        if (progress >= 0) {
+            sql += jdbc.getPROGRESS();
+            params.add(progress);
+        }
+        if (completed == 1) {
+            sql += jdbc.getCMPLTNOTNULL();
+        } else if (completed == -1) {
+            sql += jdbc.getCMPLTNULL();
+        }
+        if (started == 1) {
+            sql += jdbc.getSTRTDDTNOTNULL();
+        } else if (started == -1) {
+            sql += jdbc.getSTRTDDTNULL();
+        }
+        
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            for (Integer i : params) {
+                pstmt.setInt(i, i);
+            }
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                taskSet.add(new Task(
+                        rs.getInt("TASKID"), rs.getString("TITLE"),
+                        rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), rs.getString("PRIORITY"),
+                        rs.getString("TASKTYPE"), rs.getString("GENRE"),
+                        rs.getString("TIMEFRAME"), rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
+                        rs.getString("COMPLETED"), rs.getString("DUEDATE")
+                ));
+            }
+            
+        } catch (SQLException e) {
+            return taskSet;
+        }
+        
+        return taskSet;
+        
     }
     
 }

@@ -24,6 +24,10 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         this.DBNAME = "CountUpLite.db";
     }
 
+    //JDBC Access variables
+    public final String FILEPATH = System.getProperty("user.home") + "/Code/CountUpTaskManager/Database/dbCreation.sql";
+    public final String URL = "jdbc:sqlite:" + System.getProperty("user.home") + "/.config/";
+    
     protected String getSELECTTASK() {
         return SELECTTASK;
     }
@@ -59,10 +63,46 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     protected String getWHERETASK() {
         return WHERETASK;
     }
-    
-    //JDBC Access variables
-    private final String FILEPATH = "/home/marquis/Code/CountUpTaskManager/Database/dbCreation.sql";
-    private final String URL = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/";
+
+    public String getROOTTASKS() {
+        return ROOTTASKS;
+    }
+
+    public String getTIMEFRAME() {
+        return TIMEFRAME;
+    }
+
+    public String getGENRE() {
+        return GENRE;
+    }
+
+    public String getPRIORITY() {
+        return PRIORITY;
+    }
+
+    public String getPROGRESS() {
+        return PROGRESS;
+    }
+
+    public String getTASKTYPE() {
+        return TASKTYPE;
+    }
+
+    public String getCMPLTNULL() {
+        return CMPLTNULL;
+    }
+
+    public String getCMPLTNOTNULL() {
+        return CMPLTNOTNULL;
+    }
+
+    public String getSTRTDDTNULL() {
+        return STRTDDTNULL;
+    }
+
+    public String getSTRTDDTNOTNULL() {
+        return STRTDDTNOTNULL;
+    }
     
     //SQL Strings, General
     //Get reference variables
@@ -116,17 +156,17 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
         "WHERE PARENTID IS NULL"; //+ ";"
     //Additions for the Where clause of ROOTTASKS
-    private final String TIMEFRAME = "AND TIMEFRAME.TITLE = ?";
-    private final String GENRE = "AND GENRE.TITLE = ?";
-    private final String PRIORITY = "AND PRIORITY.TITLE = ?";
-    private final String PROGRESS = "AND PROGRESS.TITLE = ?";
-    private final String TASKTYPE = "AND TASKTYPE.TITLE = ?";
-    private final String CMPLTNULL = "AND T.COMPLETED IS NULL";
-    private final String CMPLTNOTNULL = "AND T.COMPLETED IS NOT NULL";
-    private final String STRTDDTNULL = "AND T.STARTEDDATE IS NULL";
-    private final String STRTDDTNOTNULL = "AND T.STARTEDDATE IS NOT NULL";
+    private final String TIMEFRAME = " AND TIMEFRAME.TITLE = ?";
+    private final String GENRE = " AND GENRE.TITLE = ?";
+    private final String PRIORITY = " AND PRIORITY.TITLE = ?";
+    private final String PROGRESS = " AND PROGRESS.TITLE = ?";
+    private final String TASKTYPE = " AND TASKTYPE.TITLE = ?";
+    private final String CMPLTNULL = " AND T.COMPLETED IS NULL";
+    private final String CMPLTNOTNULL = " AND T.COMPLETED IS NOT NULL";
+    private final String STRTDDTNULL = " AND T.STARTEDDATE IS NULL";
+    private final String STRTDDTNOTNULL = " AND T.STARTEDDATE IS NOT NULL";
     
-    public Connection connect() {
+    protected Connection connect() {
         Connection conn = null;
         
         try {
@@ -155,5 +195,7 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
             Logger.getLogger(GeneralJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
     
 }

@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.prefs.Preferences;
 
 /**
  *
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 public class InitialStart {
     
     public static void main( String args[] ) throws IOException, SQLException {      
-      /*new GeneralJDBC().initializeDatabase();*/
+      new GeneralJDBC().initializeDatabase();
       
-      String file = "/home/marquis/Desktop/template.md";
+      /*String file = "~/Desktop/template.md";
       File mdDoc = new File(file);
       mdDoc.createNewFile();
       
@@ -29,7 +30,7 @@ public class InitialStart {
       Task tmplt = Task.selectTask(1);      
       tmplt.markDownCountUp("# ", fw);
       
-      fw.close();
+      fw.close();*/
       
    }
 }

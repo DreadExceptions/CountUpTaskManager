@@ -60,7 +60,6 @@ public class ViewPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         descArea = new javax.swing.JTextArea();
-        editButton = new javax.swing.JButton();
         search = new javax.swing.JButton();
         viewTask = new javax.swing.JButton();
 
@@ -105,13 +104,6 @@ public class ViewPanel extends javax.swing.JPanel {
         descArea.setRows(5);
         jScrollPane2.setViewportView(descArea);
 
-        editButton.setText("Edit Task");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
-
         search.setText("New Search");
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,9 +138,7 @@ public class ViewPanel extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -164,9 +154,7 @@ public class ViewPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(viewTask)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editButton)
-                        .addGap(31, 31, 31)))
+                        .addGap(62, 62, 62)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(returnButton)
@@ -194,22 +182,6 @@ public class ViewPanel extends javax.swing.JPanel {
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_searchActionPerformed
-
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        try {
-            JFrame fr = new JFrame("CountUp Task Manager");
-            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            int row = jTable1.getSelectedRow() + 1;
-            selection.absolute(row);
-            AddEditPanel dt = new AddEditPanel(fr, selection);
-            fr.add(dt);
-            fr.pack();
-            jf.dispose();// should not dispose unless edit is made
-            fr.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_editButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
@@ -256,7 +228,6 @@ public class ViewPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea descArea;
-    private javax.swing.JButton editButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -102,6 +102,22 @@ public class Reference {
         return "Reference{" + "RefID=" + RefID + ", Title=" + Title + ", Description=" + Description + '}';
     }
     
+    public static Reference findReferenceViaID(ArrayList<Reference> refs, int id) {
+        for (Reference e : refs) {
+            if (e.getRefID() == id) {
+                return e;
+            }
+        }
+        return new Reference(-1, null);
+    }
     
+    public static Reference findReferenceViaTitle(ArrayList<Reference> refs, String title) {
+        for (Reference e : refs) {
+            if (e.getTitle().equals(title)) {
+                return e;
+            }
+        }
+        return new Reference(-1, null);
+    }
     
 }
