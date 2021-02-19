@@ -4,7 +4,6 @@ import java.sql.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class GeneralJDBC { //class cannot be used outside of it's own package
     
-    private String DBNAME;
+    private final String DBNAME;
     
     protected GeneralJDBC(String dbnm) {
         this.DBNAME = dbnm;

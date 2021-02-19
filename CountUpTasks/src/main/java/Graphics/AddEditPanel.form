@@ -43,37 +43,42 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                   <Component id="titleFTF" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="editButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="dueDateFTF" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="startedFTF" max="32767" attributes="0"/>
+                                  <Component id="endDateFTF" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="DeleteChildren" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="nptCategory" alignment="0" max="32767" attributes="0"/>
-                          <Component id="nptPriority" max="32767" attributes="0"/>
-                          <Component id="nptTimeframe" alignment="0" max="32767" attributes="0"/>
-                          <Component id="dueDateFTF" alignment="0" max="32767" attributes="0"/>
-                          <Component id="startedFTF" max="32767" attributes="0"/>
-                          <Component id="endDateFTF" alignment="0" max="32767" attributes="0"/>
-                          <Component id="completeness" alignment="0" max="32767" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -105,30 +110,21 @@
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nptCategory" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="completeness" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nptPriority" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nptTimeframe" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="editButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DeleteChildren" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -171,7 +167,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Category:"/>
+        <Property name="text" type="java.lang.String" value="Task Type:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -183,42 +179,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Timeframe:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="nptCategory">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}&#xa;nptCategory.setSelectedIndex(rs.getInt(&quot;CATEGORY&quot;));"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;CATEGORY&quot;);"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="nptPriority">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="nptPriority.setSelectedIndex(rs.getInt(&quot;PRIORITY&quot;));&#xa;} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;PRIORITY&quot;);"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="nptTimeframe">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="nptTimeframe.setSelectedIndex(rs.getInt(&quot;TIMEFRAME&quot;));&#xa;} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;TIMEFRAME&quot;);"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
@@ -286,26 +246,24 @@
         <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="} catch ( Exception e ) {&#xa;            System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;            System.exit(0);}"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="completeness">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(options)" type="code"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="completeness.setSelectedIndex(rs.getInt(&quot;COMPLETENESS&quot;));&#xa;} catch ( Exception e ) {&#xa;    System.err.println( e.getClass().getName() + &quot;: &quot; + e.getMessage() );&#xa;    System.exit(0);}"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {&#xa;    SqliteJDBC.searchOptions choice = new SqliteJDBC.searchOptions(url);&#xa;    String[] options = choice.getReferenceNames(&quot;COMPLETENESS&quot;);"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Completeness:"/>
+        <Property name="text" type="java.lang.String" value="Progress:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Genre:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="DeleteChildren">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Sub-Tasks"/>
       </Properties>
     </Component>
   </SubComponents>
