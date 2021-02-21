@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +35,7 @@ public class ViewPanel extends javax.swing.JPanel {
         this.taskSet = tsks;
         this.defineDfltSet(tsks);
         initComponents();
+        this.returnParentButton.setVisible(false);
     }
     
     public ViewPanel(JFrame jfrm, ArrayList<Task> tsks, Task prnt) {
@@ -73,7 +75,7 @@ public class ViewPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        returnButton = new javax.swing.JButton();
+        returnStartButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable(model);
         jLabel1 = new javax.swing.JLabel();
@@ -81,11 +83,14 @@ public class ViewPanel extends javax.swing.JPanel {
         descArea = new javax.swing.JTextArea();
         search = new javax.swing.JButton();
         viewTask = new javax.swing.JButton();
+        returnParentButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        duplicateTask = new javax.swing.JButton();
 
-        returnButton.setText("Return");
-        returnButton.addActionListener(new java.awt.event.ActionListener() {
+        returnStartButton.setText("Return");
+        returnStartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                returnButtonActionPerformed(evt);
+                returnStartButtonActionPerformed(evt);
             }
         });
 
@@ -128,6 +133,27 @@ public class ViewPanel extends javax.swing.JPanel {
             }
         });
 
+        returnParentButton.setText("Return to Parent");
+        returnParentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnParentButtonActionPerformed(evt);
+            }
+        });
+
+        addButton.setText("Add Task");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
+        duplicateTask.setText("Duplicate Task");
+        duplicateTask.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                duplicateTaskActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,22 +163,19 @@ public class ViewPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(returnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(248, 248, 248))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 99, Short.MAX_VALUE)
-                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(viewTask, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(returnStartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(returnParentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(viewTask, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(duplicateTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -166,16 +189,22 @@ public class ViewPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(viewTask))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(viewTask)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(duplicateTask)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(returnButton)
-                    .addComponent(search))
+                    .addComponent(returnStartButton)
+                    .addComponent(search)
+                    .addComponent(returnParentButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+    private void returnStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnStartButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         StartPanel strt = new StartPanel(fr);
@@ -183,7 +212,7 @@ public class ViewPanel extends javax.swing.JPanel {
         fr.pack();
         jf.dispose();
         fr.setVisible(true);
-    }//GEN-LAST:event_returnButtonActionPerformed
+    }//GEN-LAST:event_returnStartButtonActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
@@ -202,16 +231,46 @@ public class ViewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void viewTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTaskActionPerformed
+        if (jTable1.getSelectedRow() > -1){
+            JFrame fr = new JFrame("CountUp Task Manager");
+            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            TaskPanel tsk = new TaskPanel(fr, Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]));
+            fr.add(tsk);
+            fr.pack();
+            jf.dispose();
+            fr.setVisible(true);
+        }
+    }//GEN-LAST:event_viewTaskActionPerformed
+
+    private void returnParentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnParentButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        TaskPanel tsk = new TaskPanel(fr, Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]));
-        System.out.println(Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]).toString());
+        TaskPanel tsk = new TaskPanel(fr, this.parentTask);
         fr.add(tsk);
         fr.pack();
         jf.dispose();
         fr.setVisible(true);
-        //retreiveTaskFromList();
-    }//GEN-LAST:event_viewTaskActionPerformed
+    }//GEN-LAST:event_returnParentButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        AddEditPanel dddt = new AddEditPanel(fr, this.parentTask.getTaskID());
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void duplicateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicateTaskActionPerformed
+        String dialog = "You will duplicate the selected task as a new root task.\n" + 
+                "All children tasks of the root will also be duplicated.\n" +
+                "Do you wish to continue?";
+        Object [] options = {"Duplicate", "Cancel"};
+        
+        if ((jTable1.getSelectedRow() >= 0) &&
+                (0 == JOptionPane.showOptionDialog(null, dialog, "Confirm", 
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, 
+                        null, options, options[0]))) {
+            Task.duplicateTask(Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]));
+        }
+    }//GEN-LAST:event_duplicateTaskActionPerformed
 
     private void addResultSetRows(ResultSet rs) throws SQLException {
         Object[] newRec = new Object[9];
@@ -230,12 +289,15 @@ public class ViewPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JTextArea descArea;
+    private javax.swing.JButton duplicateTask;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton returnButton;
+    private javax.swing.JButton returnParentButton;
+    private javax.swing.JButton returnStartButton;
     private javax.swing.JButton search;
     private javax.swing.JButton viewTask;
     // End of variables declaration//GEN-END:variables

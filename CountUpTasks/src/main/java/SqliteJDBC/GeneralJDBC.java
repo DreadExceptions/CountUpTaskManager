@@ -26,6 +26,7 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     //JDBC Access variables
     public final String FILEPATH = System.getProperty("user.home") + "/Code/CountUpTaskManager/Database/dbCreation.sql";
     public final String URL = "jdbc:sqlite:" + System.getProperty("user.home") + "/.config/";
+    public static final String FOLDERWRITE = System.getProperty("user.home") + "/Documents/";
     
     protected String getSELECTTASK() {
         return SELECTTASK;
@@ -115,7 +116,27 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     //Get reference variables
     private final String SELECTREF = "SELECT REFID, TITLE, DESCRIPTION FROM ";// + table name + ";"
     //Get Specific task
-    private final String SELECTTASK = "SELECT * FROM task WHERE taskID = ? ;";
+    private final String SELECTTASK = "SELECT T.TASKID, T.TITLE, " + 
+        "T.PARENTID, " +
+	"T.DESCRIPTION, " + 
+        //"T.TIMEFRAME AS TIMEFRAMEID" +
+        "TIMEFRAME.TITLE AS TIMEFRAME, " + 
+        //"T.GENRE AS GENREID" +
+        "GENRE.TITLE AS GENRE, " + 
+        //"T.PRIORITY AS PRIORITYID" +
+        "PRIORITY.TITLE AS PRIORITY, " + 
+        //"T.PROGRESS AS PROGRESSID" +
+        "PROGRESS.TITLE AS PROGRESS, " + 
+        //"T.TASKTYPE AS TASKTYPEID" +
+        "TASKTYPE.TITLE AS TASKTYPE, " + 
+	"T.CREATEDDATE, T.STARTEDDATE, T.COMPLETED, T.DUEDATE " +
+        "FROM TASK T " + 
+	"INNER JOIN TIMEFRAME ON T.TIMEFRAME = TIMEFRAME.REFID " + 
+	"INNER JOIN GENRE ON T.GENRE = GENRE.REFID " + 
+        "INNER JOIN PRIORITY ON T.PRIORITY = PRIORITY.REFID " + 
+        "INNER JOIN PROGRESS ON T.PROGRESS = PROGRESS.REFID " +
+        "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
+        "WHERE T.TASKID = ? ;";
     //Get Children Tasks
     private final String SELECTCHILDREN = "SELECT T.TASKID, T.TITLE, " + 
 	"T.DESCRIPTION, " + 

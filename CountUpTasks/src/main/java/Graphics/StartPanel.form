@@ -21,8 +21,9 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="ViewAllButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="SelectButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="AddButton" alignment="0" pref="120" max="32767" attributes="0"/>
+                  <Component id="AddButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="ExitButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="printTasksButton" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -33,13 +34,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="ViewAllButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="printTasksButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="SelectButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="AddButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="ExitButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,6 +78,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExitButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="printTasksButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Print Tasks to File"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printTasksButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

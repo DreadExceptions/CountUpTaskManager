@@ -5,10 +5,16 @@
  */
 package SqliteJDBC;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -250,7 +256,7 @@ public class Task {
                 ", Timeframe=" + Timeframe + ", CreatedDate=" + CreatedDate + ", StartedDate=" + StartedDate + 
                 ", Completed=" + Completed + ", DueDate=" + DueDate + '}';
     }
-
+    
     public String toStringMarkdown(String heading) {
         String md = heading + Title;
             if (Priority != null) {md += "\n **Priority**: " + Priority;}
@@ -282,6 +288,39 @@ public class Task {
                 }
             } //end else
         }
+    }
+    
+    public void taskToMarkDown(){
+        Date dt = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy.HH:mm:ss");
+        String saveFile = GeneralJDBC.FOLDERWRITE + this.getTitle() + formatter.format(dt) + ".md";
+        File md = new File(saveFile);
+        try (FileWriter fw = new FileWriter(md)) {
+            this.markDownCountUp("# ", fw);
+            fw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JFrame fr = new JFrame("Notification");
+        JOptionPane.showMessageDialog(fr, "A file of tasks has been created at: " + saveFile);
+    }
+    
+    public static void taskToMarkDown(String FileName){
+        ArrayList<Task> tsks = selectRootTasks();
+        Date dt = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy.HH:mm:ss");
+        String saveFile = GeneralJDBC.FOLDERWRITE + "CountUpTasks" + formatter.format(dt) + ".md";
+        System.out.println(formatter.format(dt));
+        File md = new File(saveFile);
+        try (FileWriter fw = new FileWriter(md)) {
+            for (Task e : tsks) {
+                e.markDownCountUp("# ", fw);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Task.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JFrame fr = new JFrame("Notification");
+        JOptionPane.showMessageDialog(fr, "A file of tasks has been created at: " + saveFile);
     }
     
     public boolean deleteTask() {
@@ -345,19 +384,27 @@ public class Task {
         return taskSet;
     }
     
-    public static Task selectTask(int task) throws SQLException {
+    public static Task selectTask(int task)  {
         GeneralJDBC jdbc = new GeneralJDBC();
-        Connection conn = jdbc.connect();
-        PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTTASK());
-        pstmt.setInt(1, task);
-        ResultSet rs = pstmt.executeQuery();
-        rs.next();
-        Task rtrn = new Task(
+        Task rtrn = new Task();
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTTASK());
+            pstmt.setInt(1, task);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            rtrn = new Task(
                         rs.getInt("TASKID"), rs.getInt("PARENTID"), rs.getString("TITLE"),
-                        rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), rs.getString("PRIORITY"),
-                        rs.getString("TASKTYPE"), rs.getString("GENRE"),
-                        rs.getString("TIMEFRAME"), rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
+                        rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), //rs.getInt("PROGRESSID"),
+                        rs.getString("PRIORITY"), //rs.getInt("PRIORITYID"),
+                        rs.getString("TASKTYPE"), //rs.getInt("TASKTYPEID"), 
+                        rs.getString("GENRE"), //rs.getInt("GENREID"),
+                        rs.getString("TIMEFRAME"), //rs.getInt("TIMEFRAMEID"),
+                        rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
                         rs.getString("COMPLETED"), rs.getString("DUEDATE"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return rtrn;
     }
     
@@ -607,6 +654,10 @@ public class Task {
             }
         }
         return new Task();
+    }
+    
+    public static void duplicateTask(Task tsk) {
+        
     }
     
 }

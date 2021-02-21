@@ -64,7 +64,7 @@ public class TaskPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         genre = new javax.swing.JLabel();
         markDownButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        childrenViewButton = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -134,7 +134,12 @@ public class TaskPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("View Sub-Tasks");
+        childrenViewButton.setText("View Sub-Tasks");
+        childrenViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                childrenViewButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -172,7 +177,7 @@ public class TaskPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(childrenViewButton)
                                 .addGap(18, 18, 18)
                                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
@@ -237,7 +242,7 @@ public class TaskPanel extends javax.swing.JPanel {
                     .addComponent(genre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(childrenViewButton)
                     .addComponent(editButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -259,28 +264,44 @@ public class TaskPanel extends javax.swing.JPanel {
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         JFrame fr = new JFrame ("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        StartPanel strt = new StartPanel(fr);
-        fr.add(strt);
+        if (this.viewTask.getParentID() > 0) {
+            System.out.println(this.viewTask.getParentID());
+            TaskPanel tsk = new TaskPanel(fr, Task.selectTask(this.viewTask.getParentID()));
+            fr.add(tsk);
+        } else {
+            StartPanel strt = new StartPanel(fr);
+            fr.add(strt);
+        }
         fr.pack();
         fr.setVisible(true);
         this.jf.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void markDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markDownButtonActionPerformed
-        // TODO add your handling code here:
+        this.viewTask.taskToMarkDown();
     }//GEN-LAST:event_markDownButtonActionPerformed
+
+    private void childrenViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_childrenViewButtonActionPerformed
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ViewPanel vw = new ViewPanel(fr, viewTask.selectChildren(), viewTask);
+        fr.add(vw);
+        fr.pack();
+        fr.setVisible(true);
+        this.jf.dispose();
+    }//GEN-LAST:event_childrenViewButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Description;
     private javax.swing.JLabel Title;
+    private javax.swing.JButton childrenViewButton;
     private javax.swing.JLabel created;
     private javax.swing.JLabel dueDate;
     private javax.swing.JButton editButton;
     private javax.swing.JLabel ended;
     private javax.swing.JLabel genre;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
