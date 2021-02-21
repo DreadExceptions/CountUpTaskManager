@@ -107,6 +107,10 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         return SELECTALLTASK;
     }
     
+    public String getTITLE() {
+        return TITLE;
+    }
+    
     //SQL Strings, General
     //Get reference variables
     private final String SELECTREF = "SELECT REFID, TITLE, DESCRIPTION FROM ";// + table name + ";"
@@ -160,6 +164,7 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
         "WHERE PARENTID = 0"; //+ ";"
     //Additions for the Where clause of ROOTTASKS
+    private final String TITLE = " AND T.TITLE LIKE ?";
     private final String TIMEFRAME = " AND TIMEFRAME = ?";
     private final String GENRE = " AND GENRE = ?";
     private final String PRIORITY = " AND PRIORITY = ?";

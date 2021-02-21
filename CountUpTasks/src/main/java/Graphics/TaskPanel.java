@@ -25,6 +25,9 @@ public class TaskPanel extends javax.swing.JPanel {
         this.jf = jfrm;
         this.viewTask = vw;
         initComponents();
+        if (viewTask.getStartedDate() == null) {jLabel2.setVisible(false);}
+        if (viewTask.getCompleted() == null) {jLabel3.setVisible(false);}
+        if (viewTask.getDueDate() == null) {jLabel4.setVisible(false);}
     }
 
     /**
@@ -37,104 +40,74 @@ public class TaskPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        try {
-            Title = new javax.swing.JLabel();
-            jScrollPane2 = new javax.swing.JScrollPane();
-            Description = new javax.swing.JTextArea();
-            jLabel1 = new javax.swing.JLabel();
-            jLabel2 = new javax.swing.JLabel();
-            jLabel3 = new javax.swing.JLabel();
-            jLabel4 = new javax.swing.JLabel();
-            created = new javax.swing.JLabel();
-            started = new javax.swing.JLabel();
-            ended = new javax.swing.JLabel();
-            dueDate = new javax.swing.JLabel();
-            jLabel5 = new javax.swing.JLabel();
-            jLabel6 = new javax.swing.JLabel();
-            jLabel7 = new javax.swing.JLabel();
-            jLabel8 = new javax.swing.JLabel();
-            progress = new javax.swing.JLabel();
-            taskType = new javax.swing.JLabel();
-            priority = new javax.swing.JLabel();
-            timeframe = new javax.swing.JLabel();
-            returnButton = new javax.swing.JButton();
-            editButton = new javax.swing.JButton();
-            jLabel9 = new javax.swing.JLabel();
-            genre = new javax.swing.JLabel();
-            markDownButton = new javax.swing.JButton();
-            jButton2 = new javax.swing.JButton();
+        Title = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Description = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        created = new javax.swing.JLabel();
+        started = new javax.swing.JLabel();
+        ended = new javax.swing.JLabel();
+        dueDate = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        progress = new javax.swing.JLabel();
+        taskType = new javax.swing.JLabel();
+        priority = new javax.swing.JLabel();
+        timeframe = new javax.swing.JLabel();
+        returnButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        genre = new javax.swing.JLabel();
+        markDownButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-            jButton1.setText("jButton1");
+        jButton1.setText("jButton1");
 
-            rs.first();
-            String ttl = rs.getString("TITLE");
-            Title.setText(ttl);
+        Title.setText(viewTask.getTitle());
 
-            rs.first();
-            String dscrptn = rs.getString("DESCRIPTION");
-            Description.setColumns(20);
-            Description.setRows(5);
-            Description.setText(dscrptn);
-            jScrollPane2.setViewportView(Description);
+        Description.setColumns(20);
+        Description.setLineWrap(true);
+        Description.setRows(5);
+        Description.setText(viewTask.getDescription());
+        Description.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(Description);
 
-            jLabel1.setText("Created:");
+        jLabel1.setText("Created:");
 
-            jLabel2.setText("Started:");
+        jLabel2.setText("Started:");
 
-            jLabel3.setText("Completed:");
+        jLabel3.setText("Completed:");
 
-            jLabel4.setText("Due Date:");
+        jLabel4.setText("Due Date:");
 
-            rs.first();
-            String crtd = rs.getString("CREATED");
-            if (crtd.isBlank()) {crtd = "Does not exist.";}
-            created.setText(crtd);
+        created.setText(viewTask.getCreatedDate());
 
-            rs.first();
-            String strtd = rs.getString("STARTED");
-            if (strtd.isBlank()) {strtd = "Does not exist.";}
-            started.setText(strtd);
+        started.setText(viewTask.getStartedDate());
 
-            rs.first();
-            String ndd = rs.getString("ENDED");
-            if (ndd.isBlank()) {ndd = "Does not exist.";}
-            ended.setText(ndd);
+        ended.setText(viewTask.getCompleted());
 
-            rs.first();
-            String ddt = rs.getString("DUEDATE");
-            if (ddt.isBlank()) {ddt = "Does not exist.";}
-            dueDate.setText(ddt);
+        dueDate.setText(viewTask.getDueDate());
 
-            jLabel5.setText("Progress:");
+        jLabel5.setText("Progress:");
 
-            jLabel6.setText("Priority:");
+        jLabel6.setText("Priority:");
 
-            jLabel7.setText("Timeframe:");
+        jLabel7.setText("Timeframe:");
 
-            jLabel8.setText("Task Type");
+        jLabel8.setText("Task Type:");
 
-            rs.first();
-            String cmplt = rs.getString("COMPLETENESS");
-            if (cmplt.isBlank()) {cmplt = "N/A";}
-            progress.setText(cmplt);
+        progress.setText(viewTask.getProgress());
 
-            rs.first();
-            String ctgr = rs.getString("CATEGORY");
-            if (ctgr.isBlank()) {ctgr = "N/A";}
-            taskType.setText(ctgr);
+        taskType.setText(viewTask.getTaskType());
 
-            rs.first();
-            String prrt = rs.getString("PRIORITY");
-            if (prrt.isBlank()) {prrt = "N/A";}
-            priority.setText(prrt);
+        priority.setText(viewTask.getPriority());
 
-            rs.first();
-            String tmfrm = rs.getString("TIMEFRAME");
-            if (tmfrm.isBlank()) {tmfrm = "N/A";}
-            timeframe.setText(tmfrm);
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);}
+        timeframe.setText(viewTask.getTimeframe());
 
         returnButton.setText("Return");
         returnButton.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +125,7 @@ public class TaskPanel extends javax.swing.JPanel {
 
         jLabel9.setText("Genre:");
 
-        genre.setText("jLabel10");
+        genre.setText(viewTask.getGenre());
 
         markDownButton.setText("Markdown");
         markDownButton.addActionListener(new java.awt.event.ActionListener() {
@@ -174,28 +147,26 @@ public class TaskPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel8)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dueDate)
-                            .addComponent(ended)
-                            .addComponent(started)
-                            .addComponent(created)
-                            .addComponent(genre)
-                            .addComponent(timeframe)
-                            .addComponent(taskType)
-                            .addComponent(progress)
-                            .addComponent(priority)))
-                    .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(136, 136, 136)
+                                .addComponent(priority, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(created, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(timeframe, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(taskType, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(genre, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Title)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(markDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -203,8 +174,22 @@ public class TaskPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
-                                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(started, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Title)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ended, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -215,52 +200,49 @@ public class TaskPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(created)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(started)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ended)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dueDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(priority)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(progress)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(timeframe)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(taskType)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(genre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(editButton)
-                            .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(returnButton)
-                            .addComponent(markDownButton))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(created))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(started))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(ended))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(dueDate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(priority))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(progress))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(timeframe))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(taskType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(genre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(editButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(markDownButton)
+                    .addComponent(returnButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

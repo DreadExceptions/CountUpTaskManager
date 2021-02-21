@@ -496,15 +496,15 @@ public class Task {
         return success;
     }
     
-    public static ArrayList<Task> selectRootTasks(int timeframe, int genre, int priority,
-            int tasktype, int progress, int completed, int started) {
+    public static ArrayList<Task> selectRootTasks(String title, int priority, int progress, int timeframe,
+            int genre, int tasktype, int started, int completed) {
         
         GeneralJDBC jdbc = new GeneralJDBC();
         
         String sql = jdbc.getROOTTASKS();
         ArrayList<Integer> params = new ArrayList();
         ArrayList<Task> taskSet = new ArrayList();
-                
+        
         if (timeframe >= 0) {
             sql += jdbc.getTIMEFRAME();
             params.add(timeframe);
@@ -536,6 +536,10 @@ public class Task {
             sql += jdbc.getSTRTDDTNULL();
         }
         
+        if (!title.isBlank()) {
+            sql += jdbc.getTITLE();
+        }
+        
         try {
             Connection conn = jdbc.connect();
             System.out.println(sql);
@@ -543,6 +547,11 @@ public class Task {
             for (int i = 0; i < params.size(); i++){
                 System.out.println((i+1) + " " + params.get(i));
                 pstmt.setInt(i+1, params.get(i));
+            }
+            if (!title.isBlank()) {
+                int z = params.size() + 1;
+                System.out.println(z);
+                pstmt.setString(z, "%" + title + "%");
             }
             ResultSet rs = pstmt.executeQuery();
             
@@ -589,6 +598,15 @@ public class Task {
         
         return taskSet;
         
+    }
+    
+    public static Task retreiveTaskFromList(ArrayList<Task> taskSet, String title){
+        for (Task e : taskSet) {
+            if (e.getTitle().equals(title)) {
+                return e;
+            }
+        }
+        return new Task();
     }
     
 }

@@ -22,21 +22,46 @@ public class ViewPanel extends javax.swing.JPanel {
      * Creates new form ViewTasks
      */
     JFrame jf;
-    Object [][] dfltSet = {};
+    Object [][] dfltSet;
     Task parentTask;
-    String [] col = {"Title", "Category", "Completeness", "Priority", "Timeframe", 
+    ArrayList<Task> taskSet;
+    String [] col = {"Title", "Priority", "Progress", "Timeframe", "Genre", "Task Type",
         "Created", "Started", "Completed", "Due Date"};
     DefaultTableModel model = new DefaultTableModel(dfltSet, col);
 
     public ViewPanel(JFrame jfrm, ArrayList<Task> tsks) {
         this.jf = jfrm;
+        this.taskSet = tsks;
+        this.defineDfltSet(tsks);
         initComponents();
     }
     
     public ViewPanel(JFrame jfrm, ArrayList<Task> tsks, Task prnt) {
         this.jf = jfrm;
         this.parentTask = prnt;
+        this.taskSet = tsks;
+        this.defineDfltSet(tsks);
         initComponents();
+    }
+    
+    private void defineDfltSet(ArrayList<Task> tsks) {
+        dfltSet = new Object[tsks.size()][11];
+        
+        for (int i = 0; i < tsks.size(); i++) {
+            String[] task = new String[10];
+            task[0] = tsks.get(i).getTitle();
+            task[1] = tsks.get(i).getPriority();
+            task[2] = tsks.get(i).getProgress();
+            task[3] = tsks.get(i).getTimeframe();
+            task[4] = tsks.get(i).getGenre();
+            task[5] = tsks.get(i).getTaskType();
+            task[6] = tsks.get(i).getCreatedDate();
+            task[7] = tsks.get(i).getStartedDate();
+            task[8] = tsks.get(i).getCompleted();
+            task[9] = tsks.get(i).getDueDate();
+            dfltSet[i] = task;
+        }//end for
+        
     }
     
     /**
@@ -64,27 +89,18 @@ public class ViewPanel extends javax.swing.JPanel {
             }
         });
 
-        /*
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title", "Category", "Completeness", "Priority", "Timeframe", "Created", "Started", "Completed", "Due Date"
-            }
+            this.dfltSet,
+            this.col
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        */
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -129,14 +145,14 @@ public class ViewPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel1)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(viewTask, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 99, Short.MAX_VALUE)
+                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(viewTask, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -144,15 +160,13 @@ public class ViewPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(viewTask)
-                        .addGap(62, 62, 62)))
+                    .addComponent(viewTask))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(returnButton)
@@ -182,11 +196,21 @@ public class ViewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-           
+        descArea.setText(
+            Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]).getDescription()
+                );
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void viewTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTaskActionPerformed
-
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        TaskPanel tsk = new TaskPanel(fr, Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]));
+        System.out.println(Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]).toString());
+        fr.add(tsk);
+        fr.pack();
+        jf.dispose();
+        fr.setVisible(true);
+        //retreiveTaskFromList();
     }//GEN-LAST:event_viewTaskActionPerformed
 
     private void addResultSetRows(ResultSet rs) throws SQLException {

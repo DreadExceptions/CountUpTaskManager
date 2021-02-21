@@ -30,7 +30,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" max="32767" attributes="0"/>
+                      <Component id="titleBox" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="returnButton" min="-2" pref="89" max="-2" attributes="0"/>
@@ -71,7 +71,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="titleBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -145,10 +145,7 @@
         <Property name="text" type="java.lang.String" value="Priority"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="32 Characters Maximum"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="titleBox">
     </Component>
     <Component class="javax.swing.JComboBox" name="taskTypeComboBox">
       <Properties>
@@ -217,7 +214,7 @@
     <Component class="javax.swing.JComboBox" name="completedComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ignore&quot;, &quot;Incomplete&quot;, &quot;Completed&quot; })" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;*&quot;, &quot;Incomplete&quot;, &quot;Complete&quot; })" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -227,7 +224,7 @@
     <Component class="javax.swing.JComboBox" name="startedComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ignore&quot;, &quot;Not Started&quot;, &quot;Started&quot;})" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;*&quot;, &quot;Not Started&quot;, &quot;Started&quot;})" type="code"/>
         </Property>
       </Properties>
       <AuxValues>

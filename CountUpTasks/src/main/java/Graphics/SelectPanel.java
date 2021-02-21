@@ -46,7 +46,7 @@ public class SelectPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        titleBox = new javax.swing.JTextField();
         taskTypeComboBox = new javax.swing.JComboBox<>();
         timeframeBox = new javax.swing.JComboBox<>();
         progressComboBox = new javax.swing.JComboBox<>();
@@ -70,8 +70,6 @@ public class SelectPanel extends javax.swing.JPanel {
         jLabel4.setText("Progress");
 
         jLabel5.setText("Priority");
-
-        jTextField1.setText("32 Characters Maximum");
 
         taskTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TASKTYPE")));
 
@@ -102,9 +100,9 @@ public class SelectPanel extends javax.swing.JPanel {
             }
         });
 
-        completedComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ignore", "Incomplete", "Completed" }));
+        completedComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*", "Incomplete", "Complete" }));
 
-        startedComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ignore", "Not Started", "Started"}));
+        startedComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*", "Not Started", "Started"}));
 
         genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("GENRE")));
 
@@ -124,7 +122,7 @@ public class SelectPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(titleBox))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(returnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,7 +155,7 @@ public class SelectPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(titleBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(priorityBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,8 +216,59 @@ public class SelectPanel extends javax.swing.JPanel {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
+        //priority
+        int prrty;
+        if (priorityBox.getSelectedItem().equals("*")) {
+            prrty = -1;
+        } else {
+            prrty = Reference.findReferenceViaTitle("PRIORITY", (String) priorityBox.getSelectedItem()).getRefID();
+        }
+        
+        //progress
+        int prgrss;
+        if (progressComboBox.getSelectedItem().equals("*")) {
+            prgrss = -1;
+        } else {
+            prgrss = Reference.findReferenceViaTitle("PROGRESS", (String) progressComboBox.getSelectedItem()).getRefID();
+        }
+        //timeframe
+        int tmfrm;
+        if (priorityBox.getSelectedItem().equals("*")) {
+            tmfrm = -1;
+        } else {
+            tmfrm = Reference.findReferenceViaTitle("TIMEFRAME", (String) priorityBox.getSelectedItem()).getRefID();
+        }
+        //genre
+        int gnr;
+        if (genreComboBox.getSelectedItem().equals("*")) {
+            gnr = -1;
+        } else {
+            gnr = Reference.findReferenceViaTitle("GENRE", (String) genreComboBox.getSelectedItem()).getRefID();
+        }
+        //tasktype
+        int tsktp;
+        if (taskTypeComboBox.getSelectedItem().equals("*")) {
+            tsktp = -1;
+        } else {
+            tsktp = Reference.findReferenceViaTitle("TASKTYPE", (String) taskTypeComboBox.getSelectedItem()).getRefID();
+        }
+        //started
+        int strtd = startedComboBox.getSelectedIndex()-1;
+        switch (strtd) {
+            case -1 -> strtd = 0;
+            case 0 -> strtd = -1;
+        }
+        //complete
+        int cmplt = completedComboBox.getSelectedIndex()-1;
+        switch (cmplt) {
+            case -1 -> cmplt = 0;
+            case 0 -> cmplt = -1;
+        }
+        
         ViewPanel vw = new ViewPanel(fr, Task.selectRootTasks(
-                //insert values from selections here
+                titleBox.getText(), prrty, prgrss, tmfrm, gnr, tsktp, strtd, cmplt
         ) );
         fr.add(vw);
         fr.pack();
@@ -241,7 +290,6 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> priorityBox;
     private javax.swing.JComboBox<String> progressComboBox;
     private javax.swing.JButton returnButton;
@@ -249,6 +297,7 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> startedComboBox;
     private javax.swing.JComboBox<String> taskTypeComboBox;
     private javax.swing.JComboBox<String> timeframeBox;
+    private javax.swing.JTextField titleBox;
     private javax.swing.JButton viewAllButton;
     // End of variables declaration//GEN-END:variables
 }
