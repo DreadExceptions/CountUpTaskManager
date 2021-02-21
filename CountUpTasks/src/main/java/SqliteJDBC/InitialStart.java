@@ -19,18 +19,7 @@ import java.util.prefs.Preferences;
 public class InitialStart {
     
     public static void main( String args[] ) throws IOException, SQLException {      
-      new GeneralJDBC().initializeDatabase();
-      
-      /*String file = "~/Desktop/template.md";
-      File mdDoc = new File(file);
-      mdDoc.createNewFile();
-      
-      FileWriter fw = new FileWriter(file);
-      
-      Task tmplt = Task.selectTask(1);      
-      tmplt.markDownCountUp("# ", fw);
-      
-      fw.close();*/
+      //new GeneralJDBC().initializeDatabase();
       
    }
 }

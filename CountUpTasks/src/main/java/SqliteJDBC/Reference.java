@@ -62,7 +62,7 @@ public class Reference {
         
         try {
             Connection conn = jdbc.connect();
-            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTREF() + tblNm + ";");
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTREF() + tblNm + " ORDER BY REFID ASC;");
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -118,6 +118,15 @@ public class Reference {
             }
         }
         return new Reference(-1, null);
+    }
+    
+    public static String[] findReferenceStrings(String tblnm) {
+        ArrayList<Reference> rfRry = SqliteJDBC.Reference.referencesSQL(tblnm);
+        String[] rfStr = new String[rfRry.size()];
+        for (int i = 0; i < rfStr.length; i++) {
+            rfStr[i] = rfRry.get(i).getTitle();
+        }
+        return rfStr;
     }
     
 }

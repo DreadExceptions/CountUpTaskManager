@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public class Task {
     
+    final String tsfrmt = "YYYY-MM-DD HH:MM:SS";
     int TaskID;
     int ParentID;
     String Title;
@@ -53,7 +54,7 @@ public class Task {
         this.Completed = cmpltd;
         this.DueDate = ddt;
 	}
-
+    
     public Task (int tsk, String ttl, String dscrpt,
             String prgrss, String prrt, String tsktp, String gnr,
             String tmfrm, String crtd, String strtd, String cmpltd,
@@ -119,8 +120,17 @@ public class Task {
         this.ParentID = ParentID;
     }
     
-    protected Task (int TaskID) {
-        this.TaskID = TaskID;
+    public Task () {
+        this.Title = "32 Characters or less.";
+        this.Description = "Aptly describe what you want to do.";
+        this.ProgressID = 0;
+        this.PrioityID = 0;
+        this.TaskTypeID = 0;
+        this.GenreID = 0;
+        this.TimeframeID = 0;
+        this.StartedDate = tsfrmt;
+        this.Completed = tsfrmt;
+        this.DueDate = tsfrmt;
     }
     
     public int getTaskID() {
@@ -310,6 +320,31 @@ public class Task {
         return success;
     }
     
+    public static ArrayList<Task> selectAllTasks() {
+        GeneralJDBC jdbc = new GeneralJDBC();
+        ArrayList<Task> taskSet = new ArrayList();
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTALLTASK());
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                taskSet.add(new Task(
+                        rs.getInt("TASKID"), rs.getInt("PARENTID"), rs.getString("TITLE"),
+                        rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), rs.getString("PRIORITY"),
+                        rs.getString("TASKTYPE"), rs.getString("GENRE"),
+                        rs.getString("TIMEFRAME"), rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
+                        rs.getString("COMPLETED"), rs.getString("DUEDATE")
+                ));
+            }//end While Loop
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return taskSet;
+    }
+    
     public static Task selectTask(int task) throws SQLException {
         GeneralJDBC jdbc = new GeneralJDBC();
         Connection conn = jdbc.connect();
@@ -318,7 +353,7 @@ public class Task {
         ResultSet rs = pstmt.executeQuery();
         rs.next();
         Task rtrn = new Task(
-                        rs.getInt("TASKID"), task, rs.getString("TITLE"),
+                        rs.getInt("TASKID"), rs.getInt("PARENTID"), rs.getString("TITLE"),
                         rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), rs.getString("PRIORITY"),
                         rs.getString("TASKTYPE"), rs.getString("GENRE"),
                         rs.getString("TIMEFRAME"), rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
@@ -469,7 +504,7 @@ public class Task {
         String sql = jdbc.getROOTTASKS();
         ArrayList<Integer> params = new ArrayList();
         ArrayList<Task> taskSet = new ArrayList();
-        
+                
         if (timeframe >= 0) {
             sql += jdbc.getTIMEFRAME();
             params.add(timeframe);
@@ -503,9 +538,11 @@ public class Task {
         
         try {
             Connection conn = jdbc.connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            for (Integer i : params) {
-                pstmt.setInt(i, i);
+            System.out.println(sql);
+            PreparedStatement pstmt = conn.prepareStatement(sql + " ;");
+            for (int i = 0; i < params.size(); i++){
+                System.out.println((i+1) + " " + params.get(i));
+                pstmt.setInt(i+1, params.get(i));
             }
             ResultSet rs = pstmt.executeQuery();
             
@@ -520,7 +557,34 @@ public class Task {
             }
             
         } catch (SQLException e) {
-            return taskSet;
+            System.out.println(e.getMessage());
+        }
+        
+        return taskSet;
+        
+    }
+    
+    public static ArrayList<Task> selectRootTasks() {
+        
+        GeneralJDBC jdbc = new GeneralJDBC();
+        ArrayList<Task> taskSet = new ArrayList();
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getROOTTASKS() + ";");
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                taskSet.add(new Task(
+                        rs.getInt("TASKID"), rs.getString("TITLE"),
+                        rs.getString("DESCRIPTION"), rs.getString("PROGRESS"), rs.getString("PRIORITY"),
+                        rs.getString("TASKTYPE"), rs.getString("GENRE"),
+                        rs.getString("TIMEFRAME"), rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
+                        rs.getString("COMPLETED"), rs.getString("DUEDATE")
+                ));
+            }//end While Loop
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         
         return taskSet;

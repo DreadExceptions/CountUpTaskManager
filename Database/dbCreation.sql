@@ -106,16 +106,17 @@ INSERT INTO GENRE (REFID, TITLE, DESCRIPTION)
 CREATE TABLE TASK (
 	TASKID INTEGER PRIMARY KEY,
 	TITLE VARCHAR(32),
-	PARENTID INT,
-	TIMEFRAME INT NOT NULL
+	PARENTID INTEGER
 		DEFAULT 0,
-	GENRE INT NOT NULL
+	TIMEFRAME INTEGER NOT NULL
 		DEFAULT 0,
-	PRIORITY INT NOT NULL
+	GENRE INTEGER NOT NULL
 		DEFAULT 0,
-	PROGRESS INT NOT NULL
+	PRIORITY INTEGER NOT NULL
 		DEFAULT 0,
-	TASKTYPE INT NOT NULL
+	PROGRESS INTEGER NOT NULL
+		DEFAULT 0,
+	TASKTYPE INTEGER NOT NULL
 		DEFAULT 0,
 	DESCRIPTION TEXT,
 	CREATEDDATE TIMESTAMP NOT NULL
@@ -142,6 +143,23 @@ CREATE TABLE TASKHISTORY (
 
 -- If option is deleted in reference table, these triggers
 -- will update the tasks table to the default, "0"
+
+INSERT INTO TASK (TITLE, TIMEFRAME, GENRE, PRIORITY, PROGRESS, TASKTYPE, DESCRIPTION)
+VALUES
+('Project Template', 0, 1, 0, 0, 0, "This is the root of a complex template for a project."),
+('Simple Template', 0, 1, 0, 0, 0, "This is the root of a simple template for tasks.");
+
+INSERT INTO TASK (TITLE, PARENTID, TIMEFRAME, GENRE, PRIORITY, PROGRESS, TASKTYPE, DESCRIPTION)
+VALUES
+('Purpose', 1, 0, 1, 0, 1, 3, "Why?"),
+('Context', 1, 0, 1, 0, 1, 3, "Random tidbits for a bigger picture."),
+('Minimum', 1, 0, 1, 1, 1, 2, "Minimum viable project objectives."),
+('Extended Goals', 1, 0, 1, 3, 1, 1, "Things that would be cool to also have."),
+('Resources', 1, 0, 1, 0, 1, 4, "Things to complete the project."),
+('Milestones', 1, 0, 1, 0, 1, 1, "When?"),
+('Training', 1, 0, 1, 0, 1, 4, "Things to learn for completion."),
+('Objective', 2, 0, 1, 0, 1, 2, "This is something that needs to be done for this task."),
+('Requirement', 2, 0, 1, 0, 1, 1, "This is what is needed for this task.");
 
 CREATE TRIGGER updateTaskPriorityTrigger
 	BEFORE DELETE ON PRIORITY
@@ -206,20 +224,3 @@ CREATE TRIGGER historicalTasksTrigger
 		INSERT INTO TASKHISTORY
         VALUES
         (old.TASKID, NOW(), CHANGED_FIELD, CAST(old.VALUE AS TEXT);*/
-
-INSERT INTO TASK (TITLE, PARENTID, TIMEFRAME, GENRE, PRIORITY, PROGRESS, TASKTYPE, DESCRIPTION)
-VALUES
-('Project Template', null, 0, 1, 0, 0, 0, "This is the root of a complex template for a project."),
-('Simple Template', null, 0, 1, 0, 0, 0, "This is the root of a simple template for tasks.");
-
-INSERT INTO TASK (TITLE, PARENTID, TIMEFRAME, GENRE, PRIORITY, PROGRESS, TASKTYPE, DESCRIPTION)
-VALUES
-('Purpose', 1, 0, 1, 0, 1, 3, "Why?"),
-('Context', 1, 0, 1, 0, 1, 3, "Random tidbits for a bigger picture."),
-('Minimum', 1, 0, 1, 1, 1, 2, "Minimum viable project objectives."),
-('Extended Goals', 1, 0, 1, 3, 1, 1, "Things that would be cool to also have."),
-('Resources', 1, 0, 1, 0, 1, 4, "Things to complete the project."),
-('Milestones', 1, 0, 1, 0, 1, 1, "When?"),
-('Training', 1, 0, 1, 0, 1, 4, "Things to learn for completion."),
-('Objective', 2, 0, 1, 0, 1, 2, "This is something that needs to be done for this task."),
-('Requirement', 2, 0, 1, 0, 1, 1, "This is what is needed for this task.");

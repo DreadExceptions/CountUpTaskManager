@@ -5,10 +5,10 @@
  */
 package Graphics;
 
+import SqliteJDBC.Task;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,26 +22,20 @@ public class ViewPanel extends javax.swing.JPanel {
      * Creates new form ViewTasks
      */
     JFrame jf;
-    String slctquery;
-    ResultSet selection;
     Object [][] dfltSet = {};
+    Task parentTask;
     String [] col = {"Title", "Category", "Completeness", "Priority", "Timeframe", 
         "Created", "Started", "Completed", "Due Date"};
     DefaultTableModel model = new DefaultTableModel(dfltSet, col);
-    
-    public ViewPanel(JFrame jfrm) throws SQLException {
+
+    public ViewPanel(JFrame jfrm, ArrayList<Task> tsks) {
         this.jf = jfrm;
-        this.slctquery = "SELECT * FROM TASKS;";
-        //this.selection = SelectTask.selectQuery(slctquery);
-        this.addResultSetRows(selection);
         initComponents();
     }
-
-    public ViewPanel(JFrame jfrm, String qr) throws SQLException{
+    
+    public ViewPanel(JFrame jfrm, ArrayList<Task> tsks, Task prnt) {
         this.jf = jfrm;
-        this.slctquery = qr;
-        //this.selection = SelectTask.selectQuery(slctquery);
-        this.addResultSetRows(selection);
+        this.parentTask = prnt;
         initComponents();
     }
     
@@ -62,7 +56,6 @@ public class ViewPanel extends javax.swing.JPanel {
         descArea = new javax.swing.JTextArea();
         search = new javax.swing.JButton();
         viewTask = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         returnButton.setText("Return");
         returnButton.addActionListener(new java.awt.event.ActionListener() {
@@ -119,8 +112,6 @@ public class ViewPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Return to Parent");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,18 +122,21 @@ public class ViewPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(returnButton)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(returnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(248, 248, 248))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(viewTask, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -158,9 +152,7 @@ public class ViewPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(viewTask)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(31, 31, 31)))
+                        .addGap(62, 62, 62)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(returnButton)
@@ -190,30 +182,11 @@ public class ViewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        try {
-            int row = jTable1.getSelectedRow() + 1;
-            selection.absolute(row);
-            
-            descArea.setText(selection.getString("DESCRIPTION"));
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+           
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void viewTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTaskActionPerformed
-        try {
-            JFrame fr = new JFrame("CountUp Task Manager");
-            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            int row = jTable1.getSelectedRow() + 1;
-            selection.absolute(row);
-            TaskPanel dt = new TaskPanel(fr, selection);
-            fr.add(dt);
-            fr.pack();
-            jf.dispose();// should not dispose unless edit is made
-            fr.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }//GEN-LAST:event_viewTaskActionPerformed
 
     private void addResultSetRows(ResultSet rs) throws SQLException {
@@ -234,7 +207,6 @@ public class ViewPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea descArea;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

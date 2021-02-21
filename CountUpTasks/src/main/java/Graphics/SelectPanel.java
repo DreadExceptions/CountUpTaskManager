@@ -6,12 +6,8 @@
 package Graphics;
 
 import SqliteJDBC.*;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 
@@ -25,21 +21,12 @@ public class SelectPanel extends javax.swing.JPanel {
      * Creates new form SelectPanel
      */
     JFrame jf;
-    String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
     DateFormat tmstmpFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String fieldCheck = "YYYY-MM-DD HH:MM:SS";
-    String sortA = "";
-    String sortB = "";
-    String sortC = "";
-    String filterCategory = "";
-    String filterTimeframe = "";
-    String filterCompleteness = "";
-    String filterPriority = "";
-    String view = "SELECT * FROM TASKS";
     
     public SelectPanel(JFrame jfrm) {
         this.jf = jfrm;
-        //initComponents();
+        initComponents();
     }
 
     /**
@@ -86,38 +73,13 @@ public class SelectPanel extends javax.swing.JPanel {
 
         jTextField1.setText("32 Characters Maximum");
 
-        ArrayList<Reference> tasktypes = SqliteJDBC.Reference.referencesSQL("TASKTYPE");
-        String[] tsktps = new String[tasktypes.size()];
-        for (int i = 0; i < tsktps.length; i++) {
-            tsktps[i] = tasktypes.get(i).getTitle();
-        }
-        taskTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(tsktps));
+        taskTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TASKTYPE")));
 
-        ArrayList<Reference> timeframes = SqliteJDBC.Reference.referencesSQL("TIMEFRAME");
-        String[] tmfrm = new String[timeframes.size()];
-        for (int i = 0; i < tmfrm.length; i++) {
-            tmfrm[i] = timeframes.get(i).getTitle();
-        }
-        timeframeBox.setModel(new javax.swing.DefaultComboBoxModel<>(tmfrm));
+        timeframeBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TIMEFRAME")));
 
-        ArrayList<Reference> progress = SqliteJDBC.Reference.referencesSQL("PROGRESS");
-        String[] prgrss = new String[progress.size()];
-        for (int i = 0; i < prgrss.length; i++) {
-            prgrss[i] = progress.get(i).getTitle();
-        }
-        progressComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(prgrss));
-        progressComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                progressComboBoxActionPerformed(evt);
-            }
-        });
+        progressComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("PROGRESS")));
 
-        ArrayList<Reference> priorities = SqliteJDBC.Reference.referencesSQL("PRIORITY");
-        String[] prrts = new String[priorities.size()];
-        for (int i = 0; i < prrts.length; i++) {
-            prrts[i] = priorities.get(i).getTitle();
-        }
-        priorityBox.setModel(new javax.swing.DefaultComboBoxModel<>(prrts));
+        priorityBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("PRIORITY")));
 
         returnButton.setText("Return");
         returnButton.addActionListener(new java.awt.event.ActionListener() {
@@ -141,25 +103,10 @@ public class SelectPanel extends javax.swing.JPanel {
         });
 
         completedComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ignore", "Incomplete", "Completed" }));
-        completedComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                completedComboBoxActionPerformed(evt);
-            }
-        });
 
         startedComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ignore", "Not Started", "Started"}));
-        startedComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startedComboBoxActionPerformed(evt);
-            }
-        });
 
-        ArrayList<Reference> genres = SqliteJDBC.Reference.referencesSQL("GENRE");
-        String[] gnrs = new String[genres.size()];
-        for (int i = 0; i < gnrs.length; i++) {
-            gnrs[i] = genres.get(i).getTitle();
-        }
-        genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(gnrs));
+        genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("GENRE")));
 
         jLabel6.setText("Genre");
 
@@ -259,95 +206,26 @@ public class SelectPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void viewAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllButtonActionPerformed
-        try {
-            if (!sortA.isBlank()||!sortB.isBlank()||!sortC.isBlank()) {
-                view += " SORT BY ";
-            }
-            if (!sortA.isBlank()) {
-                view += sortA;
-                if (!sortB.isBlank()||!sortC.isBlank()) {view += ", ";}
-            } else if (!sortB.isBlank()) {
-                view += sortB;
-                if (!sortC.isBlank()) {view += ", ";}
-            } else if (!sortC.isBlank()) {view += sortC;}
-            view += ";";
-            JFrame fr = new JFrame("CountUp Task Manager");
-            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            ViewPanel vw = new ViewPanel(fr, view);
-            fr.add(vw);
-            fr.pack();
-            jf.dispose();
-            fr.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(SelectPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ViewPanel vw = new ViewPanel(fr, Task.selectRootTasks() );
+        fr.add(vw);
+        fr.pack();
+        jf.dispose();
+        fr.setVisible(true);
     }//GEN-LAST:event_viewAllButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        //Must create Select Query
-        //Add where clause, using filters
-        if ((taskTypeComboBox.getSelectedIndex()+timeframeBox.getSelectedIndex()+
-                progressComboBox.getSelectedIndex()+priorityBox.getSelectedIndex() > 0))
-        {//START FILTERS
-            view += " WHERE ";
-            
-            if (taskTypeComboBox.getSelectedIndex() > 0) {
-                view += "CATEGORY = " + taskTypeComboBox.getSelectedIndex();
-            }
-            //timeframe
-            if (timeframeBox.getSelectedIndex() > 0) {
-                if (!view.endsWith(" ")) {view+= ", ";}
-                view += "TIMEFRAME = " + timeframeBox.getSelectedIndex();
-            }
-            //completeness
-            if (progressComboBox.getSelectedIndex() > 0) {
-                if (!view.endsWith(" ")) {view+= ", ";}
-                view += "COMPLETENESS = " + progressComboBox.getSelectedIndex();
-            }
-            //priority
-            if (priorityBox.getSelectedIndex() > 0) {
-                if (!view.endsWith(" ")) {view+= ", ";}
-                view += "PRIORITY = " + priorityBox.getSelectedIndex();
-            }
-        }//END FILTERS
-        
-        //category
-        //Add sort clause, using sorts
-
-        //Call View Panel
-        view += ";";
-        try {
-            JFrame fr = new JFrame("CountUp Task Manager");
-            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            ViewPanel vw;
-            vw = new ViewPanel(fr, view);
-            fr.add(vw);
-            fr.pack();
-            jf.dispose();
-            fr.setVisible(true);
-        }catch (SQLException ex) {
-            Logger.getLogger(SelectPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ViewPanel vw = new ViewPanel(fr, Task.selectRootTasks(
+                //insert values from selections here
+        ) );
+        fr.add(vw);
+        fr.pack();
+        jf.dispose();
+        fr.setVisible(true);
     }//GEN-LAST:event_searchButtonActionPerformed
-
-    private void completedComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completedComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_completedComboBoxActionPerformed
-
-    private void startedComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startedComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startedComboBoxActionPerformed
-
-    private void progressComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_progressComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_progressComboBoxActionPerformed
-
-    private void verifyTimestampFTF(JFormattedTextField jftf){
-        //When focus is lost
-        //if text in jftf does not match format
-        //reset text to format (YYYY-MM-DD 00:00:00)
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

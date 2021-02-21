@@ -153,47 +153,40 @@
     <Component class="javax.swing.JComboBox" name="taskTypeComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(tsktps)" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(Reference.findReferenceStrings(&quot;TASKTYPE&quot;))" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;Reference&gt; tasktypes = SqliteJDBC.Reference.referencesSQL(&quot;TASKTYPE&quot;);&#xa;        String[] tsktps = new String[tasktypes.size()];&#xa;        for (int i = 0; i &lt; tsktps.length; i++) {&#xa;            tsktps[i] = tasktypes.get(i).getTitle();&#xa;        }"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="timeframeBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(tmfrm)" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(Reference.findReferenceStrings(&quot;TIMEFRAME&quot;))" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;Reference&gt; timeframes = SqliteJDBC.Reference.referencesSQL(&quot;TIMEFRAME&quot;);&#xa;        String[] tmfrm = new String[timeframes.size()];&#xa;        for (int i = 0; i &lt; tmfrm.length; i++) {&#xa;            tmfrm[i] = timeframes.get(i).getTitle();&#xa;        }"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="progressComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(prgrss)" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(Reference.findReferenceStrings(&quot;PROGRESS&quot;))" type="code"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="progressComboBoxActionPerformed"/>
-      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;Reference&gt; progress = SqliteJDBC.Reference.referencesSQL(&quot;PROGRESS&quot;);&#xa;        String[] prgrss = new String[progress.size()];&#xa;        for (int i = 0; i &lt; prgrss.length; i++) {&#xa;            prgrss[i] = progress.get(i).getTitle();&#xa;        }"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="priorityBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(prrts)" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(Reference.findReferenceStrings(&quot;PRIORITY&quot;))" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;Reference&gt; priorities = SqliteJDBC.Reference.referencesSQL(&quot;PRIORITY&quot;);&#xa;String[] prrts = new String[priorities.size()];&#xa;for (int i = 0; i &lt; prrts.length; i++) {&#xa;    prrts[i] = priorities.get(i).getTitle();&#xa;}"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
@@ -227,9 +220,6 @@
           <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ignore&quot;, &quot;Incomplete&quot;, &quot;Completed&quot; })" type="code"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="completedComboBoxActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -240,9 +230,6 @@
           <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Ignore&quot;, &quot;Not Started&quot;, &quot;Started&quot;})" type="code"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startedComboBoxActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -250,11 +237,10 @@
     <Component class="javax.swing.JComboBox" name="genreComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(gnrs)" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(Reference.findReferenceStrings(&quot;GENRE&quot;))" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;Reference&gt; genres = SqliteJDBC.Reference.referencesSQL(&quot;GENRE&quot;);&#xa;        String[] gnrs = new String[genres.size()];&#xa;        for (int i = 0; i &lt; gnrs.length; i++) {&#xa;            gnrs[i] = genres.get(i).getTitle();&#xa;        }"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>

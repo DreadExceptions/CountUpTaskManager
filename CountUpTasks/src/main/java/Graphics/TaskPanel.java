@@ -5,10 +5,8 @@
  */
 package Graphics;
 
+import SqliteJDBC.Task;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -21,10 +19,11 @@ public class TaskPanel extends javax.swing.JPanel {
      * Creates new form TaskPanel
      */
     JFrame jf;
-    ResultSet rs;
-    public TaskPanel(JFrame jfrm, ResultSet rsltst) { //hopefully, rsltst will keep it's pointer's position
+    Task viewTask;
+    ResultSet rs;//delete! only did this so I can compile without fixing code
+    public TaskPanel(JFrame jfrm, Task vw) { //hopefully, rsltst will keep it's pointer's position
         this.jf = jfrm;
-        this.rs = rsltst;
+        this.viewTask = vw;
         initComponents();
     }
 
@@ -269,7 +268,7 @@ public class TaskPanel extends javax.swing.JPanel {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        AddEditPanel dt = new AddEditPanel(fr, this.rs);
+        AddEditPanel dt = new AddEditPanel(fr, this.viewTask);
         fr.add(dt);
         fr.pack();
         fr.setVisible(true);

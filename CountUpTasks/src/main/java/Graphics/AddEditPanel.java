@@ -5,14 +5,12 @@
  */
 package Graphics;
 
-import java.sql.ResultSet;
+import SqliteJDBC.Reference;
+import SqliteJDBC.Task;
 import javax.swing.JFrame;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,19 +22,33 @@ public class AddEditPanel extends javax.swing.JPanel {
      * Creates new form TasksAdd
      */
     JFrame jf;
-    JFrame parentFr;
-    ResultSet rs;
-    String url = "jdbc:sqlite:/home/marquis/Code/CountUpTaskManager/Database/CountUp.db";
+    int parentID;
+    Task addEdit;
     String tsfrmt = "YYYY-MM-DD HH:MM:SS";
     DateFormat tmstmpFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
-    public AddEditPanel(JFrame jfrm, ResultSet rsltst) {
+    public AddEditPanel(JFrame jfrm, Task dt) {//EDIT Panel
         this.jf = jfrm;
-        this.rs = rsltst;
-        //this.parentFr = prnt;
-        //initComponents();
+        this.addEdit = dt;
+        initComponents();
     }
 
+    public AddEditPanel(JFrame jfrm, int prntID){//ADD new child task Panel
+        this.jf = jfrm;
+        this.parentID = prntID;
+        initComponents();
+        this.DeleteChildren.setVisible(false);
+        this.deleteButton.setVisible(false);
+    }
+    
+    public AddEditPanel(JFrame jfrm) {//ADD new root task Panel
+        this.jf = jfrm;
+        this.addEdit = new Task();
+        initComponents();
+        this.DeleteChildren.setVisible(false);
+        this.deleteButton.setVisible(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,75 +70,57 @@ public class AddEditPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
-        startedFTF = new javax.swing.JFormattedTextField(tmstmpFormat);
-        dueDateFTF = new javax.swing.JFormattedTextField(tmstmpFormat);
-        try {
-            titleFTF = new javax.swing.JFormattedTextField();
-            jLabel8 = new javax.swing.JLabel();
-            endDateFTF = new javax.swing.JFormattedTextField(tmstmpFormat);
-            jLabel9 = new javax.swing.JLabel();
-            deleteButton = new javax.swing.JButton();
-            jLabel2 = new javax.swing.JLabel();
-            DeleteChildren = new javax.swing.JButton();
+        titleFTF = new javax.swing.JFormattedTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        deleteButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        DeleteChildren = new javax.swing.JButton();
+        startedFF = new javax.swing.JFormattedTextField();
+        priorityCombo = new javax.swing.JComboBox<>();
+        progressCombo = new javax.swing.JComboBox<>();
+        timeframeCombo = new javax.swing.JComboBox<>();
+        genreCombo = new javax.swing.JComboBox<>();
+        taskTypeCombo = new javax.swing.JComboBox<>();
 
-            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-            jButton1.setText("jButton1");
+        jButton1.setText("jButton1");
 
-            jLabel1.setText("Edit Task");
+        jLabel1.setText("Edit Task");
 
-            nptDescription.setColumns(20);
-            nptDescription.setRows(5);
-            rs.first();
-            nptDescription.setText(rs.getString("DESCRIPTION"));
-            jScrollPane1.setViewportView(nptDescription);
+        nptDescription.setColumns(20);
+        nptDescription.setRows(5);
+        nptDescription.setText(addEdit.getDescription());
+        jScrollPane1.setViewportView(nptDescription);
 
-            jLabel3.setText("Started:");
+        jLabel3.setText("Started:");
 
-            jLabel4.setText("Due Date:");
+        jLabel4.setText("Due Date:");
 
-            jLabel5.setText("Task Type:");
+        jLabel5.setText("Task Type:");
 
-            jLabel6.setText("Priority:");
+        jLabel6.setText("Priority:");
 
-            jLabel7.setText("Timeframe:");
+        jLabel7.setText("Timeframe:");
 
-            cancelButton.setText("Cancel");
-            cancelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    cancelButtonActionPerformed(evt);
-                }
-            });
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
-            editButton.setText("Submit");
-            editButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    editButtonActionPerformed(evt);
-                }
-            });
+        editButton.setText("Submit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
-            rs.first();
-            String strtd = rs.getString("STARTED");
-            if (strtd.isBlank()) {strtd = tsfrmt;}
-            startedFTF.setText(strtd);
+        titleFTF.setText(addEdit.getTitle());
 
-            rs.first();
-            String ddt = rs.getString("DUEDATE");
-            if (ddt.isBlank()) {ddt = this.tsfrmt;}
-            dueDateFTF.setText(ddt);
-
-            rs.first();
-            titleFTF.setText(rs.getString("TITLE"));
-
-            jLabel8.setText("End Date:");
-
-            rs.first();
-            String ended = rs.getString("ENDED");
-            if (ended.isBlank()){ended = this.tsfrmt;}
-            endDateFTF.setText(ended);
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);}
+        jLabel8.setText("End Date:");
 
         jLabel9.setText("Progress:");
 
@@ -135,6 +129,18 @@ public class AddEditPanel extends javax.swing.JPanel {
         jLabel2.setText("Genre:");
 
         DeleteChildren.setText("Delete Sub-Tasks");
+
+        startedFF.setText("jFormattedTextField1");
+
+        priorityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("PRIORITY")));
+
+        progressCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("PROGRESS")));
+
+        timeframeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TIMEFRAME")));
+
+        genreCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("GENRE")));
+
+        taskTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TASKTYPE")));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -147,32 +153,40 @@ public class AddEditPanel extends javax.swing.JPanel {
                     .addComponent(titleFTF)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9)
                             .addComponent(editButton))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dueDateFTF)
-                                    .addComponent(startedFTF)
-                                    .addComponent(endDateFTF)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DeleteChildren)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(deleteButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cancelButton))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DeleteChildren)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(startedFF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(priorityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(progressCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5))
+                                .addGap(208, 208, 208)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(timeframeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(genreCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(taskTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -188,25 +202,31 @@ public class AddEditPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(startedFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startedFF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(dueDateFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
+                    .addComponent(priorityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(endDateFTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel9)
+                    .addComponent(progressCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(timeframeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(genreCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(taskTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editButton)
@@ -232,7 +252,7 @@ public class AddEditPanel extends javax.swing.JPanel {
         
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        TaskPanel tsk = new TaskPanel(fr, rs);
+        TaskPanel tsk = new TaskPanel(fr, addEdit);
         fr.add(tsk);
         fr.pack();
         jf.dispose();
@@ -245,9 +265,8 @@ public class AddEditPanel extends javax.swing.JPanel {
     private javax.swing.JButton DeleteChildren;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JFormattedTextField dueDateFTF;
     private javax.swing.JButton editButton;
-    private javax.swing.JFormattedTextField endDateFTF;
+    private javax.swing.JComboBox<String> genreCombo;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -261,7 +280,11 @@ public class AddEditPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea nptDescription;
-    private javax.swing.JFormattedTextField startedFTF;
+    private javax.swing.JComboBox<String> priorityCombo;
+    private javax.swing.JComboBox<String> progressCombo;
+    private javax.swing.JFormattedTextField startedFF;
+    private javax.swing.JComboBox<String> taskTypeCombo;
+    private javax.swing.JComboBox<String> timeframeCombo;
     private javax.swing.JFormattedTextField titleFTF;
     // End of variables declaration//GEN-END:variables
 }

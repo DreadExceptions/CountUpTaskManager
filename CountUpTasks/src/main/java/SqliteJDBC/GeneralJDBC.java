@@ -103,9 +103,13 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         return STRTDDTNOTNULL;
     }
     
+    public String getSELECTALLTASK() {
+        return SELECTALLTASK;
+    }
+    
     //SQL Strings, General
     //Get reference variables
-    private final String SELECTREF = "SELECT REFID, TITLE FROM ";// + table name + ";"
+    private final String SELECTREF = "SELECT REFID, TITLE, DESCRIPTION FROM ";// + table name + ";"
     //Get Specific task
     private final String SELECTTASK = "SELECT * FROM task WHERE taskID = ? ;";
     //Get Children Tasks
@@ -125,6 +129,7 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
         "WHERE PARENTID = ? ;";
     private final String SELECTCHILDRENSHORT = "SELECT TASKID FROM TASK WHERE PARENTID = ? ";
+    public final String SELECTALLTASK = "SELECT * FROM TASK;";
     //SQL Strings, Exclusive to AddEditPanel
     //Update Task
     private final String UPDATETASK = "UPDATE task SET ";
@@ -139,27 +144,27 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
             "?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     //SQL Strings, Exclusive to SelectPanel
     //Select all root tasks
-    private final String ROOTTASKS = "SELECT T.TITLE, " + 
+    private final String ROOTTASKS = "SELECT T.TASKID, T.TITLE, " + 
 	"T.DESCRIPTION, " + 
         "TIMEFRAME.TITLE AS TIMEFRAME, " + 
         "GENRE.TITLE AS GENRE, " + 
         "PRIORITY.TITLE AS PRIORITY, " + 
         "PROGRESS.TITLE AS PROGRESS, " + 
         "TASKTYPE.TITLE AS TASKTYPE, " + 
-	"T.CREATEDDATE, T.STARTEDDATE, T.COMPLETED, T.DUEDATE " +
+	"CREATEDDATE, STARTEDDATE, COMPLETED, DUEDATE " +
         "FROM TASK T " + 
 	"INNER JOIN TIMEFRAME ON T.TIMEFRAME = TIMEFRAME.REFID " + 
 	"INNER JOIN GENRE ON T.GENRE = GENRE.REFID " + 
         "INNER JOIN PRIORITY ON T.PRIORITY = PRIORITY.REFID " + 
         "INNER JOIN PROGRESS ON T.PROGRESS = PROGRESS.REFID " +
         "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
-        "WHERE PARENTID IS NULL"; //+ ";"
+        "WHERE PARENTID = 0"; //+ ";"
     //Additions for the Where clause of ROOTTASKS
-    private final String TIMEFRAME = " AND TIMEFRAME.TITLE = ?";
-    private final String GENRE = " AND GENRE.TITLE = ?";
-    private final String PRIORITY = " AND PRIORITY.TITLE = ?";
-    private final String PROGRESS = " AND PROGRESS.TITLE = ?";
-    private final String TASKTYPE = " AND TASKTYPE.TITLE = ?";
+    private final String TIMEFRAME = " AND TIMEFRAME = ?";
+    private final String GENRE = " AND GENRE = ?";
+    private final String PRIORITY = " AND PRIORITY = ?";
+    private final String PROGRESS = " AND PROGRESS = ?";
+    private final String TASKTYPE = " AND TASKTYPE = ?";
     private final String CMPLTNULL = " AND T.COMPLETED IS NULL";
     private final String CMPLTNOTNULL = " AND T.COMPLETED IS NOT NULL";
     private final String STRTDDTNULL = " AND T.STARTEDDATE IS NULL";

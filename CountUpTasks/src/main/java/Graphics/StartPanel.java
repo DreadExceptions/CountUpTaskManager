@@ -5,9 +5,7 @@
  */
 package Graphics;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import SqliteJDBC.Task;
 import javax.swing.JFrame;
 
 /**
@@ -104,8 +102,8 @@ public class StartPanel extends javax.swing.JPanel {
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //AddPanel dd = new AddPanel(fr);
-        //fr.add(dd);
+        AddEditPanel dd = new AddEditPanel(fr);
+        fr.add(dd);
         fr.pack();
         fr.setVisible(true);
         this.jf.dispose();
@@ -122,17 +120,13 @@ public class StartPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SelectButtonActionPerformed
 
     private void ViewAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewAllButtonActionPerformed
-        try {
             JFrame fr = new JFrame("CountUp Task Manager");
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            ViewPanel vw = new ViewPanel(fr);
+            ViewPanel vw = new ViewPanel(fr, Task.selectRootTasks());
             fr.add(vw);
             fr.pack();
             fr.setVisible(true);
             this.jf.dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(StartPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_ViewAllButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
