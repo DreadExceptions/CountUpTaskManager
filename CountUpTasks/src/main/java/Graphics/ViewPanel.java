@@ -210,6 +210,7 @@ public class ViewPanel extends javax.swing.JPanel {
         StartPanel strt = new StartPanel(fr);
         fr.add(strt);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_returnStartButtonActionPerformed
@@ -220,6 +221,7 @@ public class ViewPanel extends javax.swing.JPanel {
         SelectPanel slct = new SelectPanel(fr);
         fr.add(slct);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_searchActionPerformed
@@ -237,6 +239,7 @@ public class ViewPanel extends javax.swing.JPanel {
             TaskPanel tsk = new TaskPanel(fr, Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]));
             fr.add(tsk);
             fr.pack();
+            fr.setLocationRelativeTo(null);
             jf.dispose();
             fr.setVisible(true);
         }
@@ -248,6 +251,7 @@ public class ViewPanel extends javax.swing.JPanel {
         TaskPanel tsk = new TaskPanel(fr, this.parentTask);
         fr.add(tsk);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_returnParentButtonActionPerformed
@@ -255,7 +259,20 @@ public class ViewPanel extends javax.swing.JPanel {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        AddEditPanel dddt = new AddEditPanel(fr, this.parentTask.getTaskID());
+        int pid = 0;
+        AddEditPanel dddt;
+        if (this.parentTask != null) {
+            pid = this.parentTask.getTaskID();
+            dddt = new AddEditPanel(fr, pid,
+                this.parentTask.selectChildrenShort());
+        } else {
+            dddt = new AddEditPanel(fr);
+        }
+        fr.add(dddt);
+        fr.pack();
+        fr.setLocationRelativeTo(null);
+        fr.setVisible(true);
+        this.jf.dispose();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void duplicateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicateTaskActionPerformed

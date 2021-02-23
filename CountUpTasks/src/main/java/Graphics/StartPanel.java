@@ -117,6 +117,7 @@ public class StartPanel extends javax.swing.JPanel {
         AddEditPanel dd = new AddEditPanel(fr);
         fr.add(dd);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         fr.setVisible(true);
         this.jf.dispose();
     }//GEN-LAST:event_AddButtonActionPerformed
@@ -127,6 +128,7 @@ public class StartPanel extends javax.swing.JPanel {
         SelectPanel slct = new SelectPanel(fr);
         fr.add(slct);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         fr.setVisible(true);
         this.jf.dispose();
     }//GEN-LAST:event_SelectButtonActionPerformed
@@ -137,6 +139,7 @@ public class StartPanel extends javax.swing.JPanel {
             ViewPanel vw = new ViewPanel(fr, Task.selectRootTasks());
             fr.add(vw);
             fr.pack();
+            fr.setLocationRelativeTo(null);
             fr.setVisible(true);
             this.jf.dispose();
     }//GEN-LAST:event_ViewAllButtonActionPerformed

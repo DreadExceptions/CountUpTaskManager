@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class Task {
     
-    final String tsfrmt = "YYYY-MM-DD HH:MM:SS";
+    final String tsfrmt = "yyyy-MM-dd HH:mm:ss";
     int TaskID;
     int ParentID;
     String Title;
@@ -30,7 +30,7 @@ public class Task {
     String Progress;
     int ProgressID;
     String Priority;
-    int PrioityID;
+    int PriorityID;
     String TaskType;
     int TaskTypeID;
     String Genre;
@@ -86,7 +86,7 @@ public class Task {
         this.Title = Title;
         this.Description = Description;
         this.ProgressID = ProgressID;
-        this.PrioityID = PrioityID;
+        this.PriorityID = PrioityID;
         this.TaskTypeID = TaskTypeID;
         this.GenreID = GenreID;
         this.TimeframeID = TimeframeID;
@@ -108,7 +108,7 @@ public class Task {
         this.Progress = Progress;
         this.ProgressID = ProgressID;
         this.Priority = Priority;
-        this.PrioityID = PrioityID;
+        this.PriorityID = PrioityID;
         this.TaskType = TaskType;
         this.TaskTypeID = TaskTypeID;
         this.Genre = Genre;
@@ -121,16 +121,16 @@ public class Task {
         this.DueDate = DueDate;
     }
 
-    protected Task (int TaskID, int ParentID) {
+    protected Task (int TaskID, int ParentID, String title) {
         this.TaskID = TaskID;
         this.ParentID = ParentID;
     }
     
     public Task () {
-        this.Title = "32 Characters or less.";
+        this.Title = "New Task";
         this.Description = "Aptly describe what you want to do.";
         this.ProgressID = 0;
-        this.PrioityID = 0;
+        this.PriorityID = 0;
         this.TaskTypeID = 0;
         this.GenreID = 0;
         this.TimeframeID = 0;
@@ -181,11 +181,11 @@ public class Task {
     public void setPriority(String Priority) {
         this.Priority = Priority;
     }
-    public int getPrioityID() {
-        return PrioityID;
+    public int getPriorityID() {
+        return PriorityID;
     }
-    public void setPrioityID(int PrioityID) {
-        this.PrioityID = PrioityID;
+    public void setPriorityID(int PrioityID) {
+        this.PriorityID = PrioityID;
     }
     public String getTaskType() {
         return TaskType;
@@ -250,10 +250,14 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" + "TaskID=" + TaskID + ", ParentID=" + ParentID + 
-                ", Title=" + Title + ", Description=" + Description + ", Progress=" + Progress + 
-                ", Priority=" + Priority + ", TaskType=" + TaskType + ", Genre=" + Genre + 
-                ", Timeframe=" + Timeframe + ", CreatedDate=" + CreatedDate + ", StartedDate=" + StartedDate + 
+        return "Task{" + "tsfrmt=" + tsfrmt + ", TaskID=" + TaskID + 
+                ", ParentID=" + ParentID + ", Title=" + Title + ", Description=" + 
+                Description + ", Progress=" + Progress + ", ProgressID=" + 
+                ProgressID + ", Priority=" + Priority + ", PriorityID=" + 
+                PriorityID + ", TaskType=" + TaskType + ", TaskTypeID=" + 
+                TaskTypeID + ", Genre=" + Genre + ", GenreID=" + GenreID + 
+                ", Timeframe=" + Timeframe + ", TimeframeID=" + TimeframeID + 
+                ", CreatedDate=" + CreatedDate + ", StartedDate=" + StartedDate + 
                 ", Completed=" + Completed + ", DueDate=" + DueDate + '}';
     }
     
@@ -445,14 +449,13 @@ public class Task {
             
             while (rs.next()) {
                 taskSet.add(new Task(
-                        rs.getInt("TASKID"), this.TaskID
+                        rs.getInt("TASKID"), this.TaskID, rs.getString("TITLE")
                 ));
             }//end While Loop
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
         return taskSet;
     }
     
@@ -483,38 +486,97 @@ public class Task {
         return Parents;
     }
     
-    public boolean updateTask(ArrayList<FieldAccess> updts) {
+    public boolean updateTask(Task update) {
         //UPDATETASK + WHERETASK
         GeneralJDBC jdbc = new GeneralJDBC();
-        boolean success = true;
-        String set = null;
+        String set = "";
+        ArrayList<FieldAccess> vals = new ArrayList();
         
-        if (updts.isEmpty()) {return false;}
-        
-        for (FieldAccess updt : updts) {
-            if (updt.getFieldName().equals("STARTEDDATE") || 
-                    updt.getFieldName().equals("COMPLETED") || 
-                    updt.getFieldName().equals("DUEDATE") ||
-                    updt.getFieldName().equals("TITLE") ||
-                    updt.getFieldName().equals("DESCRIPTION")) {
-                set += updt.getFieldName() + " = \"" + updt.getFieldValue() + "\", ";
-            } else {
-                set += updt.getFieldName() + " = " + updt.getFieldValue() + " , ";
-            }
+        if (!update.getTitle().equals(this.getTitle())) {
+            set += "TITLE = ? , ";
+            vals.add(new FieldAccess("String", this.getTitle()));
+        }
+        if (!update.getTitle().equals(this.getDescription())) {
+            set += "DESCRIPTION = ? , ";
+            vals.add(new FieldAccess("String", this.getDescription()));
+        }
+        if (!update.getTitle().equals(this.getPriority())) {
+            set += "PRIORITY = ? , ";
+            update.setPriorityID(
+                Reference.findReferenceViaTitle(Reference.referencesSQL("PRIORITY"), 
+                update.getPriority()).getRefID());
+            vals.add(new FieldAccess("int", Integer.toString(this.getPriorityID())));
+        }
+        if (!update.getTitle().equals(this.getProgress())) {
+            set += "PROGRESS = ? , ";
+            update.setProgressID(
+                Reference.findReferenceViaTitle(Reference.referencesSQL("PROGRESS"), 
+                update.getProgress()).getRefID());
+            vals.add(new FieldAccess("int", Integer.toString(this.getProgressID())));
+        }
+        if (!update.getTitle().equals(this.getTimeframe())) {
+            set += "TIMEFRAME = ? , ";
+            update.setTimeframeID(
+                Reference.findReferenceViaTitle(Reference.referencesSQL("TIMEFRAME"), 
+                update.getTimeframe()).getRefID());
+            vals.add(new FieldAccess("int", Integer.toString(this.getTimeframeID())));
+        }
+        if (!update.getTitle().equals(this.getGenre())) {
+            set += "GENRE = ? , ";
+            update.setGenreID(
+                Reference.findReferenceViaTitle(Reference.referencesSQL("GENRE"), 
+                update.getGenre()).getRefID());
+            vals.add(new FieldAccess("int", Integer.toString(this.getGenreID())));
+        }
+        if (!update.getTitle().equals(this.getTaskType())) {
+            set += "TASKTYPE = ? , ";
+            update.setTaskTypeID(
+                Reference.findReferenceViaTitle(Reference.referencesSQL("TASKTYPE"), 
+                update.getTaskType()).getRefID());
+            vals.add(new FieldAccess("int", Integer.toString(this.getTaskTypeID())));
+        }
+        if (this.getStartedDate() != null && 
+                !update.getStartedDate().equals(this.getStartedDate())) {
+            set += "STARTEDDATE = ? , ";
+            vals.add(new FieldAccess("String", this.getStartedDate()));
+        }
+        if (this.getCompleted() != null && 
+                !update.getCompleted().equals(this.getCompleted())) {
+            set += "COMPLETED = ? , ";
+            vals.add(new FieldAccess("String", this.getCompleted()));
+        }
+        if (this.getDueDate() != null && 
+                !update.getDueDate().equals(this.getDueDate())) {
+            set += "DUEDATE = ? , ";
+            vals.add(new FieldAccess("String", this.getDueDate()));
         }
         
-        set = set.substring(0, set.lastIndexOf(",")-2);
+        if (!vals.isEmpty()) {//begin if for try-catch
         
-        try {
-            Connection conn = jdbc.connect();
-            PreparedStatement pstmt = conn.prepareStatement(jdbc.getUPDATETASK() + set + jdbc.getWHERETASK());
-            pstmt.setInt(1, this.TaskID);
-            int sccss = pstmt.executeUpdate();
-            if (sccss == 0) {success = false;}
-        } catch (SQLException e) {
-            return false;
-        }
-        return success;
+            try {//begin try-catch
+                Connection conn = jdbc.connect();
+                set = set.substring(0, set.length()-2);
+                PreparedStatement pstmt = conn.prepareStatement(jdbc.getUPDATETASK() + set + jdbc.getWHERETASK());
+                vals.add(new FieldAccess("int", Integer.toString(this.TaskID)));
+                for (int i = 0; i < vals.size(); i++) {
+                    switch (vals.get(i).getFieldName()) {
+                        case "String" -> pstmt.setString(i+1, vals.get(i).getFieldValue());
+                        case "int" -> pstmt.setInt(i+1, Integer.parseInt(vals.get(i).getFieldValue()));
+                        default -> {
+                            return false;
+                        }
+                    }
+                }                
+                
+                int sccss = pstmt.executeUpdate();
+                return sccss != 0;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                System.out.println(jdbc.getUPDATETASK() + set + jdbc.getWHERETASK());
+                return false;
+            } //end try-catch
+        }//end if for try-catch
+        return false;
         
     }
     
@@ -527,7 +589,7 @@ public class Task {
             PreparedStatement pstmt = conn.prepareStatement(jdbc.getINSERTTASK());
             pstmt.setString(1, this.Title);
             pstmt.setString(2, this.Description);
-            pstmt.setInt(3, this.PrioityID);
+            pstmt.setInt(3, this.PriorityID);
             pstmt.setInt(4, this.TimeframeID);
             pstmt.setInt(5, this.ProgressID);
             pstmt.setInt(6, this.GenreID);
@@ -538,6 +600,7 @@ public class Task {
             int sccss = pstmt.executeUpdate();
             if (sccss == 0) {success = false;}
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
         return success;

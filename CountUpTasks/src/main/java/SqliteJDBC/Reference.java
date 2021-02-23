@@ -130,12 +130,21 @@ public class Reference {
         return new Reference(-1, null);
     }
     
-    public static String[] findReferenceStrings(String tblnm) {
+    public static String[] findReferenceStringsAsterisk(String tblnm) {
         ArrayList<Reference> rfRry = SqliteJDBC.Reference.referencesSQL(tblnm);
         String[] rfStr = new String[rfRry.size()+1];
         rfStr[0] = "*";
         for (int i = 1; i < rfStr.length; i++) {
             rfStr[i] = rfRry.get(i-1).getTitle();
+        }
+        return rfStr;
+    }
+    
+    public static String[] findReferenceStrings(String tblnm) {
+        ArrayList<Reference> rfRry = SqliteJDBC.Reference.referencesSQL(tblnm);
+        String[] rfStr = new String[rfRry.size()];
+        for (int i = 0; i < rfStr.length; i++) {
+            rfStr[i] = rfRry.get(i).getTitle();
         }
         return rfStr;
     }

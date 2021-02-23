@@ -5,12 +5,15 @@
  */
 package Graphics;
 
+import SqliteJDBC.FieldAccess;
 import SqliteJDBC.Reference;
 import SqliteJDBC.Task;
+import java.sql.Date;
 import javax.swing.JFrame;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,20 +25,26 @@ public class AddEditPanel extends javax.swing.JPanel {
      * Creates new form TasksAdd
      */
     JFrame jf;
-    int parentID;
+    int parentID = 0;
     Task addEdit;
-    String tsfrmt = "YYYY-MM-DD HH:MM:SS";
-    DateFormat tmstmpFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Task original;
+    ArrayList<Task> taskSet;
+    String tsfrmt = "yyyy-MM-dd HH:mm:ss";
+    DateFormat dtFormat = new SimpleDateFormat(tsfrmt);
     
-    public AddEditPanel(JFrame jfrm, Task dt) {//EDIT Panel
+    public AddEditPanel(JFrame jfrm, Task dt, ArrayList<Task> tskSt) {//EDIT Panel
         this.jf = jfrm;
         this.addEdit = dt;
+        this.original = dt;
         initComponents();
+        this.jLabel1.setText("Edit Task");
     }
 
-    public AddEditPanel(JFrame jfrm, int prntID){//ADD new child task Panel
+    public AddEditPanel(JFrame jfrm, int prntID, ArrayList<Task> tskSt){//ADD new child task Panel
         this.jf = jfrm;
         this.parentID = prntID;
+        this.addEdit = new Task();
+        this.addEdit.setParentID(parentID);
         initComponents();
         this.DeleteChildren.setVisible(false);
         this.deleteButton.setVisible(false);
@@ -43,7 +52,9 @@ public class AddEditPanel extends javax.swing.JPanel {
     
     public AddEditPanel(JFrame jfrm) {//ADD new root task Panel
         this.jf = jfrm;
+        this.taskSet = Task.selectRootTasks();
         this.addEdit = new Task();
+        this.addEdit.setParentID(parentID);
         initComponents();
         this.DeleteChildren.setVisible(false);
         this.deleteButton.setVisible(false);
@@ -69,29 +80,37 @@ public class AddEditPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
+        confirmButton = new javax.swing.JButton();
         titleFTF = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         DeleteChildren = new javax.swing.JButton();
-        startedFF = new javax.swing.JFormattedTextField();
         priorityCombo = new javax.swing.JComboBox<>();
         progressCombo = new javax.swing.JComboBox<>();
         timeframeCombo = new javax.swing.JComboBox<>();
         genreCombo = new javax.swing.JComboBox<>();
         taskTypeCombo = new javax.swing.JComboBox<>();
+        completeButton = new javax.swing.JButton();
+        clearCompleteButton = new javax.swing.JButton();
+        dueDateNpt = new javax.swing.JFormattedTextField();
+        startButton = new javax.swing.JButton();
+        clearStartButton = new javax.swing.JButton();
+        strtdValue = new javax.swing.JLabel();
+        cmpltdValue = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("jButton1");
 
-        jLabel1.setText("Edit Task");
+        jLabel1.setText("Add Task");
 
         nptDescription.setColumns(20);
+        nptDescription.setLineWrap(true);
         nptDescription.setRows(5);
         nptDescription.setText(addEdit.getDescription());
+        nptDescription.setWrapStyleWord(true);
         jScrollPane1.setViewportView(nptDescription);
 
         jLabel3.setText("Started:");
@@ -111,36 +130,94 @@ public class AddEditPanel extends javax.swing.JPanel {
             }
         });
 
-        editButton.setText("Submit");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
+        confirmButton.setText("Submit");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
+                confirmButtonActionPerformed(evt);
             }
         });
 
         titleFTF.setText(addEdit.getTitle());
 
-        jLabel8.setText("End Date:");
+        jLabel8.setText("Completed Date:");
 
         jLabel9.setText("Progress:");
 
         deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Genre:");
 
         DeleteChildren.setText("Delete Sub-Tasks");
-
-        startedFF.setText("jFormattedTextField1");
+        DeleteChildren.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteChildrenActionPerformed(evt);
+            }
+        });
 
         priorityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("PRIORITY")));
+        if (!this.addEdit.getTitle().equals("New Task")) {
+            priorityCombo.setSelectedItem(this.addEdit.getPriority());}
+        else { priorityCombo.setSelectedIndex(0);}
 
         progressCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("PROGRESS")));
+        if (!this.addEdit.getTitle().equals("New Task")) {
+            progressCombo.setSelectedItem(this.addEdit.getProgress());}
+        else {progressCombo.setSelectedIndex(0);}
 
         timeframeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TIMEFRAME")));
+        if (!this.addEdit.getTitle().equals("New Task")) {
+            timeframeCombo.setSelectedItem(this.addEdit.getTimeframe());}
+        else {timeframeCombo.setSelectedIndex(0);}
 
         genreCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("GENRE")));
+        if (!this.addEdit.getTitle().equals("New Task")) {
+            genreCombo.setSelectedItem(this.addEdit.getGenre());}
+        else {genreCombo.setSelectedIndex(0);}
 
         taskTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TASKTYPE")));
+        if (!this.addEdit.getTitle().equals("New Task")) {
+            taskTypeCombo.setSelectedItem(this.addEdit.getTaskType());}
+        else {taskTypeCombo.setSelectedIndex(0);}
+
+        completeButton.setText("Complete");
+        completeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                completeButtonActionPerformed(evt);
+            }
+        });
+
+        clearCompleteButton.setText("Clear");
+        clearCompleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearCompleteButtonActionPerformed(evt);
+            }
+        });
+
+        dueDateNpt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))));
+        dueDateNpt.setText(tsfrmt);
+
+        startButton.setText("Started");
+        startButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startButtonActionPerformed(evt);
+            }
+        });
+
+        clearStartButton.setText("Clear");
+        clearStartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearStartButtonActionPerformed(evt);
+            }
+        });
+
+        strtdValue.setText(this.addEdit.getStartedDate());
+
+        cmpltdValue.setText(this.addEdit.getCompleted());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -152,42 +229,59 @@ public class AddEditPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(titleFTF)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8)
-                            .addComponent(editButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DeleteChildren)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(startedFF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(priorityCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(progressCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(progressCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5))
-                                .addGap(208, 208, 208)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(timeframeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(genreCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(taskTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(confirmButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                                .addComponent(DeleteChildren)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(deleteButton)
+                                .addGap(46, 46, 46)
+                                .addComponent(cancelButton))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(genreCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(taskTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(timeframeCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmpltdValue))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(strtdValue)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(priorityCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(completeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(clearCompleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clearStartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dueDateNpt, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -202,11 +296,19 @@ public class AddEditPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(startedFF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(startButton)
+                    .addComponent(clearStartButton)
+                    .addComponent(strtdValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(dueDateNpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(completeButton)
+                    .addComponent(clearCompleteButton)
+                    .addComponent(cmpltdValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -229,7 +331,7 @@ public class AddEditPanel extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editButton)
+                    .addComponent(confirmButton)
                     .addComponent(cancelButton)
                     .addComponent(deleteButton)
                     .addComponent(DeleteChildren))
@@ -243,29 +345,219 @@ public class AddEditPanel extends javax.swing.JPanel {
         StartPanel strt = new StartPanel(fr);
         fr.add(strt);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         fr.setVisible(true);
         this.jf.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        //have to create warnings that stop user from submitting null fields for certain things.
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        String error;
+        String msgA = "An error was found within the field:\n";
+        String msgB = "\nPlease change your selection.";
+        this.addEdit.setTitle(this.titleFTF.getText());
+        if (this.original == null) {
+            //PARENTID
+            //addEdit.getParentID();
+            
+            //TITLE
+            if (addEdit.getTitle().equals("New Task")) {
+                error = "Title";
+                JOptionPane.showMessageDialog(null, msgA + error + msgB, error, JOptionPane.ERROR_MESSAGE);
+                return;
+            }//end if
+            if (taskSet != null){//null check
+            for (Task e : taskSet) {//for
+                if (e.getTitle().equals(this.addEdit.getTitle())) {
+                    error = "Title";
+                    JOptionPane.showMessageDialog(null, msgA + error + msgB, error, JOptionPane.ERROR_MESSAGE);
+                    return;
+                }//end if
+            }}//end for and null check
+            
+            //DESCRIPTION
+            addEdit.setDescription(this.nptDescription.getText());
+            //PRIORITY
+            addEdit.setPriority((String) this.priorityCombo.getSelectedItem());
+            addEdit.setPriorityID(
+                    Reference.findReferenceViaTitle(Reference.referencesSQL("PRIORITY"), 
+                    addEdit.getPriority()).getRefID());
+            //PROGRESS
+            addEdit.setProgress((String) this.progressCombo.getSelectedItem());
+            addEdit.setProgressID(
+                    Reference.findReferenceViaTitle(Reference.referencesSQL("PROGRESS"), 
+                    addEdit.getProgress()).getRefID());
+            //TIMEFRAME
+            addEdit.setTimeframe((String) this.timeframeCombo.getSelectedItem());
+            addEdit.setTimeframeID(
+                    Reference.findReferenceViaTitle(Reference.referencesSQL("TIMEFRAME"), 
+                    addEdit.getTimeframe()).getRefID());
+            //GENRE
+            addEdit.setGenre((String) this.genreCombo.getSelectedItem());
+            addEdit.setGenreID(
+                    Reference.findReferenceViaTitle(Reference.referencesSQL("GENRE"), 
+                    addEdit.getGenre()).getRefID());
+            //TASKTYPE
+            addEdit.setTaskType((String) this.taskTypeCombo.getSelectedItem());
+            addEdit.setTaskTypeID(
+                    Reference.findReferenceViaTitle(Reference.referencesSQL("TASKTYPE"), 
+                    addEdit.getTaskType()).getRefID());
+            //DUE DATE
+            if (this.dueDateNpt.getText().equals(this.tsfrmt)) {
+                addEdit.setDueDate(null);
+            } else if (this.dueDateNpt.getText() != null) {
+                addEdit.setDueDate(this.dueDateNpt.getText());
+            } 
+            //STARTEDDATE
+            if (this.addEdit.getStartedDate().equals(this.tsfrmt)) {
+                System.out.println(true);
+                addEdit.setStartedDate(null);
+            }
+            //COMPLETED
+            if (this.addEdit.getCompleted().equals(this.tsfrmt)) {
+                addEdit.setCompleted(null);
+            }
+            
+            if (!addEdit.insertIntoTask()) {
+                JOptionPane.showMessageDialog(null, "The task insert failed.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } else {
+            //PARENTID
+            //Not needed for edit
+            //TITLE
+            if (this.addEdit.getTitle().equals("New Task")) {
+                error = "Title";
+                JOptionPane.showMessageDialog(null, msgA + error + msgB, error, JOptionPane.ERROR_MESSAGE);
+                return;
+            }//end if
+            if (taskSet != null){//null check
+            for (Task e : taskSet) {//for
+                if (e.getTitle().equals(this.addEdit.getTitle())) {
+                    error = "Title";
+                    JOptionPane.showMessageDialog(null, msgA + error + msgB, error, JOptionPane.ERROR_MESSAGE);
+                    return;
+                }//end if
+            }}//end for and null check
+            
+            //DESCRIPTION
+            addEdit.setDescription(this.nptDescription.getText());
+            //PRIORITY
+            addEdit.setPriority((String) this.priorityCombo.getSelectedItem());
+            //PROGRESS
+            addEdit.setProgress((String) this.progressCombo.getSelectedItem());
+            //TIMEFRAME
+            addEdit.setTimeframe((String) this.timeframeCombo.getSelectedItem());
+            //GENRE
+            addEdit.setGenre((String) this.genreCombo.getSelectedItem());
+            //TASKTYPE
+            addEdit.setTaskType((String) this.taskTypeCombo.getSelectedItem());
+            //DUE DATE
+            if (this.dueDateNpt.getText().equals(this.tsfrmt)) {
+                addEdit.setDueDate(null);
+            } else if (this.dueDateNpt.getText() != null) {
+                addEdit.setDueDate(this.dueDateNpt.getText());
+            } 
+            //STARTEDDATE
+            if (this.addEdit.getStartedDate().equals(this.tsfrmt)) {
+                addEdit.setStartedDate(null);
+            }
+            //COMPLETED
+            if (this.addEdit.getCompleted().equals(this.tsfrmt)) {
+                addEdit.setCompleted(null);
+            }
+            
+            original.updateTask(addEdit);
+        }
         
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         TaskPanel tsk = new TaskPanel(fr, addEdit);
         fr.add(tsk);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         jf.dispose();
-        //parentFr.dispose();
         fr.setVisible(true);
-    }//GEN-LAST:event_editButtonActionPerformed
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void DeleteChildrenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteChildrenActionPerformed
+        String msg = "This action will delete all children tasks,\n but keep the current task.";
+        String question = "\nDo you want to continue?";
+        String title = "Confirm Delete";
+        String deleted = "The task's children have been deleted.";
+        if (0 == JOptionPane.showConfirmDialog(null, title, msg + question, JOptionPane.YES_NO_OPTION)) {
+            this.addEdit.deleteChildren();
+            JOptionPane.showConfirmDialog(null, deleted);
+        }
+    }//GEN-LAST:event_DeleteChildrenActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        String msg = "This action will delete the current\n task and all children tasks";
+        String question = "\nDo you want to continue?";
+        String title = "Confirm Delete";
+        String deleted = "The task has been deleted.";
+        if (0 == JOptionPane.showConfirmDialog(null, title, msg + question, JOptionPane.YES_NO_OPTION)) {
+            this.addEdit.deleteChildren();
+            this.addEdit.deleteTask();
+            JOptionPane.showMessageDialog(null, deleted);
+            JFrame fr = new JFrame ("CountUp Task Manager");
+            fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            if (0 != this.parentID) {
+                TaskPanel tsk = new TaskPanel(fr, Task.selectTask(this.parentID));
+                fr.add(tsk);
+            } else {
+                ViewPanel vw = new ViewPanel(fr, Task.selectRootTasks());
+                fr.add(vw);
+            }
+            fr.pack();
+            fr.setLocationRelativeTo(null);
+            fr.setVisible(true);
+            this.jf.dispose();
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+        Date dt = new Date(System.currentTimeMillis());
+        addEdit.setStartedDate(dtFormat.format(dt));
+        this.strtdValue.setText(this.addEdit.getStartedDate());
+    }//GEN-LAST:event_startButtonActionPerformed
+
+    private void clearStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearStartButtonActionPerformed
+        if (original != null) {
+            addEdit.setStartedDate(original.getStartedDate());
+            this.strtdValue.setText(original.getStartedDate());
+        } else {
+            addEdit.setStartedDate(null);
+            this.strtdValue.setText(tsfrmt);
+        }
+    }//GEN-LAST:event_clearStartButtonActionPerformed
+
+    private void completeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeButtonActionPerformed
+        Date dt = new Date(System.currentTimeMillis());
+        addEdit.setCompleted(dtFormat.format(dt));
+        this.cmpltdValue.setText(this.addEdit.getCompleted());
+    }//GEN-LAST:event_completeButtonActionPerformed
+
+    private void clearCompleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCompleteButtonActionPerformed
+        if (original != null) {
+            addEdit.setCompleted(original.getCompleted());
+            this.cmpltdValue.setText(original.getCompleted());
+        } else {
+            addEdit.setCompleted(null);
+            this.cmpltdValue.setText(tsfrmt);
+        }
+    }//GEN-LAST:event_clearCompleteButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeleteChildren;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton clearCompleteButton;
+    private javax.swing.JButton clearStartButton;
+    private javax.swing.JLabel cmpltdValue;
+    private javax.swing.JButton completeButton;
+    private javax.swing.JButton confirmButton;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
+    private javax.swing.JFormattedTextField dueDateNpt;
     private javax.swing.JComboBox<String> genreCombo;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -282,7 +574,8 @@ public class AddEditPanel extends javax.swing.JPanel {
     private javax.swing.JTextArea nptDescription;
     private javax.swing.JComboBox<String> priorityCombo;
     private javax.swing.JComboBox<String> progressCombo;
-    private javax.swing.JFormattedTextField startedFF;
+    private javax.swing.JButton startButton;
+    private javax.swing.JLabel strtdValue;
     private javax.swing.JComboBox<String> taskTypeCombo;
     private javax.swing.JComboBox<String> timeframeCombo;
     private javax.swing.JFormattedTextField titleFTF;

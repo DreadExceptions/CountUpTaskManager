@@ -19,7 +19,6 @@ import java.util.prefs.Preferences;
 public class InitialStart {
     
     public static void main( String args[] ) throws IOException, SQLException {      
-      //new GeneralJDBC().initializeDatabase();
-      
+        new GeneralJDBC().initializeDatabase();
    }
 }

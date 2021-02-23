@@ -7,6 +7,7 @@ package Graphics;
 
 import SqliteJDBC.Task;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
@@ -255,17 +256,24 @@ public class TaskPanel extends javax.swing.JPanel {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        AddEditPanel dt = new AddEditPanel(fr, this.viewTask);
+        ArrayList<Task> siblings;
+        if (this.viewTask.getParentID() != 0) {
+            siblings = Task.selectTask(this.viewTask.getParentID()).selectChildrenShort();
+        } else {
+            siblings = Task.selectRootTasks();
+        }
+        AddEditPanel dt = new AddEditPanel(fr, this.viewTask, siblings);
         fr.add(dt);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         fr.setVisible(true);
+        this.jf.dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         JFrame fr = new JFrame ("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         if (this.viewTask.getParentID() > 0) {
-            System.out.println(this.viewTask.getParentID());
             TaskPanel tsk = new TaskPanel(fr, Task.selectTask(this.viewTask.getParentID()));
             fr.add(tsk);
         } else {
@@ -273,6 +281,7 @@ public class TaskPanel extends javax.swing.JPanel {
             fr.add(strt);
         }
         fr.pack();
+        fr.setLocationRelativeTo(null);
         fr.setVisible(true);
         this.jf.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
@@ -287,6 +296,7 @@ public class TaskPanel extends javax.swing.JPanel {
         ViewPanel vw = new ViewPanel(fr, viewTask.selectChildren(), viewTask);
         fr.add(vw);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         fr.setVisible(true);
         this.jf.dispose();
     }//GEN-LAST:event_childrenViewButtonActionPerformed

@@ -71,13 +71,13 @@ public class SelectPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Priority");
 
-        taskTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TASKTYPE")));
+        taskTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStringsAsterisk("TASKTYPE")));
 
-        timeframeBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("TIMEFRAME")));
+        timeframeBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStringsAsterisk("TIMEFRAME")));
 
-        progressComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("PROGRESS")));
+        progressComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStringsAsterisk("PROGRESS")));
 
-        priorityBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("PRIORITY")));
+        priorityBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStringsAsterisk("PRIORITY")));
 
         returnButton.setText("Return");
         returnButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +104,7 @@ public class SelectPanel extends javax.swing.JPanel {
 
         startedComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*", "Not Started", "Started"}));
 
-        genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStrings("GENRE")));
+        genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(Reference.findReferenceStringsAsterisk("GENRE")));
 
         jLabel6.setText("Genre");
 
@@ -199,6 +199,7 @@ public class SelectPanel extends javax.swing.JPanel {
         StartPanel strt = new StartPanel(fr);
         fr.add(strt);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_returnButtonActionPerformed
@@ -209,6 +210,7 @@ public class SelectPanel extends javax.swing.JPanel {
         ViewPanel vw = new ViewPanel(fr, Task.selectRootTasks() );
         fr.add(vw);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_viewAllButtonActionPerformed
@@ -272,6 +274,7 @@ public class SelectPanel extends javax.swing.JPanel {
         ) );
         fr.add(vw);
         fr.pack();
+        fr.setLocationRelativeTo(null);
         jf.dispose();
         fr.setVisible(true);
     }//GEN-LAST:event_searchButtonActionPerformed

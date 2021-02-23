@@ -10,9 +10,15 @@ Write task duplication method
 
 Initialize/check for DB in startClass
 
-Get Start Panel Working: Add Panel (new root task), add button to print all tasks to a file.
+Bug: When deleting a newly created task, it deleted all tasks (probably did not create where clause)
 
-Get AddEditPanel Working: Create logic to make sure the panel has different constructors for adding and editing tasks. Key difference is that Add will pass a parent (even if that id is null), while Edit will pass original values of the task. Add/Edit panel will not support the view of children tasks. Create a dialog for submit, delete, and delete children.
+Bug: When creating a task, the task panel does not show the created date. This is because the database creates the timestamp. Once the task is viewed again, it will populate.
+
+Bug: Update is catching values that are not changing.
+
+Bug: Update is not changing title.
+
+Bug: Completed/Started "Clear buttons" are not working
 
 Extra:
 
