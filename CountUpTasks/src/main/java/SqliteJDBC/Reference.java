@@ -68,7 +68,7 @@ public class Reference {
             while (rs.next()) {
                 refSet.add(new Reference(rs.getInt("REFID"), rs.getString("TITLE")));
             }//end While Loop
-            
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -89,7 +89,7 @@ public class Reference {
             while (rs.next()) {
                 refSet.add(new Reference(rs.getInt("REFID"), rs.getString("TITLE"), rs.getString("DESCRIPTION")));
             }//end While Loop
-            
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -5,7 +5,6 @@
  */
 package Graphics;
 
-import SqliteJDBC.FieldAccess;
 import SqliteJDBC.Reference;
 import SqliteJDBC.Task;
 import java.sql.Date;
@@ -34,8 +33,10 @@ public class AddEditPanel extends javax.swing.JPanel {
     
     public AddEditPanel(JFrame jfrm, Task dt, ArrayList<Task> tskSt) {//EDIT Panel
         this.jf = jfrm;
-        this.addEdit = dt;
-        this.original = dt;
+        this.addEdit = new Task();
+        this.original = new Task();
+        this.addEdit.copy(dt);
+        this.original.copy(dt);
         initComponents();
         this.jLabel1.setText("Edit Task");
     }
@@ -342,8 +343,13 @@ public class AddEditPanel extends javax.swing.JPanel {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         JFrame fr = new JFrame ("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        StartPanel strt = new StartPanel(fr);
-        fr.add(strt);
+        if (this.original != null) {
+            TaskPanel tsk = new TaskPanel(fr, original);
+            fr.add(tsk);
+        } else {
+            StartPanel strt = new StartPanel(fr);
+            fr.add(strt);
+        }
         fr.pack();
         fr.setLocationRelativeTo(null);
         fr.setVisible(true);
@@ -352,7 +358,7 @@ public class AddEditPanel extends javax.swing.JPanel {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         String error;
-        String msgA = "An error was found within the field:\n";
+        String msgA = "An error was found:\n";
         String msgB = "\nPlease change your selection.";
         this.addEdit.setTitle(this.titleFTF.getText());
         if (this.original == null) {
@@ -360,19 +366,24 @@ public class AddEditPanel extends javax.swing.JPanel {
             //addEdit.getParentID();
             
             //TITLE
-            if (addEdit.getTitle().equals("New Task")) {
-                error = "Title";
+            String ttl = addEdit.getTitle();
+            if (ttl.isBlank() || ttl.length() > 32) {
+                error = "Title must be 1 to 32 characters.";
                 JOptionPane.showMessageDialog(null, msgA + error + msgB, error, JOptionPane.ERROR_MESSAGE);
                 return;
-            }//end if
-            if (taskSet != null){//null check
-            for (Task e : taskSet) {//for
-                if (e.getTitle().equals(this.addEdit.getTitle())) {
-                    error = "Title";
-                    JOptionPane.showMessageDialog(null, msgA + error + msgB, error, JOptionPane.ERROR_MESSAGE);
-                    return;
-                }//end if
-            }}//end for and null check
+            } else if (ttl.equals("New Task")) {
+                error = "Title cannot be New Task.";
+                JOptionPane.showMessageDialog(null, msgA + error + msgB, error, JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if (taskSet != null){//null check
+                for (Task e : taskSet) {//for
+                    if (e.getTitle().equals(ttl)) {
+                        error = "Another task with the same parent already has this title.";
+                        JOptionPane.showMessageDialog(null, msgA + error + msgB, error, JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }//end if
+                }//end for
+            }//end null check
             
             //DESCRIPTION
             addEdit.setDescription(this.nptDescription.getText());
@@ -409,7 +420,6 @@ public class AddEditPanel extends javax.swing.JPanel {
             } 
             //STARTEDDATE
             if (this.addEdit.getStartedDate().equals(this.tsfrmt)) {
-                System.out.println(true);
                 addEdit.setStartedDate(null);
             }
             //COMPLETED
@@ -452,18 +462,21 @@ public class AddEditPanel extends javax.swing.JPanel {
             //TASKTYPE
             addEdit.setTaskType((String) this.taskTypeCombo.getSelectedItem());
             //DUE DATE
+            System.out.println(this.dueDateNpt.getText());
             if (this.dueDateNpt.getText().equals(this.tsfrmt)) {
-                addEdit.setDueDate(null);
+                addEdit.setDueDate("null");
             } else if (this.dueDateNpt.getText() != null) {
                 addEdit.setDueDate(this.dueDateNpt.getText());
             } 
             //STARTEDDATE
-            if (this.addEdit.getStartedDate().equals(this.tsfrmt)) {
-                addEdit.setStartedDate(null);
+            if (this.addEdit.getStartedDate() != null && 
+                    this.addEdit.getStartedDate().equals(this.tsfrmt)) {
+                addEdit.setStartedDate("null");
             }
             //COMPLETED
-            if (this.addEdit.getCompleted().equals(this.tsfrmt)) {
-                addEdit.setCompleted(null);
+            if (this.addEdit.getCompleted() != null && 
+                    this.addEdit.getCompleted().equals(this.tsfrmt)) {
+                addEdit.setCompleted("null");
             }
             
             original.updateTask(addEdit);
@@ -494,11 +507,10 @@ public class AddEditPanel extends javax.swing.JPanel {
         String msg = "This action will delete the current\n task and all children tasks";
         String question = "\nDo you want to continue?";
         String title = "Confirm Delete";
-        String deleted = "The task has been deleted.";
         if (0 == JOptionPane.showConfirmDialog(null, title, msg + question, JOptionPane.YES_NO_OPTION)) {
-            this.addEdit.deleteChildren();
-            this.addEdit.deleteTask();
-            JOptionPane.showMessageDialog(null, deleted);
+            if (this.addEdit.deleteChildren()) {
+                this.addEdit.deleteTask();
+            }
             JFrame fr = new JFrame ("CountUp Task Manager");
             fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             if (0 != this.parentID) {
@@ -522,13 +534,8 @@ public class AddEditPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void clearStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearStartButtonActionPerformed
-        if (original != null) {
-            addEdit.setStartedDate(original.getStartedDate());
-            this.strtdValue.setText(original.getStartedDate());
-        } else {
-            addEdit.setStartedDate(null);
+            addEdit.setStartedDate(tsfrmt);
             this.strtdValue.setText(tsfrmt);
-        }
     }//GEN-LAST:event_clearStartButtonActionPerformed
 
     private void completeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeButtonActionPerformed
@@ -538,13 +545,8 @@ public class AddEditPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_completeButtonActionPerformed
 
     private void clearCompleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCompleteButtonActionPerformed
-        if (original != null) {
-            addEdit.setCompleted(original.getCompleted());
-            this.cmpltdValue.setText(original.getCompleted());
-        } else {
-            addEdit.setCompleted(null);
+            addEdit.setCompleted(tsfrmt);
             this.cmpltdValue.setText(tsfrmt);
-        }
     }//GEN-LAST:event_clearCompleteButtonActionPerformed
 
 

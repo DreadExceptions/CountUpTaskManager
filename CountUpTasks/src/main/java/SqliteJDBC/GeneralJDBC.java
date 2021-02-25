@@ -1,5 +1,6 @@
 
 package SqliteJDBC;
+import java.io.File;
 import java.sql.*;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,8 +24,13 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         this.DBNAME = "CountUpLite.db";
     }
 
+    
+    
     //JDBC Access variables
-    public final String FILEPATH = System.getProperty("user.home") + "/Code/CountUpTaskManager/Database/dbCreation.sql";
+    
+    public final String DBSTART = System.getProperty("user.home") + 
+            "/Code/CountUpTaskManager/CountUpTasks/src/main/java/SqliteJDBC/dbCreation.sql";
+    public final String PATH = System.getProperty("user.home") + "/.config/";
     public final String URL = "jdbc:sqlite:" + System.getProperty("user.home") + "/.config/";
     public static final String FOLDERWRITE = System.getProperty("user.home") + "/Documents/";
     
@@ -116,6 +122,10 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         return SELECTTASKTITLE;
     }
     
+    public String getINSERTINTOSELECT() {
+        return INSERTINTOSELECT;
+    }
+    
     //SQL Strings, General
     //Get reference variables
     private final String SELECTREF = "SELECT REFID, TITLE, DESCRIPTION FROM ";// + table name + ";"
@@ -141,8 +151,8 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
         "INNER JOIN PROGRESS ON T.PROGRESS = PROGRESS.REFID " +
         "INNER JOIN TASKTYPE ON T.TASKTYPE = TASKTYPE.REFID " +
         "WHERE T.TASKID = ? ;";
-    private final String SELECTTASKTITLE = "SELECT TASKID, PARENTID, TITLE " +
-            "FROM TASK WHERE PARENTID = ? AND TITLE = ?;";
+    private final String SELECTTASKTITLE = "SELECT TASKID, PARENTID, TITLE, " +
+            "CREATEDDATE FROM TASK WHERE PARENTID = ? AND TITLE = ?;";
     //Get Children Tasks
     private final String SELECTCHILDREN = "SELECT T.TASKID, T.TITLE, " + 
 	"T.DESCRIPTION, " + 
@@ -202,6 +212,14 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     private final String STRTDDTNULL = " AND T.STARTEDDATE IS NULL";
     private final String STRTDDTNOTNULL = " AND T.STARTEDDATE IS NOT NULL";
     
+    //Insert Into Select for Duplicate
+    private final String INSERTINTOSELECT = "INSERT INTO TASK " + 
+            "(TITLE, PARENTID, TIMEFRAME, GENRE, PRIORITY, PROGRESS, " + 
+            "TASKTYPE, DESCRIPTION)" +
+            "SELECT ? AS TITLE, ? AS PARENTID, TIMEFRAME, GENRE, PRIORITY," + 
+            "PROGRESS, TASKTYPE, DESCRIPTION " + 
+            "FROM TASK WHERE TASKID = ? ;";
+    
     protected Connection connect() {
         Connection conn = null;
         
@@ -215,22 +233,21 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     }
     
     public void initializeDatabase() {
-        System.out.println(URL+DBNAME);
-        try (Connection conn = DriverManager.getConnection(URL+DBNAME)) {
-            if (conn != null) {
-                Statement stmt = conn.createStatement();
-                System.out.println("A new Count Up Database has been created.");
-                String sql = Files.readString(Path.of(FILEPATH));
-                System.out.println(sql.substring(0, 20));
-                //stmt.addBatch(sql);
-                //stmt.executeBatch();
-                stmt.executeUpdate(sql);
-                System.out.println("A new Count Up Database has been initialized.");
+        File f = new File(PATH+DBNAME);
+        if(!f.isFile()) {
+            try (Connection conn = DriverManager.getConnection(URL+DBNAME)) {
+                if (conn != null) {
+                    Statement stmt = conn.createStatement();
+                    String sql = Files.readString(Path.of(DBSTART));
+                    stmt.executeUpdate(sql);
+                }
+                conn.close();
+            } catch (SQLException | IOException ex) {
+                Logger.getLogger(GeneralJDBC.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException | IOException ex) {
-            Logger.getLogger(GeneralJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+        
     
     
     

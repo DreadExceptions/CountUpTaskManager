@@ -25,6 +25,11 @@ public class TaskPanel extends javax.swing.JPanel {
     public TaskPanel(JFrame jfrm, Task vw) { //hopefully, rsltst will keep it's pointer's position
         this.jf = jfrm;
         this.viewTask = vw;
+        if (this.viewTask.getTaskID() == 0) {
+            Task tmp = Task.selectTask(this.viewTask.getParentID(), this.viewTask.getTitle());
+            this.viewTask.setTaskID(tmp.getTaskID());
+            this.viewTask.setCreatedDate(tmp.getCreatedDate());
+        }
         initComponents();
         if (viewTask.getStartedDate() == null) {jLabel2.setVisible(false);}
         if (viewTask.getCompleted() == null) {jLabel3.setVisible(false);}
@@ -86,12 +91,16 @@ public class TaskPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Due Date:");
 
+        created.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         created.setText(viewTask.getCreatedDate());
 
+        started.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         started.setText(viewTask.getStartedDate());
 
+        ended.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ended.setText(viewTask.getCompleted());
 
+        dueDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         dueDate.setText(viewTask.getDueDate());
 
         jLabel5.setText("Progress:");
@@ -163,15 +172,18 @@ public class TaskPanel extends javax.swing.JPanel {
                                 .addGap(136, 136, 136)
                                 .addComponent(priority, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(84, 84, 84)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(created, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(timeframe, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(taskType, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(genre, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(genre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(created, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(104, 104, 104)
+                        .addComponent(started, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(markDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,22 +192,17 @@ public class TaskPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(childrenViewButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(started, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Title)
+                                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Title))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ended, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(82, 82, 82)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dueDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ended, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

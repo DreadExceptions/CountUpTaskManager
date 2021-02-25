@@ -5,9 +5,8 @@
  */
 package Graphics;
 
-import SqliteJDBC.Reference;
+import SqliteJDBC.GeneralJDBC;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 
 /**
@@ -16,7 +15,10 @@ import javax.swing.JFrame;
  */
 public class StartClass {
     
+    
+    
     public static void main( String args[] ) throws ClassNotFoundException, SQLException {
+        new GeneralJDBC().initializeDatabase();
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         StartPanel strt = new StartPanel(fr);

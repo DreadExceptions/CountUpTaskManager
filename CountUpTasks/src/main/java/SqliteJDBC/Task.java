@@ -8,7 +8,11 @@ package SqliteJDBC;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -124,6 +128,7 @@ public class Task {
     protected Task (int TaskID, int ParentID, String title) {
         this.TaskID = TaskID;
         this.ParentID = ParentID;
+        this.Title = title;
     }
     
     public Task () {
@@ -250,7 +255,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" + "tsfrmt=" + tsfrmt + ", TaskID=" + TaskID + 
+        return "Task{" + "TaskID=" + TaskID + 
                 ", ParentID=" + ParentID + ", Title=" + Title + ", Description=" + 
                 Description + ", Progress=" + Progress + ", ProgressID=" + 
                 ProgressID + ", Priority=" + Priority + ", PriorityID=" + 
@@ -331,36 +336,40 @@ public class Task {
         //Will delete a specific task.
         //Will only be successful if the task has no children.
         GeneralJDBC jdbc = new GeneralJDBC();
-        boolean success = true;
+        int sccss;
         
         try {
             Connection conn = jdbc.connect();
             PreparedStatement pstmt = conn.prepareStatement(jdbc.getDELETETASK());
             pstmt.setInt(1, this.TaskID);
-            int sccss = pstmt.executeUpdate();
-            if (sccss == 0) {success = false;}
+            sccss = pstmt.executeUpdate();
+            conn.close();
+            JOptionPane.showMessageDialog(null, sccss + " Tasks were deleted");
+            return true;
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "The following error was given: \n" + e.getMessage());
             return false;
         }
-        return success;
     }
     
     public boolean deleteChildren() {
         //Deletes the children of a given task.
         //Will only be successful if the children of a task have no children.
         GeneralJDBC jdbc = new GeneralJDBC();
-        boolean success = true;
+        int sccss;
         
         try {
             Connection conn = jdbc.connect();
             PreparedStatement pstmt = conn.prepareStatement(jdbc.getDELETECHILDREN());
             pstmt.setInt(1, this.TaskID);
-            int sccss = pstmt.executeUpdate();
-            if (sccss == 0) {success = false;}
+            sccss = pstmt.executeUpdate();
+            conn.close();
+            JOptionPane.showMessageDialog(null, sccss + " Children Tasks were deleted");
+            return true;
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "The following error was given: \n" + e.getMessage());
             return false;
         }
-        return success;
     }
     
     public static ArrayList<Task> selectAllTasks() {
@@ -380,6 +389,8 @@ public class Task {
                         rs.getString("COMPLETED"), rs.getString("DUEDATE")
                 ));
             }//end While Loop
+            
+            conn.close();
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -406,6 +417,25 @@ public class Task {
                         rs.getString("TIMEFRAME"), //rs.getInt("TIMEFRAMEID"),
                         rs.getString("CREATEDDATE"), rs.getString("STARTEDDATE"),
                         rs.getString("COMPLETED"), rs.getString("DUEDATE"));
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rtrn;
+    }
+    
+    public static Task selectTask(int parent, String task) {
+        GeneralJDBC jdbc = new GeneralJDBC();
+        Task rtrn = new Task();
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getSELECTTASKTITLE());
+            pstmt.setInt(1, parent);
+            pstmt.setString(2, task);
+            ResultSet rs = pstmt.executeQuery();
+            rtrn = new Task(rs.getInt("TASKID"), rs.getInt("PARENTID"), rs.getString("TITLE"));
+            rtrn.setCreatedDate(rs.getString("CREATEDDATE"));
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -431,6 +461,7 @@ public class Task {
                 ));
             }//end While Loop
             
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -452,7 +483,7 @@ public class Task {
                         rs.getInt("TASKID"), this.TaskID, rs.getString("TITLE")
                 ));
             }//end While Loop
-            
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -493,62 +524,61 @@ public class Task {
         ArrayList<FieldAccess> vals = new ArrayList();
         
         if (!update.getTitle().equals(this.getTitle())) {
+            System.out.println("SUCCESS");
             set += "TITLE = ? , ";
-            vals.add(new FieldAccess("String", this.getTitle()));
+            vals.add(new FieldAccess("String", update.getTitle()));
         }
-        if (!update.getTitle().equals(this.getDescription())) {
+        if (!update.getDescription().equals(this.getDescription())) {
             set += "DESCRIPTION = ? , ";
-            vals.add(new FieldAccess("String", this.getDescription()));
+            vals.add(new FieldAccess("String", update.getDescription()));
         }
-        if (!update.getTitle().equals(this.getPriority())) {
+        if (!update.getPriority().equals(this.getPriority())) {
             set += "PRIORITY = ? , ";
             update.setPriorityID(
                 Reference.findReferenceViaTitle(Reference.referencesSQL("PRIORITY"), 
                 update.getPriority()).getRefID());
-            vals.add(new FieldAccess("int", Integer.toString(this.getPriorityID())));
+            vals.add(new FieldAccess("int", Integer.toString(update.getPriorityID())));
         }
-        if (!update.getTitle().equals(this.getProgress())) {
+        if (!update.getProgress().equals(this.getProgress())) {
             set += "PROGRESS = ? , ";
             update.setProgressID(
                 Reference.findReferenceViaTitle(Reference.referencesSQL("PROGRESS"), 
                 update.getProgress()).getRefID());
-            vals.add(new FieldAccess("int", Integer.toString(this.getProgressID())));
+            vals.add(new FieldAccess("int", Integer.toString(update.getProgressID())));
         }
-        if (!update.getTitle().equals(this.getTimeframe())) {
+        if (!update.getTimeframe().equals(this.getTimeframe())) {
             set += "TIMEFRAME = ? , ";
             update.setTimeframeID(
                 Reference.findReferenceViaTitle(Reference.referencesSQL("TIMEFRAME"), 
                 update.getTimeframe()).getRefID());
-            vals.add(new FieldAccess("int", Integer.toString(this.getTimeframeID())));
+            vals.add(new FieldAccess("int", Integer.toString(update.getTimeframeID())));
         }
-        if (!update.getTitle().equals(this.getGenre())) {
+        if (!update.getGenre().equals(this.getGenre())) {
             set += "GENRE = ? , ";
             update.setGenreID(
                 Reference.findReferenceViaTitle(Reference.referencesSQL("GENRE"), 
                 update.getGenre()).getRefID());
-            vals.add(new FieldAccess("int", Integer.toString(this.getGenreID())));
+            vals.add(new FieldAccess("int", Integer.toString(update.getGenreID())));
         }
-        if (!update.getTitle().equals(this.getTaskType())) {
+        if (!update.getTaskType().equals(this.getTaskType())) {
             set += "TASKTYPE = ? , ";
             update.setTaskTypeID(
                 Reference.findReferenceViaTitle(Reference.referencesSQL("TASKTYPE"), 
                 update.getTaskType()).getRefID());
-            vals.add(new FieldAccess("int", Integer.toString(this.getTaskTypeID())));
+            vals.add(new FieldAccess("int", Integer.toString(update.getTaskTypeID())));
         }
-        if (this.getStartedDate() != null && 
-                !update.getStartedDate().equals(this.getStartedDate())) {
+
+        if (update.getStartedDate()!= null && !update.getStartedDate().equals(this.getStartedDate())) {
             set += "STARTEDDATE = ? , ";
-            vals.add(new FieldAccess("String", this.getStartedDate()));
+            vals.add(new FieldAccess("String", update.getStartedDate()));
         }
-        if (this.getCompleted() != null && 
-                !update.getCompleted().equals(this.getCompleted())) {
+        if (update.getCompleted()!= null && !update.getCompleted().equals(this.getCompleted())) {
             set += "COMPLETED = ? , ";
-            vals.add(new FieldAccess("String", this.getCompleted()));
+            vals.add(new FieldAccess("String", update.getCompleted()));
         }
-        if (this.getDueDate() != null && 
-                !update.getDueDate().equals(this.getDueDate())) {
+        if (update.getDueDate()!= null && !update.getDueDate().equals(this.getDueDate())) {
             set += "DUEDATE = ? , ";
-            vals.add(new FieldAccess("String", this.getDueDate()));
+            vals.add(new FieldAccess("String", update.getDueDate()));
         }
         
         if (!vals.isEmpty()) {//begin if for try-catch
@@ -560,15 +590,23 @@ public class Task {
                 vals.add(new FieldAccess("int", Integer.toString(this.TaskID)));
                 for (int i = 0; i < vals.size(); i++) {
                     switch (vals.get(i).getFieldName()) {
-                        case "String" -> pstmt.setString(i+1, vals.get(i).getFieldValue());
+                        case "String" -> {
+                            String vl = vals.get(i).getFieldValue();
+                            if (vl.equals("null")) {
+                                pstmt.setNull(i+1, java.sql.Types.TIMESTAMP);
+                            } else {
+                                pstmt.setString(i+1, vals.get(i).getFieldValue());
+                            }
+                        }
                         case "int" -> pstmt.setInt(i+1, Integer.parseInt(vals.get(i).getFieldValue()));
                         default -> {
                             return false;
                         }
                     }
                 }                
-                
+                System.out.println(jdbc.getUPDATETASK() + set + jdbc.getWHERETASK());
                 int sccss = pstmt.executeUpdate();
+                conn.close();
                 return sccss != 0;
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -599,6 +637,7 @@ public class Task {
             pstmt.setString(10, this.DueDate);
             int sccss = pstmt.executeUpdate();
             if (sccss == 0) {success = false;}
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
@@ -674,7 +713,7 @@ public class Task {
                         rs.getString("COMPLETED"), rs.getString("DUEDATE")
                 ));
             }
-            
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -701,7 +740,7 @@ public class Task {
                         rs.getString("COMPLETED"), rs.getString("DUEDATE")
                 ));
             }//end While Loop
-            
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -719,8 +758,61 @@ public class Task {
         return new Task();
     }
     
-    public static void duplicateTask(Task tsk) {
+    public boolean duplicateTaskSQL(int newParentID) {
+        String newTitle = this.getTitle();
         
+        if (newTitle.length() > 27) {
+            newTitle = this.Title.substring(0, 26);
+        }
+        newTitle = newTitle + " Copy";
+        
+        GeneralJDBC jdbc = new GeneralJDBC();
+        
+        try {
+            Connection conn = jdbc.connect();
+            PreparedStatement pstmt = conn.prepareStatement(jdbc.getINSERTINTOSELECT());
+            pstmt.setString(1, newTitle);
+            pstmt.setInt(2, newParentID);
+            pstmt.setInt(3, this.TaskID);
+            int sccss = pstmt.executeUpdate();
+            conn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "The following error was given: \n" + e.getMessage());
+            System.out.println(e.getMessage());
+            return false;
+        }
+        
+        int newTaskID = Task.selectTask(newParentID, newTitle).getTaskID();
+        
+        ArrayList<Task> childTasks = this.findChildren();
+        for (Task e : childTasks) {
+            if (!e.duplicateTaskSQL(newTaskID)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    public void copy(Task original) {
+        this.TaskID = original.TaskID;
+        this.ParentID = original.ParentID;
+        this.Title = original.Title;
+        this.Description = original.Description;
+        this.Progress = original.Progress;
+        this.ProgressID = original.ProgressID;
+        this.Priority = original.Priority;
+        this.PriorityID = original.PriorityID;
+        this.TaskType = original.TaskType;
+        this.TaskTypeID = original.TaskTypeID;
+        this.Genre = original.Genre;
+        this.GenreID = original.GenreID;
+        this.Timeframe = original.Timeframe;
+        this.TimeframeID = original.TimeframeID;
+        this.CreatedDate = original.CreatedDate;
+        this.StartedDate = original.StartedDate;
+        this.Completed = original.Completed;
+        this.DueDate = original.DueDate;
     }
     
 }

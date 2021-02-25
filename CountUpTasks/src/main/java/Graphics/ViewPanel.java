@@ -276,17 +276,40 @@ public class ViewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void duplicateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicateTaskActionPerformed
-        String dialog = "You will duplicate the selected task as a new root task.\n" + 
+        String dialog = "You will duplicate the selected task as a new task.\n" + 
                 "All children tasks of the root will also be duplicated.\n" +
-                "Do you wish to continue?";
-        Object [] options = {"Duplicate", "Cancel"};
+                "Do you wish for the task to be a new root or under the same parent?";
+        Object [] options = {"Root", "Same", "Cancel"};
         
-        if ((jTable1.getSelectedRow() >= 0) &&
-                (0 == JOptionPane.showOptionDialog(null, dialog, "Confirm", 
+        if (jTable1.getSelectedRow() >= 0) {//start if
+            int opt = JOptionPane.showOptionDialog(null, dialog, "Confirm", 
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, 
-                        null, options, options[0]))) {
-            Task.duplicateTask(Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]));
+                        null, options, options[0]);
+            if (0 == opt) {
+                Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]).duplicateTaskSQL(0);
+            } else if (1 == opt) {
+                if (this.parentTask != null) {
+                    Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]).duplicateTaskSQL(this.parentTask.getTaskID());
+                } else {
+                    Task.retreiveTaskFromList(taskSet, (String) dfltSet[jTable1.getSelectedRow()][0]).duplicateTaskSQL(0);
+                }
+            }
+        }//end if
+        
+        JFrame fr = new JFrame("CountUp Task Manager");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ViewPanel vw;
+        if (this.parentTask != null) {
+            vw = new ViewPanel(fr, this.parentTask.selectChildren(), this.parentTask);
+        } else {
+            vw = new ViewPanel(fr, Task.selectRootTasks());
         }
+        fr.add(vw);
+        fr.pack();
+        fr.setLocationRelativeTo(null);
+        jf.dispose();
+        fr.setVisible(true);
+        
     }//GEN-LAST:event_duplicateTaskActionPerformed
 
     private void addResultSetRows(ResultSet rs) throws SQLException {
