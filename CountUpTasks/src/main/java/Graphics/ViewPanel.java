@@ -31,6 +31,7 @@ public class ViewPanel extends javax.swing.JPanel {
     DefaultTableModel model = new DefaultTableModel(dfltSet, col);
 
     public ViewPanel(JFrame jfrm, ArrayList<Task> tsks) {
+        System.out.println("No Parent");
         this.jf = jfrm;
         this.taskSet = tsks;
         this.defineDfltSet(tsks);
@@ -39,6 +40,7 @@ public class ViewPanel extends javax.swing.JPanel {
     }
     
     public ViewPanel(JFrame jfrm, ArrayList<Task> tsks, Task prnt) {
+        System.out.println("PARENT: " + prnt);
         this.jf = jfrm;
         this.parentTask = prnt;
         this.taskSet = tsks;

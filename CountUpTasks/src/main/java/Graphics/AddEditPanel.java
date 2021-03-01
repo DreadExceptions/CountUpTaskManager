@@ -32,6 +32,9 @@ public class AddEditPanel extends javax.swing.JPanel {
     DateFormat dtFormat = new SimpleDateFormat(tsfrmt);
     
     public AddEditPanel(JFrame jfrm, Task dt, ArrayList<Task> tskSt) {//EDIT Panel
+        System.out.println("EDIT");
+        System.out.println(dt);
+        for (Task e : tskSt) {System.out.println(e);}
         this.jf = jfrm;
         this.addEdit = new Task();
         this.original = new Task();
@@ -42,6 +45,9 @@ public class AddEditPanel extends javax.swing.JPanel {
     }
 
     public AddEditPanel(JFrame jfrm, int prntID, ArrayList<Task> tskSt){//ADD new child task Panel
+        System.out.println("ADD 1");
+        System.out.println(prntID);
+        for (Task e : tskSt) {System.out.println(e);}
         this.jf = jfrm;
         this.parentID = prntID;
         this.addEdit = new Task();
@@ -52,6 +58,7 @@ public class AddEditPanel extends javax.swing.JPanel {
     }
     
     public AddEditPanel(JFrame jfrm) {//ADD new root task Panel
+        System.out.println("ADD 2");
         this.jf = jfrm;
         this.taskSet = Task.selectRootTasks();
         this.addEdit = new Task();
@@ -363,7 +370,7 @@ public class AddEditPanel extends javax.swing.JPanel {
         this.addEdit.setTitle(this.titleFTF.getText());
         if (this.original == null) {
             //PARENTID
-            //addEdit.getParentID();
+            addEdit.setParentID(parentID);
             
             //TITLE
             String ttl = addEdit.getTitle();
@@ -482,6 +489,7 @@ public class AddEditPanel extends javax.swing.JPanel {
             original.updateTask(addEdit);
         }
         
+        addEdit.setTaskID(Task.selectTask(parentID, addEdit.getTitle()).getTaskID());
         JFrame fr = new JFrame("CountUp Task Manager");
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         TaskPanel tsk = new TaskPanel(fr, addEdit);

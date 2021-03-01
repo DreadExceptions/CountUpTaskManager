@@ -180,9 +180,9 @@ public class GeneralJDBC { //class cannot be used outside of it's own package
     //Delete Children Tasks
     private final String DELETECHILDREN = "DELETE FROM task WHERE parentID = ? ;";
     //Insert Tasks
-    private final String INSERTTASK = "INSERT INTO TASK (TITLE, DESCRIPTION, PRIORITY, PROGRESS, " + 
+    private final String INSERTTASK = "INSERT INTO TASK (TITLE, PARENTID, DESCRIPTION, PRIORITY, PROGRESS, " + 
             "TIMEFRAME, GENRE, TASKTYPE, STARTEDDATE, COMPLETED, DUEDATE) VALUES (" + 
-            "?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     //SQL Strings, Exclusive to SelectPanel
     //Select all root tasks
     private final String ROOTTASKS = "SELECT T.TASKID, T.TITLE, " + 

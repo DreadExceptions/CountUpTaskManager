@@ -624,15 +624,16 @@ public class Task {
             Connection conn = jdbc.connect();
             PreparedStatement pstmt = conn.prepareStatement(jdbc.getINSERTTASK());
             pstmt.setString(1, this.Title);
-            pstmt.setString(2, this.Description);
-            pstmt.setInt(3, this.PriorityID);
-            pstmt.setInt(4, this.TimeframeID);
-            pstmt.setInt(5, this.ProgressID);
-            pstmt.setInt(6, this.GenreID);
-            pstmt.setInt(7, this.TaskTypeID);
-            pstmt.setString(8, this.StartedDate);
-            pstmt.setString(9, this.Completed);
-            pstmt.setString(10, this.DueDate);
+            pstmt.setInt(2, this.ParentID);
+            pstmt.setString(3, this.Description);
+            pstmt.setInt(4, this.PriorityID);
+            pstmt.setInt(5, this.TimeframeID);
+            pstmt.setInt(6, this.ProgressID);
+            pstmt.setInt(7, this.GenreID);
+            pstmt.setInt(8, this.TaskTypeID);
+            pstmt.setString(9, this.StartedDate);
+            pstmt.setString(10, this.Completed);
+            pstmt.setString(11, this.DueDate);
             int sccss = pstmt.executeUpdate();
             if (sccss == 0) {success = false;}
             conn.close();
